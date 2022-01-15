@@ -1,0 +1,42 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "ApiNetContext",
+   "ContextNamespace": "ApiDbContext",
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": "Models",
+   "OutputContextPath": "ApiDbContext",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "BaseProject",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[employees]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[userAdmin]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "DESKTOP-G2RKN51\\SQLEXPRESS.api_dotnet",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
