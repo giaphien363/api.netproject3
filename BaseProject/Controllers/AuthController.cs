@@ -27,32 +27,33 @@ namespace BaseProject.Controllers
             _db = db;
         }
 
+        // demo authorized (get role, check permission)
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult> GetCurrentUser()
+        public async Task<ActionResult> GetUserLogin()
         {
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
 
-            if (role.Role == "admin")
+            if (role.Role == RoleUser.ADMIN)
             {
-                var user = _db.UserAdmins.FirstOrDefault(obj=>obj.Username == role.Username);
+                var user = _db.UserAdmins.FirstOrDefault(obj => obj.Username == role.Username);
                 if (user != null)
                     return Ok(user);
             }
-            else if (role.Role == "employee")
+            else if (role.Role == RoleUser.EMPLOYEE)
             {
                 var user = _db.Employees.FirstOrDefault(obj => obj.Username == role.Username);
                 if (user != null)
                     return Ok(user);
             }
 
-            return BadRequest("User not found");
+            return BadRequest(new CustomError { Detail = "User not found" });
         }
 
 
         [HttpPost("admin/register")]
-        public async Task<ActionResult<UserAdmin>> Register(AdminDto adminDto)
+        public async Task<ActionResult<UserAdmin>> Register(UserDto adminDto)
         {
             UserAdmin newAdmin = new UserAdmin();
 
@@ -62,76 +63,82 @@ namespace BaseProject.Controllers
             _db.UserAdmins.Add(newAdmin);
             if (_db.SaveChanges() > 0)
             {
-                var token = GenToken.GenerateToken(_jwtConfig, newAdmin.Username, "admin");
+                MyResponse token = new MyResponse();
+                token.Access = GenToken.GenerateToken(_jwtConfig, newAdmin.Username, RoleUser.ADMIN);
 
                 return Ok(token);
             }
-            return BadRequest("Something went wrong!");
+            return BadRequest(new CustomError() { Detail = "Something went wrong!" });
         }
 
         [HttpPost("admin/login")]
-        public async Task<ActionResult<UserAdmin>> Login(AdminDto adminDto)
+        public async Task<ActionResult<UserAdmin>> Login(UserDto adminDto)
         {
             var admin = _db.UserAdmins.FirstOrDefault(x => x.Username == adminDto.UserName);
 
             if (admin == null)
-                return BadRequest("User not found!");
+                return BadRequest(new CustomError() { Detail = "User not found!" });
 
             if (!EncryptPassword.VerifyPassword(admin.Password, adminDto.Password))
-                return BadRequest("Incorrect Password!");
+                return BadRequest(new CustomError() { Detail = "Incorrect Password!" });
 
-            // get token
-            var token = GenToken.GenerateToken(_jwtConfig, admin.Username, "admin");
+            // gen token
+            MyResponse token = new MyResponse();
+            token.Access = GenToken.GenerateToken(_jwtConfig, admin.Username, RoleUser.ADMIN);
             return Ok(token);
         }
 
-
-        [HttpPost("admin/register/employee")]
-        public async Task<ActionResult<Employee>> RegisterEmployee(EmployeeDto emDto)
-        {
-            Employee newEm = new Employee();
-
-            newEm.Username = emDto.Username;
-            newEm.Password = EncryptPassword.Encrypt(emDto.Password);
-            newEm.Designation = emDto.Designation != null ? emDto.Designation : null;
-            newEm.Salary = emDto.Salary != null ? emDto.Salary : null;
-
-            newEm.Firstname = emDto.Firstname != null ? emDto.Firstname : null;
-            newEm.Lastname = emDto.Lastname != null ? emDto.Lastname : null;
-            newEm.Joindate = emDto.Joindate != null ? emDto.Joindate : null;
-
-            newEm.Address = emDto.Address != null ? emDto.Address : null;
-            newEm.Contact = emDto.Contact != null ? emDto.Contact : null;
-            newEm.State = emDto.State != null ? emDto.State : null;
-
-            newEm.City = emDto.City != null ? emDto.City : null;
-            newEm.Country = emDto.Country != null ? emDto.Country : null;
-
-            _db.Employees.Add(newEm);
-            if (_db.SaveChanges() > 0)
-            {
-                return Ok();
-            }
-            return BadRequest("Something went wrong!");
-        }
-
-
         [HttpPost("employee/login")]
-        public async Task<ActionResult<Employee>> LoginEmployee(EmployeeLogin emDto)
+        public async Task<ActionResult<Employee>> LoginEmployee(UserDto emDto)
         {
-            var employee = _db.Employees.FirstOrDefault(x => x.Username == emDto.Username);
+            var employee = _db.Employees.FirstOrDefault(x => x.Username == emDto.UserName && x.IsDeleted == 0);
 
             if (employee == null)
-                return BadRequest("User not found!");
+                return BadRequest(new CustomError() { Detail = "User not found!" });
 
             if (!EncryptPassword.VerifyPassword(employee.Password, emDto.Password))
-                return BadRequest("Incorrect Password!");
+                return BadRequest(new CustomError() { Detail = "Incorrect Password!" });
 
-            // get token
-            var token = GenToken.GenerateToken(_jwtConfig, employee.Username, "employee");
+            // gen token
+            MyResponse token = new MyResponse();
+            token.Access = GenToken.GenerateToken(_jwtConfig, employee.Username, RoleUser.EMPLOYEE);
             //return new JsonResult(token);
             return Ok(token);
         }
 
+        [HttpPost("insurance/login")]
+        public async Task<ActionResult<Employee>> InsuranceEmployee(UserDto emDto)
+        {
+            var employee = _db.InsuranceAdmins.FirstOrDefault(x => x.Username == emDto.UserName && x.IsDeleted == 0);
+
+            if (employee == null)
+                return BadRequest(new CustomError() { Detail = "User not found!" });
+
+            if (!EncryptPassword.VerifyPassword(employee.Password, emDto.Password))
+                return BadRequest(new CustomError() { Detail = "Incorrect Password!" });
+
+            // check role insurance admin to gen token
+            MyResponse token = new MyResponse();
+            if (employee.Role.ToUpper() == RoleUser.IMANAGER)
+            {
+                token.Access = GenToken.GenerateToken(_jwtConfig, employee.Username, RoleUser.IMANAGER);
+                return Ok(token);
+            }
+            token.Access = GenToken.GenerateToken(_jwtConfig, employee.Username, RoleUser.IFINMAN);
+            return Ok(token);
+        }
+
+    }
+
+    public static class RoleUser
+    {
+        static public string ADMIN = "AMDIN";
+        static public string EMPLOYEE = "EMPLOYEE";
+        static public string IMANAGER = "IMANAGER";
+        static public string IFINMAN = "IFINMAN";
+    }
+    public class MyResponse
+    {
+        public string Access { get; set; }
     }
 }

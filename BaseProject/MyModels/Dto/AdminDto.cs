@@ -2,7 +2,7 @@
 
 namespace BaseProject.MyModels
 {
-    public class AdminDto
+    public class UserDto
     {
         [Required]
         public string UserName{ get; set; }

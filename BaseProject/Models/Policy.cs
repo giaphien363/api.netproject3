@@ -6,34 +6,39 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BaseProject.Models
 {
-    public partial class Employee
+    public partial class Policy
     {
-        public Employee()
+        public Policy()
         {
             Bills = new HashSet<Bill>();
             ClaimEmployees = new HashSet<ClaimEmployee>();
+            ContractPolicies = new HashSet<ContractPolicy>();
             PolicyOrders = new HashSet<PolicyOrder>();
         }
 
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public decimal? Salary { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public DateTime? Joindate { get; set; }
-        public string Designation { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
+        [Required]
+        public string Name { get; set; }
+        public string Description { get; set; }
+        [Required]
+        public int SupportPercent { get; set; }
+        [Required]
+        public int DurationInDays { get; set; }
+        [Required]
+        public decimal Price { get; set; }
+        [Required]
+        public int? TypeId { get; set; }
+        [Required]
+        public int? CompanyId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int? IsDeleted { get; set; }
 
-        public virtual Contract Contract { get; set; }
+        public virtual InsuranceCompany Company { get; set; }
+        public virtual TypePolicy Type { get; set; }
         public virtual ICollection<Bill> Bills { get; set; }
         public virtual ICollection<ClaimEmployee> ClaimEmployees { get; set; }
+        public virtual ICollection<ContractPolicy> ContractPolicies { get; set; }
         public virtual ICollection<PolicyOrder> PolicyOrders { get; set; }
     }
 }

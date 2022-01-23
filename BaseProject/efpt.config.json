@@ -14,11 +14,51 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[dbo].[employees]",
+         "Name": "[dbo].[Bill]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[userAdmin]",
+         "Name": "[dbo].[ClaimAction]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClaimEmployee]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Contract]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ContractPolicy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Employees]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[InsuranceAdmin]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[InsuranceCompany]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Policy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PolicyOrder]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TypePolicy]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserAdmin]",
          "ObjectType": 0
       }
    ],

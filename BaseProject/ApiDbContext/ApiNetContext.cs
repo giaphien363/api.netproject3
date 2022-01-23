@@ -20,103 +20,425 @@ namespace BaseProject.ApiDbContext
         {
         }
 
+        public virtual DbSet<Bill> Bills { get; set; }
+        public virtual DbSet<ClaimAction> ClaimActions { get; set; }
+        public virtual DbSet<ClaimEmployee> ClaimEmployees { get; set; }
+        public virtual DbSet<Contract> Contracts { get; set; }
+        public virtual DbSet<ContractPolicy> ContractPolicies { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<InsuranceAdmin> InsuranceAdmins { get; set; }
+        public virtual DbSet<InsuranceCompany> InsuranceCompanies { get; set; }
+        public virtual DbSet<Policy> Policies { get; set; }
+        public virtual DbSet<PolicyOrder> PolicyOrders { get; set; }
+        public virtual DbSet<TypePolicy> TypePolicies { get; set; }
         public virtual DbSet<UserAdmin> UserAdmins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
+            modelBuilder.Entity<Bill>(entity =>
+            {
+                entity.HasKey(e => e.ClaimId)
+                    .HasName("PK__Bill__EF2E139BF4469651");
+
+                entity.ToTable("Bill");
+
+                entity.Property(e => e.ClaimId).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.SupportCost).HasColumnType("decimal(12, 2)");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Claim)
+                    .WithOne(p => p.Bill)
+                    .HasForeignKey<Bill>(d => d.ClaimId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Bill__ClaimId__4BAC3F29");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.Bills)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK__Bill__EmployeeId__4AB81AF0");
+
+                entity.HasOne(d => d.Policy)
+                    .WithMany(p => p.Bills)
+                    .HasForeignKey(d => d.PolicyId)
+                    .HasConstraintName("FK__Bill__PolicyId__4CA06362");
+            });
+
+            modelBuilder.Entity<ClaimAction>(entity =>
+            {
+                entity.ToTable("ClaimAction");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Reason)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Claim)
+                    .WithMany(p => p.ClaimActions)
+                    .HasForeignKey(d => d.ClaimId)
+                    .HasConstraintName("FK__ClaimActi__Claim__52593CB8");
+            });
+
+            modelBuilder.Entity<ClaimEmployee>(entity =>
+            {
+                entity.ToTable("ClaimEmployee");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Reason)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.TotalCost).HasColumnType("decimal(12, 2)");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.ClaimEmployees)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK__ClaimEmpl__Emplo__440B1D61");
+
+                entity.HasOne(d => d.Policy)
+                    .WithMany(p => p.ClaimEmployees)
+                    .HasForeignKey(d => d.PolicyId)
+                    .HasConstraintName("FK__ClaimEmpl__Polic__44FF419A");
+            });
+
+            modelBuilder.Entity<Contract>(entity =>
+            {
+                entity.HasKey(e => e.EmployeeId)
+                    .HasName("PK__Contract__7AD04F1104259854");
+
+                entity.ToTable("Contract");
+
+                entity.Property(e => e.EmployeeId).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TotalAmount).HasColumnType("decimal(12, 2)");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Employee)
+                    .WithOne(p => p.Contract)
+                    .HasForeignKey<Contract>(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Contract__Employ__300424B4");
+            });
+
+            modelBuilder.Entity<ContractPolicy>(entity =>
+            {
+                entity.ToTable("ContractPolicy");
+
+                entity.Property(e => e.AmountOwing).HasColumnType("decimal(12, 2)");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Emi).HasColumnType("decimal(12, 2)");
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Contract)
+                    .WithMany(p => p.ContractPolicies)
+                    .HasForeignKey(d => d.ContractId)
+                    .HasConstraintName("FK__ContractP__Contr__35BCFE0A");
+
+                entity.HasOne(d => d.Policy)
+                    .WithMany(p => p.ContractPolicies)
+                    .HasForeignKey(d => d.PolicyId)
+                    .HasConstraintName("FK__ContractP__Polic__36B12243");
+            });
+
             modelBuilder.Entity<Employee>(entity =>
             {
-                entity.ToTable("employees");
-
-                entity.HasIndex(e => e.Username, "UQ__employee__F3DBC572E1A8F317")
+                entity.HasIndex(e => e.Username, "UQ__Employee__536C85E4235549D6")
                     .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("address");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.City)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("city");
-
-                entity.Property(e => e.Contact)
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("contact");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Country)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("country");
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Designation)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("designation");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Firstname)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("firstname");
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Joindate)
                     .HasColumnType("datetime")
-                    .HasColumnName("joindate");
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Lastname)
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("lastname");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("password");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Salary)
-                    .HasColumnType("decimal(12, 2)")
-                    .HasColumnName("salary");
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(12)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.State)
-                    .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasColumnName("state");
+                entity.Property(e => e.Salary).HasColumnType("decimal(12, 2)");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("username");
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<InsuranceAdmin>(entity =>
+            {
+                entity.ToTable("InsuranceAdmin");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Role)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.InsuranceAdmins)
+                    .HasForeignKey(d => d.CompanyId)
+                    .HasConstraintName("FK__Insurance__Compa__1ED998B2");
+            });
+
+            modelBuilder.Entity<InsuranceCompany>(entity =>
+            {
+                entity.ToTable("InsuranceCompany");
+
+                entity.Property(e => e.Address)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Policy>(entity =>
+            {
+                entity.ToTable("Policy");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Price).HasColumnType("decimal(12, 2)");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.Policies)
+                    .HasForeignKey(d => d.CompanyId)
+                    .HasConstraintName("FK__Policy__CompanyI__2A4B4B5E");
+
+                entity.HasOne(d => d.Type)
+                    .WithMany(p => p.Policies)
+                    .HasForeignKey(d => d.TypeId)
+                    .HasConstraintName("FK__Policy__TypeId__29572725");
+            });
+
+            modelBuilder.Entity<PolicyOrder>(entity =>
+            {
+                entity.ToTable("PolicyOrder");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Emi).HasColumnType("decimal(12, 2)");
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.PolicyOrders)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK__PolicyOrd__Emplo__3C69FB99");
+
+                entity.HasOne(d => d.Policy)
+                    .WithMany(p => p.PolicyOrders)
+                    .HasForeignKey(d => d.PolicyId)
+                    .HasConstraintName("FK__PolicyOrd__Polic__3D5E1FD2");
+            });
+
+            modelBuilder.Entity<TypePolicy>(entity =>
+            {
+                entity.ToTable("TypePolicy");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
             });
 
             modelBuilder.Entity<UserAdmin>(entity =>
             {
-                entity.ToTable("userAdmin");
+                entity.ToTable("UserAdmin");
 
-                entity.HasIndex(e => e.Username, "UQ__userAdmi__F3DBC572ADB3BCAF")
+                entity.HasIndex(e => e.Username, "UQ__UserAdmi__536C85E4B36DD792")
                     .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("password");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("username");
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);
