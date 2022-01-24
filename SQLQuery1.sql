@@ -148,10 +148,3 @@ create table ClaimAction(
 	UpdatedAt datetime default(GETDATE()),
 	IsDeleted int default(0)
 );
-
-
-select * from UserAdmin;
-
-select * from Employees;
-truncate table Employees;
-

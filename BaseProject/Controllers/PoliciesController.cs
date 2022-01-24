@@ -29,52 +29,25 @@ namespace BaseProject.Controllers
 
         // GET: api/Policies ---> list
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Policy>>> GetPolicies()
         {
-            return await _context.Policies.ToListAsync();
+            return await _context.Policies.Where(item => item.IsDeleted == 0).ToListAsync();
         }
 
         // GET: api/Policies/5 ---> get detail 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Policy>> GetPolicy(int id)
         {
-            var policy = await _context.Policies.FindAsync(id);
+            var policy = await _context.Policies.Where(item => item.IsDeleted == 0 && item.Id == id).FirstOrDefaultAsync();
 
             if (policy == null)
             {
-                return NotFound();
+                return NotFound(new CustomError { Code = 404, Detail = "Policy not found!" });
             }
 
-            return policy;
-        }
-
-        // PUT: api/Policies/5 ----> update
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPolicy(int id, Policy policy)
-        {
-            if (id != policy.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(policy).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PolicyExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(policy);
         }
 
         // POST: api/Policies ----> create new policy
@@ -92,8 +65,39 @@ namespace BaseProject.Controllers
 
             _context.Policies.Add(policy);
             await _context.SaveChangesAsync();
+            return Ok();
+        }
 
-            return CreatedAtAction("GetPolicy", new { id = policy.Id }, policy);
+        // PUT: api/Policies/5 ----> update
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<IActionResult> PutPolicy(int id, PolicyUpdateDto policyDto)
+        {
+            // check permission
+            ClaimsIdentity identity = _httpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken user = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (user.Role != RoleUser.ADMIN)
+            {
+                return Unauthorized(new CustomError { Detail = "Permission denied!" });
+            }
+
+            var policy = await _context.Policies.Where(item => item.Id == id && item.IsDeleted == 0).FirstOrDefaultAsync();
+            if (policy == null)
+                return NotFound(new CustomError { Code = 404, Detail = "Policy not found!" });
+
+            policy = PolicyUpdateDto.UpdatePolicy(policy, policyDto);
+            _context.Policies.Update(policy);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return Ok(policy);
         }
 
         // DELETE: api/Policies/5
@@ -109,10 +113,10 @@ namespace BaseProject.Controllers
                 return Unauthorized(new CustomError { Detail = "Permission denied!" });
             }
 
-            var policy = await _context.Policies.FindAsync(id);
+            var policy = await _context.Policies.Where(item => item.IsDeleted == 0 && item.Id == id).FirstOrDefaultAsync();
             if (policy == null)
             {
-                return NotFound();
+                return NotFound(new CustomError { Code = 404, Detail = "Policy not found!" });
             }
 
             policy.IsDeleted = 1;

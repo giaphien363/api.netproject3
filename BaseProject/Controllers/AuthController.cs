@@ -5,6 +5,7 @@ using BaseProject.MyModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -128,6 +129,45 @@ namespace BaseProject.Controllers
             return Ok(token);
         }
 
+        // change password
+        [HttpPut("update/password")]
+        [Authorize]
+        public async Task<ActionResult> ChangePassword(ChangePasswordForm form)
+        {
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken user = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+
+            if (user.Role == RoleUser.ADMIN)
+            {
+                UserAdmin admin = _db.UserAdmins.Where(u => u.Username == user.Username).FirstOrDefault();
+                if (!EncryptPassword.VerifyPassword(admin.Password, form.password) && admin != null)
+                    return BadRequest(new CustomError() { Code = 400, Detail = "Incorrect Password!" });
+                admin.Password = EncryptPassword.Encrypt(form.newpassword);
+                _db.UserAdmins.Update(admin);
+                await _db.SaveChangesAsync();
+                return Ok();
+            }
+            else if (user.Role == RoleUser.EMPLOYEE)
+            {
+                Employee emp = _db.Employees.Where(u => u.Username == user.Username).FirstOrDefault();
+                if (!EncryptPassword.VerifyPassword(emp.Password, form.password) && emp != null)
+                    return BadRequest(new CustomError() { Code = 400, Detail = "Incorrect Password!" });
+                emp.Password = EncryptPassword.Encrypt(form.newpassword);
+                _db.Employees.Update(emp);
+                await _db.SaveChangesAsync();
+                return Ok();
+            }
+            else
+            {
+                InsuranceAdmin inAdmin = _db.InsuranceAdmins.Where(u => u.Username == user.Username).FirstOrDefault();
+                if (!EncryptPassword.VerifyPassword(inAdmin.Password, form.password) && inAdmin != null)
+                    return BadRequest(new CustomError() { Code = 400, Detail = "Incorrect Password!" });
+                inAdmin.Password = EncryptPassword.Encrypt(form.newpassword);
+                _db.InsuranceAdmins.Update(inAdmin);
+                await _db.SaveChangesAsync();
+                return Ok();
+            }
+        }
     }
 
     public static class RoleUser
@@ -140,5 +180,13 @@ namespace BaseProject.Controllers
     public class MyResponse
     {
         public string Access { get; set; }
+    }
+
+    public class ChangePasswordForm
+    {
+        [Required]
+        public string password { get; set; }
+        [Required]
+        public string newpassword { get; set; }
     }
 }
