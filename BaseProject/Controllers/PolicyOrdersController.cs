@@ -16,47 +16,47 @@ namespace BaseProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InsuranceCompaniesController : ControllerBase
+    public class PolicyOrdersController : ControllerBase
     {
         private readonly ApiNetContext _context;
 
-        public InsuranceCompaniesController(ApiNetContext context)
+        public PolicyOrdersController(ApiNetContext context)
         {
             _context = context;
         }
 
-        // GET: api/InsuranceCompanies
+        // GET: api/PolicyOrders
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<InsuranceCompany>>> GetInsuranceCompanies(string key)
+        public async Task<ActionResult<IEnumerable<PolicyOrder>>> GetPolicyOrders()
         {
-            return await _context.InsuranceCompanies.
-                Where(item => item.IsDeleted == 0).
-                Where(item => item.Name.Contains(key)).
-                ToListAsync();
+            return await _context.PolicyOrders
+                .Where(item => item.IsDeleted == 0)
+                .ToListAsync();
         }
 
-        // GET: api/InsuranceCompanies/5
+        // GET: api/PolicyOrders/5
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<InsuranceCompany>> GetInsuranceCompany(int id)
+        public async Task<ActionResult<PolicyOrder>> GetPolicyOrder(int id)
         {
-            var insuranceCompany = await _context.InsuranceCompanies.
-                Where(item => item.IsDeleted == 0 && item.Id == id).FirstOrDefaultAsync();
+            var policyOrder = await _context.PolicyOrders
+                .Where(item => item.Id == id && item.IsDeleted == 0)
+                .FirstAsync();
 
-            if (insuranceCompany == null)
+            if (policyOrder == null)
             {
-                return NotFound(new CustomError { Code = 404, Detail = "Insurance Company not found!" });
+                return NotFound();
             }
 
-            return Ok(insuranceCompany);
+            return Ok(policyOrder);
         }
 
-        // PUT: api/InsuranceCompanies/5
+        // PUT: api/PolicyOrders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> PutInsuranceCompany(int id, InsuranceCompany incom)
+        public async Task<IActionResult> PutPolicyOrder(int id, PolicyOrder policyOrder)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -66,15 +66,14 @@ namespace BaseProject.Controllers
                 return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
 
-            var retrieveInCom = await _context.InsuranceCompanies.
-                Where(item => item.Id == id && item.IsDeleted == 0).
-                FirstOrDefaultAsync();
+            var current = await _context.PolicyOrders
+                .Where(item => item.Id == id && item.IsDeleted == 0)
+                .FirstOrDefaultAsync();
+            if (current == null)
+                return NotFound(new CustomError { Detail = "Policy order not found!" });
 
-            if (retrieveInCom == null)
-                return NotFound(new CustomError { Detail = "Insurance Company not found!" });
-
-            retrieveInCom = ICompanyCreateDto.UpdateICompany(retrieveInCom, incom);
-            _context.InsuranceCompanies.Update(retrieveInCom);
+            current = OrderDto.UpdateOrder(current, policyOrder);
+            _context.PolicyOrders.Update(current);
 
             try
             {
@@ -85,14 +84,14 @@ namespace BaseProject.Controllers
                 throw;
             }
 
-            return Ok(retrieveInCom);
+            return Ok(current);
         }
 
-        // POST: api/InsuranceCompanies
+        // POST: api/PolicyOrders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<InsuranceCompany>> PostInsuranceCompany(ICompanyCreateDto iComDto)
+        public async Task<ActionResult<PolicyOrder>> PostPolicyOrder(OrderDto policyOrderDto)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -102,19 +101,19 @@ namespace BaseProject.Controllers
                 return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
 
-            var newCompany = ICompanyCreateDto.ConvertIntoICompany(iComDto);
+            PolicyOrder order = OrderDto.CreateOrder(policyOrderDto);
+            // check if exist username
 
-            _context.InsuranceCompanies.Add(newCompany);
+            _context.PolicyOrders.Add(order);
             await _context.SaveChangesAsync();
-            //var retrieve = await _context.Employees.Where(item => item.Username == employee.Username && item.IsDeleted == 0).FirstOrDefaultAsync();
 
             return Ok();
         }
 
-        // DELETE: api/InsuranceCompanies/5
+        // DELETE: api/PolicyOrders/5
         [HttpDelete("{id}")]
         [Authorize]
-        public async Task<IActionResult> DeleteInsuranceCompany(int id)
+        public async Task<IActionResult> DeletePolicyOrder(int id)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -124,22 +123,22 @@ namespace BaseProject.Controllers
                 return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
 
-            var company = await _context.InsuranceCompanies.FindAsync(id);
-            if (company == null)
+            var order = await _context.PolicyOrders.FindAsync(id);
+            if (order == null)
             {
-                return NotFound(new CustomError { Detail = "Insurance company not found!" });
+                return NotFound(new CustomError { Detail = "Policy order not found!" });
             }
-            company.IsDeleted = 1;
-            _context.InsuranceCompanies.Update(company);
+            order.IsDeleted = 1;
+            _context.PolicyOrders.Update(order);
 
             await _context.SaveChangesAsync();
 
             return Ok();
         }
 
-        private bool InsuranceCompanyExists(int id)
+        private bool PolicyOrderExists(int id)
         {
-            return _context.InsuranceCompanies.Any(e => e.Id == id);
+            return _context.PolicyOrders.Any(e => e.Id == id);
         }
     }
 }

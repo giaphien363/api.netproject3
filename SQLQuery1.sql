@@ -5,6 +5,8 @@
 
 -- USE  [api_dotnet];
 
+select * from Employees
+
 CREATE TABLE UserAdmin (
     [Id] int identity(1,1) primary key,
     [Username] varchar(50) unique not null,

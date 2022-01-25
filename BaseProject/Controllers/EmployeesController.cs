@@ -28,7 +28,7 @@ namespace BaseProject.Controllers
         // GET: api/Employees ---> list
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees(string key)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -37,7 +37,14 @@ namespace BaseProject.Controllers
             {
                 return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
-            return await _context.Employees.Where(item => item.IsDeleted == 0).ToListAsync();
+            return await _context.Employees.
+                Where(item => item.IsDeleted == 0).
+                Where(item =>
+                    item.Username.Contains(key) ||
+                    item.Firstname.Contains(key) ||
+                    item.Lastname.Contains(key)
+                    ).
+                ToListAsync();
         }
 
         // GET: api/Employees/5 ---> get detail 
