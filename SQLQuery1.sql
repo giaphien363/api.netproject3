@@ -1,11 +1,16 @@
--- USE  [master];
+/*
+Uncomment block code below if first time you run
+*/
 
--- drop database api_dotnet;
--- CREATE DATABASE api_dotnet;
+/*
+USE  [master];
 
--- USE  [api_dotnet];
+DROP DATABASE [api_dotnet];
 
-select * from Employees
+CREATE DATABASE [api_dotnet];
+
+USE  [api_dotnet];
+*/
 
 CREATE TABLE UserAdmin (
     [Id] int identity(1,1) primary key,
@@ -97,7 +102,7 @@ create table [ContractPolicy](
 	EndDate datetime not null,
 	Emi decimal(12,2) null, -- so tien tra gop hang thang
 	AmountOwing decimal(12,2) null, -- so no can phai tra
-	PaymentStatus int not null, -- trang thai da thanh toan hay chua ?
+	PaymentStatus int not null, -- trang thai da thanh toan hay chua ? 0: not yet, 1: done, 2: emi
 	PaymentType int not null, -- kieu thanh toan, tra gop hay 1 lan ?	
 	CreatedAt datetime default(GETDATE()),
 	UpdatedAt datetime default(GETDATE()),
@@ -109,6 +114,7 @@ create table PolicyOrder(
 	StartDate datetime not null, 
 	PaymentType int not null,
 	Emi decimal(12,2) null,
+	[Status] int default(0), -- 0: pending, 1: approval, 2: reject
 	EmployeeId int FOREIGN KEY REFERENCES Employees(Id),
 	PolicyId int FOREIGN KEY REFERENCES Policy(Id),
 	CreatedAt datetime default(GETDATE()),
@@ -150,3 +156,7 @@ create table ClaimAction(
 	UpdatedAt datetime default(GETDATE()),
 	IsDeleted int default(0)
 );
+
+-- select * from [Contract]
+
+-- ALTER TABLE PolicyOrder ADD [Status] int default(0);

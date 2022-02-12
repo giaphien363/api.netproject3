@@ -12,7 +12,7 @@ namespace BaseProject.Common
 {
     public static class GenToken
     {
-        public static string GenerateToken(JwtConfig jwtConfig, string userName, string role)
+        public static string GenerateToken(JwtConfig jwtConfig, string userName, string role, int id)
         {
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.Key));
@@ -22,6 +22,7 @@ namespace BaseProject.Common
             {
                 new Claim(ClaimTypes.Name, userName),
                 new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.NameIdentifier, id.ToString()),
             };
 
             var token = new JwtSecurityToken(jwtConfig.Issuer,
@@ -48,7 +49,8 @@ namespace BaseProject.Common
                 return new JsonResult(new ObjReturnToken
                 {
                     Username = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Name)?.Value,
-                    Role = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Role)?.Value
+                    Role = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Role)?.Value,
+                    Id = Int32.Parse(userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value)
                 });
             }
             return null;
@@ -59,6 +61,7 @@ namespace BaseProject.Common
     {
         public string Username { get; set; }
         public string Role { get; set; }
+        public int Id{ get; set; }
 
     }
 }

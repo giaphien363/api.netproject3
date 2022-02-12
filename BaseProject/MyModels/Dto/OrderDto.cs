@@ -1,4 +1,5 @@
-﻿using BaseProject.Models;
+﻿using BaseProject.Common;
+using BaseProject.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,6 +28,7 @@ namespace BaseProject.MyModels
             order.PaymentType = dto.PaymentType;
             order.EmployeeId = dto.EmployeeId;
             order.PolicyId = dto.PolicyId;
+            order.Status = (int)StatusPolicyOrder.PENDING;
 
             if (dto.Emi != null)
             {

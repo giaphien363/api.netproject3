@@ -83,6 +83,12 @@ namespace BaseProject.Controllers
                 return Conflict(new CustomError { Code = 409, Detail = "User existed!" });
             }
             _context.Employees.Add(employee);
+
+            // create contract when created employee
+            // create contract one_to_one with employee
+            Contract contract = ContractDto.CreateContract(employee);
+            _context.Contracts.Add(contract);
+            
             await _context.SaveChangesAsync();
             var retrieve = await _context.Employees.Where(item => item.Username == employee.Username && item.IsDeleted == 0).FirstOrDefaultAsync();
 

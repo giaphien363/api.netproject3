@@ -65,7 +65,7 @@ namespace BaseProject.Controllers
             if (_db.SaveChanges() > 0)
             {
                 MyResponse token = new MyResponse();
-                token.Access = GenToken.GenerateToken(_jwtConfig, newAdmin.Username, RoleUser.ADMIN);
+                token.Access = GenToken.GenerateToken(_jwtConfig, newAdmin.Username, RoleUser.ADMIN, newAdmin.Id);
 
                 return Ok(token);
             }
@@ -85,7 +85,7 @@ namespace BaseProject.Controllers
 
             // gen token
             MyResponse token = new MyResponse();
-            token.Access = GenToken.GenerateToken(_jwtConfig, admin.Username, RoleUser.ADMIN);
+            token.Access = GenToken.GenerateToken(_jwtConfig, admin.Username, RoleUser.ADMIN, admin.Id);
             return Ok(token);
         }
 
@@ -102,7 +102,7 @@ namespace BaseProject.Controllers
 
             // gen token
             MyResponse token = new MyResponse();
-            token.Access = GenToken.GenerateToken(_jwtConfig, employee.Username, RoleUser.EMPLOYEE);
+            token.Access = GenToken.GenerateToken(_jwtConfig, employee.Username, RoleUser.EMPLOYEE, employee.Id);
             //return new JsonResult(token);
             return Ok(token);
         }
@@ -122,10 +122,10 @@ namespace BaseProject.Controllers
             MyResponse token = new MyResponse();
             if (employee.Role.ToUpper() == RoleUser.IMANAGER)
             {
-                token.Access = GenToken.GenerateToken(_jwtConfig, employee.Username, RoleUser.IMANAGER);
+                token.Access = GenToken.GenerateToken(_jwtConfig, employee.Username, RoleUser.IMANAGER, employee.Id);
                 return Ok(token);
             }
-            token.Access = GenToken.GenerateToken(_jwtConfig, employee.Username, RoleUser.IFINMAN);
+            token.Access = GenToken.GenerateToken(_jwtConfig, employee.Username, RoleUser.IFINMAN, employee.Id);
             return Ok(token);
         }
 
