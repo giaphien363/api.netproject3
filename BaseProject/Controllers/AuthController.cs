@@ -39,17 +39,21 @@ namespace BaseProject.Controllers
             if (role.Role == RoleUser.ADMIN)
             {
                 var user = _db.UserAdmins.FirstOrDefault(obj => obj.Username == role.Username);
-                if (user != null)
-                    return Ok(user);
+                return Ok(new UserResponse { Id = user.Id, Username = user.Username, Role = role.Role });
             }
             else if (role.Role == RoleUser.EMPLOYEE)
             {
                 var user = _db.Employees.FirstOrDefault(obj => obj.Username == role.Username);
-                if (user != null)
-                    return Ok(user);
+                return Ok(new UserResponse { Id = user.Id, Username = user.Username, Role = role.Role });
             }
+            else if (role.Role == RoleUser.IFINMAN)
+            {
+                var user = _db.InsuranceAdmins.FirstOrDefault(obj => obj.Username == role.Username);
+                return Ok(new UserResponse { Id = user.Id, Username = user.Username, Role = role.Role });
+            }
+            var admin = _db.InsuranceAdmins.FirstOrDefault(obj => obj.Username == role.Username);
+            return Ok(new UserResponse { Id = admin.Id, Username = admin.Username, Role = RoleUser.IMANAGER });
 
-            return BadRequest(new CustomError { Detail = "User not found" });
         }
 
 
@@ -180,6 +184,12 @@ namespace BaseProject.Controllers
     public class MyResponse
     {
         public string Access { get; set; }
+    }
+    public class UserResponse
+    {
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Role { get; set; }
     }
 
     public class ChangePasswordForm
