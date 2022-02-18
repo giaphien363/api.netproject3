@@ -12,6 +12,8 @@ CREATE DATABASE [api_dotnet];
 USE  [api_dotnet];
 */
 
+select * from Policy
+
 CREATE TABLE UserAdmin (
     [Id] int identity(1,1) primary key,
     [Username] varchar(50) unique not null,

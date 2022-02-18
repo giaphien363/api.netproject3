@@ -19,12 +19,10 @@ namespace BaseProject.Controllers
     public class PoliciesController : ControllerBase
     {
         private readonly ApiNetContext _context;
-        private readonly HttpContext _httpContext;
 
-        public PoliciesController(ApiNetContext context, HttpContext httpContext)
+        public PoliciesController(ApiNetContext context)
         {
             _context = context;
-            _httpContext = httpContext;
         }
 
         // GET: api/Policies ---> list
@@ -79,7 +77,7 @@ namespace BaseProject.Controllers
         public async Task<ActionResult<Policy>> PostPolicy(Policy policy)
         {
             // check permission
-            ClaimsIdentity identity = _httpContext.User.Identity as ClaimsIdentity;
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
             if (role.Role != RoleUser.ADMIN)
             {
@@ -97,7 +95,7 @@ namespace BaseProject.Controllers
         public async Task<IActionResult> PutPolicy(int id, PolicyUpdateDto policyDto)
         {
             // check permission
-            ClaimsIdentity identity = _httpContext.User.Identity as ClaimsIdentity;
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken user = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
             if (user.Role != RoleUser.ADMIN)
             {
@@ -129,7 +127,7 @@ namespace BaseProject.Controllers
         public async Task<IActionResult> DeletePolicy(int id)
         {
             // check permission
-            ClaimsIdentity identity = _httpContext.User.Identity as ClaimsIdentity;
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
             if (role.Role != RoleUser.ADMIN)
             {
@@ -149,11 +147,6 @@ namespace BaseProject.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool PolicyExists(int id)
-        {
-            return _context.Policies.Any(e => e.Id == id);
         }
     }
 }
