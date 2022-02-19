@@ -1,0 +1,41 @@
+version: '3'
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "root@123456"
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
+    restart: always
+    networks:
+      local:
+
+  api-app:
+    build: 
+      dockerfile: ./Dockerfile
+      context: .
+    image: eproject_backend:latest
+    environment:
+      DbServer: "mssql"
+      DbPort: "1433"
+      DbUser: "SA"
+      Password: "root@123456"
+      Database: "api_dotnet"
+    ports: 
+      - "8008:80"
+    restart: always
+    volumes:
+      - eproject:/source_code
+    depends_on:
+      - mssql
+    networks:
+      local:
+
+volumes:
+  eproject:
+
+networks:
+  local:
+    driver: bridge

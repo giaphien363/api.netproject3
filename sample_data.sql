@@ -1,4 +1,6 @@
 -- some stupid data
+-- Select @@version
+
 
 INSERT INTO InsuranceCompany (Name, [Address], [Url], Phone) VALUES 
 ('BH Nhan Tho', 'Cau Giay HN', 'http://', '0988765123'),
