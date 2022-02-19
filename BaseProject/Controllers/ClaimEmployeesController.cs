@@ -28,11 +28,18 @@ namespace BaseProject.Controllers
         // GET: api/ClaimEmployees
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<ClaimEmployee>>> GetClaimEmployees()
+        public async Task<ActionResult<PagedResponse<List<ClaimEmployee>>>> GetClaimEmployees([FromQuery] PaginationFilter filter)
         {
-            return await _context.ClaimEmployees
-                .Where(item => item.IsDeleted == 0)
+            // if admin return all
+            // if employee thi return nhung claim cua no
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            var pagedData = await _context.ClaimEmployees
+                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                .Take(validFilter.PageSize)
                 .ToListAsync();
+            var totalRecords = await _context.ClaimEmployees.CountAsync();
+            PagedResponse<List<ClaimEmployee>> page_response = new PagedResponse<List<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            return Ok(page_response);
         }
 
         // GET: api/ClaimEmployees/5

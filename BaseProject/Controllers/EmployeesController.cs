@@ -37,14 +37,17 @@ namespace BaseProject.Controllers
             {
                 return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
+            if (key != "" || key != null)
+                return await _context.Employees.
+                    Where(item => item.IsDeleted == 0).
+                    Where(item =>
+                        item.Username.Contains(key) ||
+                        item.Firstname.Contains(key) ||
+                        item.Lastname.Contains(key)
+                        ).
+                    ToListAsync();
             return await _context.Employees.
-                Where(item => item.IsDeleted == 0).
-                Where(item =>
-                    item.Username.Contains(key) ||
-                    item.Firstname.Contains(key) ||
-                    item.Lastname.Contains(key)
-                    ).
-                ToListAsync();
+                   Where(item => item.IsDeleted == 0).ToListAsync();
         }
 
         // GET: api/Employees/5 ---> get detail 
@@ -88,7 +91,7 @@ namespace BaseProject.Controllers
             // create contract one_to_one with employee
             Contract contract = ContractDto.CreateContract(employee);
             _context.Contracts.Add(contract);
-            
+
             await _context.SaveChangesAsync();
             var retrieve = await _context.Employees.Where(item => item.Username == employee.Username && item.IsDeleted == 0).FirstOrDefaultAsync();
 

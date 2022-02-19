@@ -27,33 +27,14 @@ namespace BaseProject.Controllers
 
         // GET: api/Policies ---> list
         [HttpGet]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<Policy>>> GetPolicies(string key, decimal maxPrice = 0)
+        //[Authorize]
+        public async Task<ActionResult<PagedResponse<IEnumerable<Policy>>>> GetPolicies([FromQuery] PolicyFilter filter)
         {
-            if (key != null)
-            {
-                if (maxPrice != 0)
-                {
-                    return await _context.Policies
-                    .Where(item => item.IsDeleted == 0)
-                    .Where(item => item.Name.Contains(key))
-                    .Where(item => item.Price < maxPrice)
-                    .ToListAsync();
-                }
-                return await _context.Policies
-                    .Where(item => item.IsDeleted == 0)
-                    .Where(item => item.Name.Contains(key))
-                    .ToListAsync();
-            }
-
-            if (maxPrice != 0)
-            {
-                return await _context.Policies
-                .Where(item => item.IsDeleted == 0)
-                .Where(item => item.Price < maxPrice)
-                .ToListAsync();
-            }
-            return await _context.Policies.Where(item => item.IsDeleted == 0).ToListAsync();
+            PolicyFilter validFilter = new PolicyFilter(filter.PageNumber, filter.PageSize, filter.Key, filter.MaxPrice);
+            var totalRecords = await _context.Policies.CountAsync();
+            var pagedData = validFilter.GetPolicyFilter(_context);
+            PagedResponse<IEnumerable<Policy>> page_response = new PagedResponse<IEnumerable<Policy>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            return Ok(page_response);
         }
 
         // GET: api/Policies/5 ---> get detail 
