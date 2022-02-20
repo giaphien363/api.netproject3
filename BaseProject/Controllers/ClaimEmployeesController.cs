@@ -30,14 +30,50 @@ namespace BaseProject.Controllers
         [Authorize]
         public async Task<ActionResult<PagedResponse<List<ClaimEmployee>>>> GetClaimEmployees([FromQuery] PaginationFilter filter)
         {
-            // if admin return all
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
             // if employee thi return nhung claim cua no
+            if (role.Role == RoleUser.EMPLOYEE)
+            {
+                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+            }
+            // if admin return all
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
             var pagedData = await _context.ClaimEmployees
+                .Where(item => item.IsDeleted == 0)
+                .Include(item => item.Policy)
+                .Include(item => item.ClaimActions)
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                 .Take(validFilter.PageSize)
                 .ToListAsync();
             var totalRecords = await _context.ClaimEmployees.CountAsync();
+            PagedResponse<List<ClaimEmployee>> page_response = new PagedResponse<List<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            return Ok(page_response);
+        }
+        // GET: api/ClaimEmployees
+        [HttpGet("employee")]
+        [Authorize]
+        public async Task<ActionResult<PagedResponse<List<ClaimEmployee>>>> GetClaimForEmployee([FromQuery] PaginationFilter filter)
+        {
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            // if employee thi return nhung claim cua no
+            if (role.Role != RoleUser.EMPLOYEE)
+            {
+                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+            }
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            List<ClaimEmployee> pagedData = await _context.ClaimEmployees
+                .Where(item => item.IsDeleted == 0)
+                .Where(item => item.EmployeeId == role.Id)
+                .Include(item => item.Policy)
+                .Include(item => item.ClaimActions)
+                .OrderByDescending(d => d.CreatedAt)
+                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                .Take(validFilter.PageSize)
+                .ToListAsync();
+
+            var totalRecords = await _context.ClaimEmployees.Where(item => item.EmployeeId == role.Id).CountAsync();
             PagedResponse<List<ClaimEmployee>> page_response = new PagedResponse<List<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
             return Ok(page_response);
         }
@@ -49,11 +85,13 @@ namespace BaseProject.Controllers
         {
             var claimEmployee = await _context.ClaimEmployees
                 .Where(item => item.IsDeleted == 0 && item.Id == id)
+                .Include(item => item.Policy)
+                .Include(item => item.ClaimActions)
                 .FirstOrDefaultAsync();
 
             if (claimEmployee == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             return Ok(claimEmployee);
@@ -67,12 +105,23 @@ namespace BaseProject.Controllers
         {
             var retrieveClaim = await _context.ClaimEmployees
                 .Where(item => item.Id == id && item.IsDeleted == 0)
+                .Include(item => item.Policy)
+                .Include(item => item.ClaimActions)
                 .FirstOrDefaultAsync();
             if (retrieveClaim == null)
                 return BadRequest(new CustomError { Detail = "The Claim not found!" });
 
             retrieveClaim = ClaimDto.UpdateClaimEmployee(retrieveClaim, claimDto);
             _context.ClaimEmployees.Update(retrieveClaim);
+
+
+            // add record claim action 
+            ClaimAction claimAction = new ClaimAction();
+
+            claimAction.ActionType = (int)StatusClaimAction.EDIT;
+            claimAction.ClaimId = retrieveClaim.Id;
+            claimAction.CreatebyEmployeeId = retrieveClaim.EmployeeId;
+            _context.ClaimActions.Add(claimAction);
 
             try
             {
@@ -82,14 +131,6 @@ namespace BaseProject.Controllers
             {
                 throw;
             }
-            // add record claim action 
-            ClaimActionDto new_action = new ClaimActionDto();
-            new_action.ActionType = (int)StatusClaimAction.EDIT;
-            new_action.ClaimId = retrieveClaim.Id;
-            // only employee have permission edit
-            new_action.EmployeeId = retrieveClaim.EmployeeId;
-            // add reason if have
-            ClaimActionDto.AddAction(new_action);
 
             return Ok(retrieveClaim);
         }
@@ -218,19 +259,27 @@ namespace BaseProject.Controllers
             claimEmployee.IsDeleted = 1;
             _context.ClaimEmployees.Update(claimEmployee);
 
-            await _context.SaveChangesAsync();
-
             // add record action (handlel later)
-            ClaimActionDto new_action = new ClaimActionDto();
-            new_action.ActionType = (int)StatusClaimAction.DELETE;
-            new_action.ClaimId = claimEmployee.Id;
-            if (role.Role == RoleUser.EMPLOYEE)
-                new_action.EmployeeId = role.Id;
-            if (role.Role == RoleUser.IMANAGER || role.Role == RoleUser.IFINMAN)
-                new_action.InsuranceAdminId = role.Id;
-            // add reason if have
-            ClaimActionDto.AddAction(new_action);
+            //ClaimActionDto new_action = new ClaimActionDto();
+            //new_action.ActionType = (int)StatusClaimAction.DELETE;
+            //new_action.ClaimId = claimEmployee.Id;
+            //if (role.Role == RoleUser.EMPLOYEE)
+            //    new_action.EmployeeId = role.Id;
+            //if (role.Role == RoleUser.IMANAGER || role.Role == RoleUser.IFINMAN)
+            //    new_action.InsuranceAdminId = role.Id;
+            //// add reason if have
+            //ClaimActionDto.AddAction(new_action);
+            ClaimAction claimAction = new ClaimAction();//new_action.ActionType = (int)StatusClaimAction.DELETE;
 
+            claimAction.ActionType = (int)StatusClaimAction.DELETE;
+            claimAction.ClaimId = claimEmployee.Id;
+            if (role.Role == RoleUser.EMPLOYEE)
+                claimAction.CreatebyEmployeeId = role.Id;
+            if (role.Role == RoleUser.IMANAGER || role.Role == RoleUser.IFINMAN)
+                claimAction.CreatebyInsuranceAdminId = role.Id;
+            _context.ClaimActions.Add(claimAction);
+
+            await _context.SaveChangesAsync();
             return Ok();
         }
     }

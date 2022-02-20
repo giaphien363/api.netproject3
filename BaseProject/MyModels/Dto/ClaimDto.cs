@@ -31,7 +31,7 @@ namespace BaseProject.MyModels
         {
             claimEmp.Reason = claimDto.Reason;
             claimEmp.TotalCost = claimDto.TotalCost;
-            claimEmp.PolicyId = claimDto.PolicyId;
+            //claimEmp.PolicyId = claimDto.PolicyId;
 
             DateTime datetimeNow = DateTime.Now;
             claimEmp.UpdatedAt = datetimeNow;

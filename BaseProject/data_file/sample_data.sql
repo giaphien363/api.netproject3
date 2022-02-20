@@ -24,20 +24,31 @@ INSERT INTO Policy (Name, [Description], SupportPercent, DurationInDays, Price, 
 
 
 INSERT INTO ClaimEmployee ([Status], Reason, TotalCost, EmployeeId, PolicyId) VALUES 
-(0, 'chua nghi ra reason', 500000, 1, 1),
-(0, 'chua nghi ra reason', 500000, 1, 2),
-(0, 'chua nghi ra reason', 500000, 1, 3),
-(0, 'chua nghi ra reason', 500000, 1, 4),
-(0, 'chua nghi ra reason', 500000, 1, 5),
-(0, 'chua nghi ra reason', 500000, 1, 6),
-(0, 'chua nghi ra reason', 500000, 1, 7),
-(0, 'chua nghi ra reason', 500000, 1, 8),
-(0, 'chua nghi ra reason', 500000, 1, 9),
-(0, 'chua nghi ra reason', 500000, 1, 10),
+(0, 'chua nghi ra reason', 500000, 3, 1),
+(0, 'chua nghi ra reason', 500000, 3, 2),
+(0, 'chua nghi ra reason', 500000, 3, 3),
+(0, 'chua nghi ra reason', 500000, 3, 4),
+(0, 'chua nghi ra reason', 500000, 3, 5),
+(0, 'chua nghi ra reason', 500000, 3, 6),
+(0, 'chua nghi ra reason', 500000, 3, 7),
+(0, 'chua nghi ra reason', 500000, 3, 8),
+(0, 'chua nghi ra reason', 500000, 3, 9),
+(0, 'chua nghi ra reason', 500000, 3, 10),
 (0, 'chua nghi ra reason', 500000, 3, 1),
 (0, 'chua nghi ra reason', 500000, 3, 2),
 (0, 'chua nghi ra reason', 500000, 3, 3),
 (0, 'chua nghi ra reason', 500000, 3, 4),
 (0, 'chua nghi ra reason', 500000, 3, 5);
 
-select * from ClaimEmployee
+select * from ClaimAction
+
+
+select COUNT(id) from ClaimEmployee where EmployeeId=3;
+
+
+INSERT INTO ClaimAction (ActionType, Reason, CreatebyEmployeeId, ClaimId) VALUES 
+(0, 'chua nghi ra', 3, 13);
+-- truncate table ClaimAction;
+
+ -- UPDATE ClaimEmployee SET IsDeleted = 0;
+
