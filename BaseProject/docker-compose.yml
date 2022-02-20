@@ -1,7 +1,10 @@
 version: '3'
 services:
   mssql:
-    image: mcr.microsoft.com/mssql/server:latest
+    build: 
+      dockerfile: ./Dockerfile.db
+      context: .
+    image: eproject_mssql:latest
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "root@123456"

@@ -12,7 +12,15 @@ CREATE DATABASE [api_dotnet];
 USE  [api_dotnet];
 */
 
-select * from Policy
+IF EXISTS(SELECT * FROM sys.databases WHERE name = 'api_dotnet')
+  BEGIN
+    DROP DATABASE [api_dotnet];
+  END
+  GO
+  CREATE DATABASE [api_dotnet];
+  GO
+  USE [api_dotnet];
+  GO
 
 CREATE TABLE UserAdmin (
     [Id] int identity(1,1) primary key,
@@ -158,6 +166,8 @@ create table ClaimAction(
 	UpdatedAt datetime default(GETDATE()),
 	IsDeleted int default(0)
 );
+
+GO
 
 -- select * from [Contract]
 
