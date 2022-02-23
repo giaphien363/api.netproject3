@@ -1,4 +1,4 @@
-﻿using BaseProject.ApiDbContext;
+using BaseProject.ApiDbContext;
 using BaseProject.Common;
 using BaseProject.Models;
 using BaseProject.MyModels;
@@ -176,7 +176,7 @@ namespace BaseProject.Controllers
 
     public static class RoleUser
     {
-        static public string ADMIN = "AMDIN";
+        static public string ADMIN = "ADMIN";
         static public string EMPLOYEE = "EMPLOYEE";
         static public string IMANAGER = "IMANAGER";
         static public string IFINMAN = "IFINMAN";
