@@ -1,6 +1,12 @@
 -- some stupid data
 -- Select @@version
 
+-- Mỗi ng có 1 tk admin. Mk chung: admin
+INSERT INTO UserAdmin (Username,Password,) VALUES
+	 ('hienanh','YWRtaW5zZWNyZXRAa2V5QEA='),
+	 ('giaphien','YWRtaW5zZWNyZXRAa2V5QEA='),
+	 ('huyhoang','YWRtaW5zZWNyZXRAa2V5QEA='),
+	 ('tienduong','YWRtaW5zZWNyZXRAa2V5QEA=');
 
 INSERT INTO InsuranceCompany (Name,Address,Phone,Url) VALUES
 	 ('Bao Viet','8 Le Thai To, Hoan Kiem Dist., Hanoi','1900 55 88 99','https://www.baoviet.com.vn/'),
