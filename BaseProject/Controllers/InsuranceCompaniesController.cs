@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,10 +30,16 @@ namespace BaseProject.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<InsuranceCompany>>> GetInsuranceCompanies(string key)
         {
-            return await _context.InsuranceCompanies.
-                Where(item => item.IsDeleted == 0).
-                Where(item => item.Name.Contains(key)).
-                ToListAsync();
+            // TODO cái đoạn if check này bị hỏng :) k truyền key nó cũng chạy vào, k hiểu kiểu gì
+            // if (key != "" || key != null) 
+            // {
+            //     return await _context.InsuranceCompanies
+            //         .Where(item => item.IsDeleted == 0)
+            //         .Where(item => item.Name.Contains(key))
+            //         .ToListAsync();
+                
+            // }
+            return await _context.InsuranceCompanies.Where(item => item.IsDeleted == 0).ToListAsync();
         }
 
         // GET: api/InsuranceCompanies/5
