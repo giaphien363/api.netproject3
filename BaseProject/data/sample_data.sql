@@ -1,11 +1,11 @@
 -- Mỗi ng có 1 tk admin. Mk chung: admin
-INSERT INTO UserAdmin (Username,Password) VALUES
+INSERT INTO api_dotnet.dbo.UserAdmin (Username,Password) VALUES
 	 ('hienanh','YWRtaW5zZWNyZXRAa2V5QEA='),
 	 ('giaphien','YWRtaW5zZWNyZXRAa2V5QEA='),
 	 ('huyhoang','YWRtaW5zZWNyZXRAa2V5QEA='),
 	 ('tienduong','YWRtaW5zZWNyZXRAa2V5QEA=');
 
-INSERT INTO InsuranceCompany (Name,Address,Phone,Url) VALUES
+INSERT INTO api_dotnet.dbo.InsuranceCompany (Name,Address,Phone,Url) VALUES
 	 ('Bao Viet','8 Le Thai To, Hoan Kiem Dist., Hanoi','1900 55 88 99','https://www.baoviet.com.vn/'),
 	 ('Generali','Trieste, Italy','1900 96 96 75','https://generali.vn/'),
 	 ('Chubb Life','Floor 21, Sun Wah Building, 115 Nguyen Hue, Dist. 1, HCMC','(028) 3827 8123','https://www.chubb.com'),
@@ -15,13 +15,13 @@ INSERT INTO InsuranceCompany (Name,Address,Phone,Url) VALUES
 	 ('Prudential','Floor 25, Sai Gon Trade Center, 37 Ton Duc Thang, HCMC','1800 1247','https://www.prudential.com.vn'),
 	 ('MIC - Military Insurance Company','Floor 5-6, MB Building, 21 Cat Linh, Dong Da Dist., Hanoi','1900 55 88 91','https://mic.vn/');
 
-INSERT INTO TypePolicy (Name, [Description]) VALUES 
+INSERT INTO api_dotnet.dbo.TypePolicy (Name, [Description]) VALUES 
 ('CHECKUP', 'Covers medical checkups at certain locations'),
 ('MEDICINE', 'Pay for listed medicines'),
 ('COVID-19', 'Covid-19 related insurance packages');
 
 
-INSERT INTO Policy (Name, [Description], SupportPercent, DurationInDays, Price, [TypeId], CompanyId) VALUES 
+INSERT INTO api_dotnet.dbo.Policy (Name, [Description], SupportPercent, DurationInDays, Price, [TypeId], CompanyId) VALUES 
 ('Dai-ichi COVID-19 Package', 'Covers all your medicine and/or quarantine expenses', 80, 180, 500000, 3, 5),
 ('COVID-19 Premium', 'Covers all your medicine and/or quarantine expenses', 60, 365, 100000, 3, 1),
 ('High School', 'Basic package for highschool students', 100, 365, 250000, 1, 1),
