@@ -11,3 +11,4 @@
 - `docker exec -it baseproject_mssql_1 bash`
 ### import .sql file 
 - `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./data/wire_frame_db.sql`
+- `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./data/sample_data.sql`

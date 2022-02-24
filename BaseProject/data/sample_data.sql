@@ -1,6 +1,3 @@
--- some stupid data
--- Select @@version
-
 -- Mỗi ng có 1 tk admin. Mk chung: admin
 INSERT INTO UserAdmin (Username,Password) VALUES
 	 ('hienanh','YWRtaW5zZWNyZXRAa2V5QEA='),
@@ -20,47 +17,36 @@ INSERT INTO InsuranceCompany (Name,Address,Phone,Url) VALUES
 
 INSERT INTO TypePolicy (Name, [Description]) VALUES 
 ('CHECKUP', 'Covers medical checkups at certain locations'),
-('MEDICINE', 'Pay for medicines');
+('MEDICINE', 'Pay for listed medicines'),
 ('COVID-19', 'Covid-19 related insurance packages');
 
 
 INSERT INTO Policy (Name, [Description], SupportPercent, DurationInDays, Price, [TypeId], CompanyId) VALUES 
-('Dai-ichi COVID-19 Package', 'Covers all your medicine and/or quarantine expenses', 80, 180, 500000, 2, 5);
-('COVID-19 Premium', 'Covers all your medicine and/or quarantine expenses', 60, 365, 100000, 2, 1,);
-('policy 3', 'chua nghi ra', 70, 140, 100000, 2, 1),
-('policy 4', 'chua nghi ra', 60, 200, 100000, 2, 2),
-('policy 5', 'chua nghi ra', 20, 185, 100000, 1, 1),
-('policy 6', 'chua nghi ra', 40, 130, 100000, 2, 2),
-('policy 7', 'chua nghi ra', 90, 120, 100000, 1, 2),
-('policy 8', 'chua nghi ra', 85, 110, 100000, 2, 1);
+('Dai-ichi COVID-19 Package', 'Covers all your medicine and/or quarantine expenses', 80, 180, 500000, 3, 5),
+('COVID-19 Premium', 'Covers all your medicine and/or quarantine expenses', 60, 365, 100000, 3, 1),
+('High School', 'Basic package for highschool students', 100, 365, 250000, 1, 1),
+('Diabetes', 'Covers 5 life-saving medicines for Diabetes type I & II patients', 70, 730, 2500000, 2, 4),
+('Young Adults', 'Covers basic vaccines & yearly checkups for newly working individuals.', 50, 365, 289000, 1, 7),
+('Working person', 'Offers basic vaccines & yearly checkups for those who are working 9-5.', 60, 365, 349000, 1, 2),
+('Policy 7', 'Something', 90, 120, 100000, 1, 2),
+('Policy 8', 'Some other thing', 85, 110, 100000, 2, 1);
 
+-- INSERT INTO ClaimEmployee ([Status], Reason, TotalCost, EmployeeId, PolicyId) VALUES 
+-- (0, 'chua nghi ra reason', 500000, 3, 1),
+-- (0, 'chua nghi ra reason', 500000, 3, 2),
+-- (0, 'chua nghi ra reason', 500000, 3, 3),
+-- (0, 'chua nghi ra reason', 500000, 3, 4),
+-- (0, 'chua nghi ra reason', 500000, 3, 5),
+-- (0, 'chua nghi ra reason', 500000, 3, 6),
+-- (0, 'chua nghi ra reason', 500000, 3, 7),
+-- (0, 'chua nghi ra reason', 500000, 3, 8),
+-- (0, 'chua nghi ra reason', 500000, 3, 9),
+-- (0, 'chua nghi ra reason', 500000, 3, 10),
+-- (0, 'chua nghi ra reason', 500000, 3, 1),
+-- (0, 'chua nghi ra reason', 500000, 3, 2),
+-- (0, 'chua nghi ra reason', 500000, 3, 3),
+-- (0, 'chua nghi ra reason', 500000, 3, 4),
+-- (0, 'chua nghi ra reason', 500000, 3, 5);
 
-INSERT INTO ClaimEmployee ([Status], Reason, TotalCost, EmployeeId, PolicyId) VALUES 
-(0, 'chua nghi ra reason', 500000, 3, 1),
-(0, 'chua nghi ra reason', 500000, 3, 2),
-(0, 'chua nghi ra reason', 500000, 3, 3),
-(0, 'chua nghi ra reason', 500000, 3, 4),
-(0, 'chua nghi ra reason', 500000, 3, 5),
-(0, 'chua nghi ra reason', 500000, 3, 6),
-(0, 'chua nghi ra reason', 500000, 3, 7),
-(0, 'chua nghi ra reason', 500000, 3, 8),
-(0, 'chua nghi ra reason', 500000, 3, 9),
-(0, 'chua nghi ra reason', 500000, 3, 10),
-(0, 'chua nghi ra reason', 500000, 3, 1),
-(0, 'chua nghi ra reason', 500000, 3, 2),
-(0, 'chua nghi ra reason', 500000, 3, 3),
-(0, 'chua nghi ra reason', 500000, 3, 4),
-(0, 'chua nghi ra reason', 500000, 3, 5);
-
-select * from ClaimAction
-
-
-select COUNT(id) from ClaimEmployee where EmployeeId=3;
-
-
-INSERT INTO ClaimAction (ActionType, Reason, CreatebyEmployeeId, ClaimId) VALUES 
-(0, 'chua nghi ra', 3, 13);
--- truncate table ClaimAction;
-
- -- UPDATE ClaimEmployee SET IsDeleted = 0;
-
+-- INSERT INTO ClaimAction (ActionType, Reason, CreatebyEmployeeId, ClaimId) VALUES 
+-- (0, 'chua nghi ra', 3, 13);
