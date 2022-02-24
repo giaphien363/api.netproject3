@@ -2,7 +2,7 @@
 -- Select @@version
 
 -- Mỗi ng có 1 tk admin. Mk chung: admin
-INSERT INTO UserAdmin (Username,Password,) VALUES
+INSERT INTO UserAdmin (Username,Password) VALUES
 	 ('hienanh','YWRtaW5zZWNyZXRAa2V5QEA='),
 	 ('giaphien','YWRtaW5zZWNyZXRAa2V5QEA='),
 	 ('huyhoang','YWRtaW5zZWNyZXRAa2V5QEA='),
