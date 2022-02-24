@@ -10,4 +10,4 @@
 ### open bash in container: 
 - `docker exec -it eproject_mssql bash`
 ### import .sql file 
-- `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  mssql_data/data_file/wire_frame_db.sql`
+- `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  mssql_data/data/wire_frame_db.sql`
