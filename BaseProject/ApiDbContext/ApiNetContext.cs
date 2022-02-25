@@ -355,6 +355,8 @@ namespace BaseProject.ApiDbContext
 
                 entity.Property(e => e.Price).HasColumnType("decimal(12, 2)");
 
+                entity.Property(e => e.Status).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
@@ -383,6 +385,8 @@ namespace BaseProject.ApiDbContext
                 entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.UpdatedAt)
                     .HasColumnType("datetime")

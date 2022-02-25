@@ -28,7 +28,7 @@ namespace BaseProject.Controllers
         // GET: api/Employees ---> list
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees(string key)
+        public async Task<ActionResult<PagedResponse<IEnumerable<Employee>>>> GetEmployees([FromQuery] EmployeeFilter filter)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -37,17 +37,11 @@ namespace BaseProject.Controllers
             {
                 return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
-            if (key != "" || key != null)
-                return await _context.Employees.
-                    Where(item => item.IsDeleted == 0).
-                    Where(item =>
-                        item.Username.Contains(key) ||
-                        item.Firstname.Contains(key) ||
-                        item.Lastname.Contains(key)
-                        ).
-                    ToListAsync();
-            return await _context.Employees.
-                   Where(item => item.IsDeleted == 0).ToListAsync();
+            EmployeeFilter validFilter = new EmployeeFilter(filter.PageNumber, filter.PageSize, filter.Name);
+            var totalRecords = await _context.Employees.CountAsync();
+            var pagedData = validFilter.GetEmployeeFilter(_context);
+            PagedResponse<IEnumerable<Employee>> page_response = new PagedResponse<IEnumerable<Employee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            return Ok(page_response);
         }
 
         // GET: api/Employees/5 ---> get detail 
@@ -83,18 +77,21 @@ namespace BaseProject.Controllers
             var userExist = await _context.Employees.Where(item => item.Username == employee.Username && item.IsDeleted == 0).FirstOrDefaultAsync();
             if (userExist != null)
             {
-                return Conflict(new CustomError { Code = 409, Detail = "User existed!" });
+                return BadRequest(new CustomError { Code = 409, Detail = "User existed!" });
             }
             _context.Employees.Add(employee);
 
+            await _context.SaveChangesAsync();
+
             // create contract when created employee
             // create contract one_to_one with employee
-            Contract contract = ContractDto.CreateContract(employee);
+            var retrieve = await _context.Employees
+                .Where(item => item.Username == employee.Username && item.IsDeleted == 0)
+                .FirstOrDefaultAsync();
+
+            Contract contract = ContractDto.CreateContract(retrieve);
             _context.Contracts.Add(contract);
-
             await _context.SaveChangesAsync();
-            var retrieve = await _context.Employees.Where(item => item.Username == employee.Username && item.IsDeleted == 0).FirstOrDefaultAsync();
-
             return Ok(retrieve);
         }
 

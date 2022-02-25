@@ -28,54 +28,53 @@ namespace BaseProject.Controllers
         // GET: api/ClaimEmployees
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<PagedResponse<List<ClaimEmployee>>>> GetClaimEmployees([FromQuery] PaginationFilter filter)
+        public async Task<ActionResult<PagedResponse<IEnumerable<ClaimEmployee>>>> GetClaimEmployees([FromQuery] ClaimFilter filter)
         {
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
             // if employee thi return nhung claim cua no
+            if (role.Role == RoleUser.IFINMAN || role.Role == RoleUser.IMANAGER)
+            {
+                return BadRequest(new CustomError { Code = 403, Detail = "Permission denied!" });
+            }
             if (role.Role == RoleUser.EMPLOYEE)
             {
-                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+                filter.EmId = role.Id;
             }
-            // if admin return all
-            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-            var pagedData = await _context.ClaimEmployees
-                .Where(item => item.IsDeleted == 0)
-                .Include(item => item.Policy)
-                .Include(item => item.ClaimActions)
-                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                .Take(validFilter.PageSize)
-                .ToListAsync();
+
+            ClaimFilter validFilter = new ClaimFilter(filter.PageNumber, filter.PageSize, filter.EmId, filter.Status);
             var totalRecords = await _context.ClaimEmployees.CountAsync();
-            PagedResponse<List<ClaimEmployee>> page_response = new PagedResponse<List<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            var pagedData = validFilter.GetClaimFilter(_context);
+            PagedResponse<IEnumerable<ClaimEmployee>> page_response = new PagedResponse<IEnumerable<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
             return Ok(page_response);
         }
-        // GET: api/ClaimEmployees
+
+        // GET: api/ClaimEmployees/employee ---> failure
         [HttpGet("employee")]
         [Authorize]
         public async Task<ActionResult<PagedResponse<List<ClaimEmployee>>>> GetClaimForEmployee([FromQuery] PaginationFilter filter)
         {
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
-            // if employee thi return nhung claim cua no
-            if (role.Role != RoleUser.EMPLOYEE)
-            {
-                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
-            }
-            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-            List<ClaimEmployee> pagedData = await _context.ClaimEmployees
-                .Where(item => item.IsDeleted == 0)
-                .Where(item => item.EmployeeId == role.Id)
-                .Include(item => item.Policy)
-                .Include(item => item.ClaimActions)
-                .OrderByDescending(d => d.CreatedAt)
-                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                .Take(validFilter.PageSize)
-                .ToListAsync();
+            //ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            //ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            //// if employee thi return nhung claim cua no
+            //if (role.Role != RoleUser.EMPLOYEE)
+            //{
+            //    return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+            //}
+            //var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            //List<ClaimEmployee> pagedData = await _context.ClaimEmployees
+            //    .Where(item => item.IsDeleted == 0)
+            //    .Where(item => item.EmployeeId == role.Id)
+            //    .Include(item => item.Policy)
+            //    .Include(item => item.ClaimActions)
+            //    .OrderByDescending(d => d.CreatedAt)
+            //    .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+            //    .Take(validFilter.PageSize)
+            //    .ToListAsync();
 
-            var totalRecords = await _context.ClaimEmployees.Where(item => item.EmployeeId == role.Id).CountAsync();
-            PagedResponse<List<ClaimEmployee>> page_response = new PagedResponse<List<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
-            return Ok(page_response);
+            //var totalRecords = await _context.ClaimEmployees.Where(item => item.EmployeeId == role.Id).CountAsync();
+            //PagedResponse<List<ClaimEmployee>> page_response = new PagedResponse<List<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            return Forbid();
         }
 
         // GET: api/ClaimEmployees/5
@@ -241,8 +240,8 @@ namespace BaseProject.Controllers
         public async Task<IActionResult> DeleteClaimEmployee(int id)
         {
             // check permission
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            //ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            //ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
             //if (role.Role != RoleUser.ADMIN)
             //{
             //    return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });

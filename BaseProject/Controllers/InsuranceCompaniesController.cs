@@ -28,18 +28,13 @@ namespace BaseProject.Controllers
         // GET: api/InsuranceCompanies
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<InsuranceCompany>>> GetInsuranceCompanies(string key)
+        public async Task<ActionResult<PagedResponse<IEnumerable<InsuranceCompany>>>> GetInsuranceCompanies([FromQuery] InsuranceCompanyFilter inCompany)
         {
-            // TODO cái đoạn if check này bị hỏng :) k truyền key nó cũng chạy vào, k hiểu kiểu gì
-            // if (key != "" || key != null) 
-            // {
-            //     return await _context.InsuranceCompanies
-            //         .Where(item => item.IsDeleted == 0)
-            //         .Where(item => item.Name.Contains(key))
-            //         .ToListAsync();
-                
-            // }
-            return await _context.InsuranceCompanies.Where(item => item.IsDeleted == 0).ToListAsync();
+            InsuranceCompanyFilter validFilter = new InsuranceCompanyFilter(inCompany.PageNumber, inCompany.PageSize, inCompany.Name);
+            var totalRecords = await _context.InsuranceCompanies.CountAsync();
+            var pagedData = validFilter.GetInCompanyFilter(_context);
+            PagedResponse<IEnumerable<InsuranceCompany>> page_response = new PagedResponse<IEnumerable<InsuranceCompany>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            return Ok(page_response);
         }
 
         // GET: api/InsuranceCompanies/5

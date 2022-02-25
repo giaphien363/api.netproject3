@@ -12,6 +12,8 @@ services:
     ports:
       - "1433:1433"
     restart: always
+    volumes:
+      - ./data:/data
     networks:
       local:
 
@@ -30,14 +32,11 @@ services:
       - "8008:80"
     restart: always
     volumes:
-      - eproject:/source_code
+      - .:/app
     depends_on:
       - mssql
     networks:
       local:
-
-volumes:
-  eproject:
 
 networks:
   local:

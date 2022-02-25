@@ -2,7 +2,6 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BaseProject.Models
 {
@@ -17,22 +16,17 @@ namespace BaseProject.Models
         }
 
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        [Required]
         public int SupportPercent { get; set; }
-        [Required]
         public int DurationInDays { get; set; }
-        [Required]
         public decimal Price { get; set; }
-        [Required]
         public int? TypeId { get; set; }
-        [Required]
         public int? CompanyId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int? IsDeleted { get; set; }
+        public int? Status { get; set; }
 
         public virtual InsuranceCompany Company { get; set; }
         public virtual TypePolicy Type { get; set; }

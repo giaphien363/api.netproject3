@@ -10,13 +10,13 @@ namespace BaseProject.Models
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public int PaymentType { get; set; }
-        public int Status { get; set; }
         public decimal? Emi { get; set; }
         public int? EmployeeId { get; set; }
         public int? PolicyId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int? IsDeleted { get; set; }
+        public int? Status { get; set; }
 
         public virtual Employee Employee { get; set; }
         public virtual Policy Policy { get; set; }

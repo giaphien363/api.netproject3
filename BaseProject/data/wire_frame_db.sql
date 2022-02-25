@@ -86,6 +86,7 @@ create table Policy(
 	SupportPercent int not null,
 	DurationInDays int not null,	
 	Price decimal(12,2) not null,
+	[Status] int default(0), -- 0: pending, 1: approval, 2: reject
 	[TypeId] int  FOREIGN KEY REFERENCES TypePolicy(Id),
 	CompanyId int FOREIGN KEY REFERENCES InsuranceCompany(Id),
 	CreatedAt datetime default(GETDATE()),
@@ -167,8 +168,8 @@ create table ClaimAction(
 	IsDeleted int default(0)
 );
 
-GO
+GO;
 
--- select * from [Contract]
+-- select * from [Policy]
 
 -- ALTER TABLE PolicyOrder ADD [Status] int default(0);

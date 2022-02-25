@@ -36,7 +36,7 @@ namespace BaseProject.MyModels
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
-            this.TotalPages = (int)((double)totalRecords / (double)PageSize);
+            this.TotalPages = (int)Math.Ceiling(((double)totalRecords / (double)PageSize));
             this.TotalRecords = totalRecords;
             this.Data = data;
             this.Message = null;
