@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BaseProject.ApiDbContext;
+using BaseProject.Common;
+using BaseProject.Models;
+using BaseProject.MyModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BaseProject.ApiDbContext;
-using BaseProject.Models;
-using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
+//using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
-using BaseProject.Common;
-using BaseProject.MyModels;
+using System.Threading.Tasks;
 
 namespace BaseProject.Controllers
 {
@@ -82,9 +82,9 @@ namespace BaseProject.Controllers
         [Authorize]
         public async Task<ActionResult<ClaimEmployee>> GetClaimEmployee(int id)
         {
-            var claimEmployee = await _context.ClaimEmployees
+            ClaimEmployee claimEmployee = await _context.ClaimEmployees
                 .Where(item => item.IsDeleted == 0 && item.Id == id)
-                .Include(item => item.Policy)
+                .Include(it => it.Policy)
                 .Include(item => item.ClaimActions)
                 .FirstOrDefaultAsync();
 
@@ -97,22 +97,18 @@ namespace BaseProject.Controllers
         }
 
         // PUT: api/ClaimEmployees/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [Authorize]
         public async Task<IActionResult> PutClaimEmployee(int id, ClaimDto claimDto)
         {
             var retrieveClaim = await _context.ClaimEmployees
                 .Where(item => item.Id == id && item.IsDeleted == 0)
-                .Include(item => item.Policy)
-                .Include(item => item.ClaimActions)
                 .FirstOrDefaultAsync();
             if (retrieveClaim == null)
                 return BadRequest(new CustomError { Detail = "The Claim not found!" });
 
             retrieveClaim = ClaimDto.UpdateClaimEmployee(retrieveClaim, claimDto);
             _context.ClaimEmployees.Update(retrieveClaim);
-
 
             // add record claim action 
             ClaimAction claimAction = new ClaimAction();
@@ -134,21 +130,26 @@ namespace BaseProject.Controllers
             return Ok(retrieveClaim);
         }
 
+        // field required {status: int, reason: string}
         [HttpPut("{id}/update-status")]
         [Authorize]
-        public async Task<IActionResult> UpdateStatusClaimEmployee(int id, int statusType)
+        public async Task<IActionResult> UpdateStatusClaimEmployee(int id, [FromBody] ClaimEmployee claimEm)
         {
-
             // only insurance admin have permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (role.Role != RoleUser.IFINMAN && role.Role != RoleUser.IMANAGER)
+            {
+                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+            }
 
-            if (statusType == null)
+            if (claimEm.Status < 0)
             {
                 return BadRequest(new CustomError { Detail = "Status invalid!" });
             }
             var current = await _context.ClaimEmployees
                 .Where(item => item.Id == id && item.IsDeleted == 0)
+                .Include(item => item.Policy)
                 .FirstOrDefaultAsync();
             if (current == null)
                 return NotFound(new CustomError { Detail = "The Claim not found!" });
@@ -161,52 +162,43 @@ namespace BaseProject.Controllers
                 return BadRequest(new CustomError { Detail = "The Claim was reject!" });
             }
 
-            current.Status = statusType;
+            current.Status = claimEm.Status;
             _context.ClaimEmployees.Update(current);
 
             // add action
             ClaimActionDto new_action = new ClaimActionDto();
+            new_action.Reason = claimEm.Reason;
             new_action.ClaimId = current.Id;
             new_action.InsuranceAdminId = role.Id;
             if (role.Role == RoleUser.IMANAGER)
             {
-                if (statusType == (int)StatusClaimEmployee.APPROVE_BY_MAN)
+                if (claimEm.Status == (int)StatusClaimEmployee.APPROVE_BY_MAN)
                 {
                     new_action.ActionType = (int)StatusClaimAction.APPROVE_BY_MAN;
                 }
-                if (statusType == (int)StatusClaimEmployee.REJECT_BY_MAN)
+                if (claimEm.Status == (int)StatusClaimEmployee.REJECT_BY_MAN)
                 {
                     new_action.ActionType = (int)StatusClaimAction.REJECT_BY_MAN;
                 }
             }
             if (role.Role == RoleUser.IFINMAN)
             {
-                if (statusType == (int)StatusClaimEmployee.APPROVE_BY_FIN)
+                if (claimEm.Status == (int)StatusClaimEmployee.PAY)
                 {
-                    new_action.ActionType = (int)StatusClaimAction.APPROVE_BY_FIN;
+                    new_action.ActionType = (int)StatusClaimAction.PAY;
                     // add bill
-                    BillDto.CreateBill(current);
+                    BillDto.CreateBill(_context, current);
                 }
-                if (statusType == (int)StatusClaimEmployee.REJECT_BY_FIN)
+                if (claimEm.Status == (int)StatusClaimEmployee.REJECT_BY_FIN)
                 {
                     new_action.ActionType = (int)StatusClaimAction.REJECT_BY_FIN;
                 }
             }
-            // add reason if have
-            ClaimActionDto.AddAction(new_action);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-            // add record claim action (handle later)
+            var action_new = ClaimActionDto.ConvertIntoAction(new_action);
+            _context.ClaimActions.Add(action_new);
+            await _context.SaveChangesAsync();
 
             return Ok();
-
         }
 
         // POST: api/ClaimEmployees
@@ -214,6 +206,22 @@ namespace BaseProject.Controllers
         [Authorize]
         public async Task<ActionResult<ClaimEmployee>> PostClaimEmployee(ClaimDto claimDto)
         {
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (role.Role != RoleUser.EMPLOYEE)
+            {
+                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+            }
+            claimDto.EmployeeId = role.Id;
+            var contractPolicies = _context.ContractPolicies
+                .Where(item => item.IsDeleted == 0)
+                .Where(item => item.PolicyId == claimDto.PolicyId)
+                .Where(item => item.ContractId == claimDto.EmployeeId)
+                .FirstOrDefault();
+            if (contractPolicies == null)
+            {
+                return BadRequest(new CustomError { Code = 400, Detail = "You need to purchase this policy first" });
+            }
             var claim = ClaimDto.CreateClaimEmployee(claimDto);
             _context.ClaimEmployees.Add(claim);
 
@@ -225,13 +233,11 @@ namespace BaseProject.Controllers
             // only employee have permission create
             new_action.EmployeeId = claim.EmployeeId;
             // add reason if have
-            ClaimActionDto.AddAction(new_action);
-
+            var action_new = ClaimActionDto.ConvertIntoAction(new_action);
+            _context.ClaimActions.Add(action_new);
             await _context.SaveChangesAsync();
-            var retrieve = await _context.ClaimEmployees
-                .Where(item => item.Id == claim.Id)
-                .FirstOrDefaultAsync();
-            return Ok(retrieve);
+
+            return Ok();
         }
 
         // DELETE: api/ClaimEmployees/5
@@ -240,8 +246,8 @@ namespace BaseProject.Controllers
         public async Task<IActionResult> DeleteClaimEmployee(int id)
         {
             // check permission
-            //ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            //ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
             //if (role.Role != RoleUser.ADMIN)
             //{
             //    return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
@@ -258,17 +264,8 @@ namespace BaseProject.Controllers
             claimEmployee.IsDeleted = 1;
             _context.ClaimEmployees.Update(claimEmployee);
 
-            // add record action (handlel later)
-            //ClaimActionDto new_action = new ClaimActionDto();
-            //new_action.ActionType = (int)StatusClaimAction.DELETE;
-            //new_action.ClaimId = claimEmployee.Id;
-            //if (role.Role == RoleUser.EMPLOYEE)
-            //    new_action.EmployeeId = role.Id;
-            //if (role.Role == RoleUser.IMANAGER || role.Role == RoleUser.IFINMAN)
-            //    new_action.InsuranceAdminId = role.Id;
-            //// add reason if have
-            //ClaimActionDto.AddAction(new_action);
-            ClaimAction claimAction = new ClaimAction();//new_action.ActionType = (int)StatusClaimAction.DELETE;
+            // add record action
+            ClaimAction claimAction = new ClaimAction();
 
             claimAction.ActionType = (int)StatusClaimAction.DELETE;
             claimAction.ClaimId = claimEmployee.Id;

@@ -6,7 +6,6 @@
         DELETE, // 2
         EDIT, // 3
         APPROVE_BY_MAN, // 4
-        APPROVE_BY_FIN, // 5
         REJECT_BY_MAN, // 6
         REJECT_BY_FIN, // 7
         PAY // 8
@@ -28,7 +27,7 @@
     {
         PENDING = 1, // 1
         APPROVE_BY_MAN, // 2
-        APPROVE_BY_FIN, // 3
+        PAY, // 3
         REJECT_BY_MAN, // 4
         REJECT_BY_FIN, // 5
     }

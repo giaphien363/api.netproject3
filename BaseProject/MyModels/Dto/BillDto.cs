@@ -5,20 +5,17 @@ namespace BaseProject.MyModels
 {
     public class BillDto
     {
-        public static void CreateBill(ClaimEmployee claim)
+        public static void CreateBill(ApiNetContext context, ClaimEmployee claim)
         {
-            using (var context = new ApiNetContext())
-            {
-                Bill bill = new Bill();
+            Bill bill = new Bill();
 
-                bill.EmployeeId = claim.EmployeeId;
-                bill.PolicyId = claim.PolicyId;
-                bill.ClaimId = claim.Id;
-                bill.SupportCost = (claim.TotalCost * claim.Policy.SupportPercent) /100;
+            bill.EmployeeId = claim.EmployeeId;
+            bill.PolicyId = claim.PolicyId;
+            bill.ClaimId = claim.Id;
+            bill.SupportCost = (claim.TotalCost * claim.Policy.SupportPercent) / 100;
 
-                context.Bills.Add(bill);
-                context.SaveChanges();
-            }
+            context.Bills.Add(bill);
+            context.SaveChanges();
         }
     }
 }

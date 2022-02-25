@@ -105,7 +105,6 @@ namespace BaseProject.Controllers
         }
 
         // POST: api/InsuranceAdmins
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<InsuranceAdmin>> PostInsuranceAdmin(InsuranceAdmin insuranceAdmin)
@@ -120,7 +119,8 @@ namespace BaseProject.Controllers
             if (
                 insuranceAdmin.Username == null ||
                 insuranceAdmin.Password == null ||
-                insuranceAdmin.Role == null
+                insuranceAdmin.Role == null || 
+                insuranceAdmin.CompanyId <=0 
               )
             {
                 return BadRequest(new CustomError { Code = 400, Detail = "Missing some field!" });

@@ -11,25 +11,20 @@ namespace BaseProject.MyModels
         public int? InsuranceAdminId { get; set; }
         public int? ClaimId { get; set; }
 
-        public static void AddAction(ClaimActionDto actionDto)
+        public static ClaimAction ConvertIntoAction(ClaimActionDto actionDto)
         {
-            using (var context = new ApiNetContext())
-            {
-                var claimAction= new ClaimAction();
+            var claimAction = new ClaimAction();
+            claimAction.ActionType = actionDto.ActionType;
+            claimAction.ClaimId = actionDto.ClaimId;
 
-                claimAction.ActionType = actionDto.ActionType;
-                claimAction.ClaimId = actionDto.ClaimId;
+            if (actionDto.Reason != null)
+                claimAction.Reason = actionDto.Reason;
+            if (actionDto.EmployeeId != null)
+                claimAction.CreatebyEmployeeId = actionDto.EmployeeId;
+            if (actionDto.InsuranceAdminId != null)
+                claimAction.CreatebyInsuranceAdminId = actionDto.InsuranceAdminId;
 
-                if(actionDto.Reason != null)
-                    claimAction.Reason = actionDto.Reason;
-                if (actionDto.EmployeeId != null)
-                    claimAction.CreatebyEmployeeId = actionDto.EmployeeId;
-                if (actionDto.InsuranceAdminId != null)
-                    claimAction.CreatebyInsuranceAdminId = actionDto.InsuranceAdminId;
-
-                context.ClaimActions.Add(claimAction);
-                context.SaveChanges();
-            }
+            return claimAction;
         }
     }
 }

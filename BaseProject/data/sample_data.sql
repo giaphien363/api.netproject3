@@ -50,3 +50,9 @@ INSERT INTO api_dotnet.dbo.Policy (Name, [Description], SupportPercent, Duration
 
 -- INSERT INTO ClaimAction (ActionType, Reason, CreatebyEmployeeId, ClaimId) VALUES 
 -- (0, 'chua nghi ra', 3, 13);
+
+select * from InsuranceAdmin
+
+select * from InsuranceCompany
+
+select * from ClaimAction
