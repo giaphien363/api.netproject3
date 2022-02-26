@@ -31,7 +31,7 @@ INSERT INTO api_dotnet.dbo.Policy (Name, [Description], SupportPercent, Duration
 ('Policy 7', 'Something', 90, 120, 100000, 1, 2),
 ('Policy 8', 'Some other thing', 85, 110, 100000, 2, 1);
 
-INSERT INTO api_dotnet.dbo.InsuranceAdmin (Username, Password, [Role], CompanyId, CreatedAt, UpdatedAt, IsDeleted) VALUES
+INSERT INTO api_dotnet.dbo.InsuranceAdmin (Username, Password, [Role], CompanyId) VALUES
 ('manager1', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 1),
 ('manager2', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 2),
 ('manager3', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 3),
