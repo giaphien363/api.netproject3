@@ -29,11 +29,11 @@ INSERT INTO api_dotnet.dbo.Policy (Name, [Description], SupportPercent, Duration
 ('Young Adults', 'Covers basic vaccines & yearly checkups for newly working individuals.', 50, 365, 289000, 2, 1, 7),
 ('Working person', 'Offers basic vaccines & yearly checkups for those who are working 9-5.', 60, 365, 349000, 2, 1, 2),
 ('Policy 7', 'Something', 90, 120, 100000, 3, 1, 2),
-('Policy 8', 'Some other thing', 85, 110, 100000, 2, 2, 1);
+('Policy 8', 'Some other thing', 85, 110, 100000, 2, 2, 1),
 ('Policy 9', 'Something', 90, 120, 100000, 1, 1, 2),
-('Policy 10', 'Some other thing', 85, 110, 100000, 1, 2, 1);
+('Policy 10', 'Some other thing', 85, 110, 100000, 1, 2, 1),
 ('Policy 11', 'Something', 90, 120, 100000, 1, 1, 2),
-('Policy 12', 'Some other thing', 85, 110, 100000, 1, 2, 1);
+('Policy 12', 'Some other thing', 85, 110, 100000, 1, 2, 1),
 ('Policy 13', 'Something', 90, 120, 100000, 2, 1, 2),
 ('Policy 14', 'Some other thing', 85, 110, 100000, 3, 2, 1);
 
