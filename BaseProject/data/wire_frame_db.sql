@@ -86,7 +86,7 @@ create table Policy(
 	SupportPercent int not null,
 	DurationInDays int not null,	
 	Price decimal(12,2) not null,
-	[Status] int default(0), -- 0: pending, 1: approval, 2: reject
+	[Status] int default(0), -- 1: pending, 2: approval, 3: reject
 	[TypeId] int  FOREIGN KEY REFERENCES TypePolicy(Id),
 	CompanyId int FOREIGN KEY REFERENCES InsuranceCompany(Id),
 	CreatedAt datetime default(GETDATE()),

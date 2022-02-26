@@ -21,15 +21,21 @@ INSERT INTO api_dotnet.dbo.TypePolicy (Name, [Description]) VALUES
 ('COVID-19', 'Covid-19 related insurance packages');
 
 
-INSERT INTO api_dotnet.dbo.Policy (Name, [Description], SupportPercent, DurationInDays, Price, [TypeId], CompanyId) VALUES 
-('Dai-ichi COVID-19 Package', 'Covers all your medicine and/or quarantine expenses', 80, 180, 500000, 3, 5),
-('COVID-19 Premium', 'Covers all your medicine and/or quarantine expenses', 60, 365, 100000, 3, 1),
-('High School', 'Basic package for highschool students', 100, 365, 250000, 1, 1),
-('Diabetes', 'Covers 5 life-saving medicines for Diabetes type I & II patients', 70, 730, 2500000, 2, 4),
-('Young Adults', 'Covers basic vaccines & yearly checkups for newly working individuals.', 50, 365, 289000, 1, 7),
-('Working person', 'Offers basic vaccines & yearly checkups for those who are working 9-5.', 60, 365, 349000, 1, 2),
-('Policy 7', 'Something', 90, 120, 100000, 1, 2),
-('Policy 8', 'Some other thing', 85, 110, 100000, 2, 1);
+INSERT INTO api_dotnet.dbo.Policy (Name, [Description], SupportPercent, DurationInDays, Price, Status, [TypeId], CompanyId) VALUES 
+('Dai-ichi COVID-19 Package', 'Covers all your medicine and/or quarantine expenses', 80, 180, 500000, 2, 3, 5),
+('COVID-19 Premium', 'Covers all your medicine and/or quarantine expenses', 60, 365, 100000, 1, 3, 1),
+('High School', 'Basic package for highschool students', 100, 365, 250000, 2, 1, 1),
+('Diabetes', 'Covers 5 life-saving medicines for Diabetes type I & II patients', 70, 730, 2500000, 2, 2, 4),
+('Young Adults', 'Covers basic vaccines & yearly checkups for newly working individuals.', 50, 365, 289000, 2, 1, 7),
+('Working person', 'Offers basic vaccines & yearly checkups for those who are working 9-5.', 60, 365, 349000, 2, 1, 2),
+('Policy 7', 'Something', 90, 120, 100000, 3, 1, 2),
+('Policy 8', 'Some other thing', 85, 110, 100000, 2, 2, 1);
+('Policy 9', 'Something', 90, 120, 100000, 1, 1, 2),
+('Policy 10', 'Some other thing', 85, 110, 100000, 1, 2, 1);
+('Policy 11', 'Something', 90, 120, 100000, 1, 1, 2),
+('Policy 12', 'Some other thing', 85, 110, 100000, 1, 2, 1);
+('Policy 13', 'Something', 90, 120, 100000, 2, 1, 2),
+('Policy 14', 'Some other thing', 85, 110, 100000, 3, 2, 1);
 
 INSERT INTO api_dotnet.dbo.InsuranceAdmin (Username, Password, [Role], CompanyId) VALUES
 ('manager1', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 1),
