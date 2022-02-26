@@ -2,6 +2,7 @@
 using BaseProject.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseProject.MyModels
 {
@@ -24,7 +25,9 @@ namespace BaseProject.MyModels
         public IEnumerable<Policy> GetPolicyFilter(ApiNetContext context)
         {
             IEnumerable<Policy> query = context.Policies
-                    .Where(item => item.IsDeleted == 0);
+                    .Where(item => item.IsDeleted == 0)
+                    .Include(item => item.Company)
+                    .Include(item => item.Type);
 
             if (this.Name != null)
             {
