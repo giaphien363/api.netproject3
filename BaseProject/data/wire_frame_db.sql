@@ -168,7 +168,7 @@ create table ClaimAction(
 	IsDeleted int default(0)
 );
 
-GO;
+GO
 
 -- select * from [ContractPolicy]
 
