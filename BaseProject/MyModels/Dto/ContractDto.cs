@@ -9,7 +9,7 @@ namespace BaseProject.MyModels
         {
             Contract new_contract = new Contract();
             new_contract.EmployeeId = employee.Id;
-            new_contract.Name = employee.Firstname +" "+ employee.Lastname;
+            new_contract.Name = "HD" + employee.Id;
 
             return new_contract;
         }
