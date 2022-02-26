@@ -23,7 +23,7 @@ namespace BaseProject.MyModels
         {
             if (this.Name != null)
             {
-                if (this.Status >= 0)
+                if (this.Status > 0)
                 {
                     return context.Policies
                     .Where(item => item.IsDeleted == 0)
@@ -43,11 +43,11 @@ namespace BaseProject.MyModels
                 //.ToList();
             }
 
-            if (this.Status == 0 || this.Status == 1 || this.Status == 2)
+            if (this.Status > 0)
             {
                 return context.Policies
                 .Where(item => item.IsDeleted == 0)
-                .Where(item => item.Status < this.Status)
+                .Where(item => item.Status == this.Status)
                 .OrderBy(item => item.Name);
                 //.Skip((this.PageNumber - 1) * this.PageSize)
                 //.Take(this.PageSize)

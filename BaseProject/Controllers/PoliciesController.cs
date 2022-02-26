@@ -39,11 +39,11 @@ namespace BaseProject.Controllers
             PolicyFilter validFilter = new PolicyFilter(filter.PageNumber, filter.PageSize, filter.Name, filter.Status);
 
             var rawData = validFilter.GetPolicyFilter(_context);
-            var totalRecords = rawData.Count();
             var pagedData = rawData
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                 .Take(validFilter.PageSize)
                 .ToList();
+            var totalRecords = rawData.Count();
 
             PagedResponse<IEnumerable<Policy>> page_response = new PagedResponse<IEnumerable<Policy>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
             return Ok(page_response);
