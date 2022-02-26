@@ -32,11 +32,14 @@ services:
       - "8008:80"
     restart: always
     volumes:
-      - .:/app
+      - eproject:/source_code
     depends_on:
       - mssql
     networks:
       local:
+
+volumes:
+  eproject:
 
 networks:
   local:

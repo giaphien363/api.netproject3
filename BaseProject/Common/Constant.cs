@@ -6,9 +6,9 @@
         DELETE, // 2
         EDIT, // 3
         APPROVE_BY_MAN, // 4
-        REJECT_BY_MAN, // 6
-        REJECT_BY_FIN, // 7
-        PAY // 8
+        REJECT_BY_MAN, // 5
+        REJECT_BY_FIN, // 6
+        PAY // 7
 
         /*
          * example
