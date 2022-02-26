@@ -31,6 +31,24 @@ INSERT INTO api_dotnet.dbo.Policy (Name, [Description], SupportPercent, Duration
 ('Policy 7', 'Something', 90, 120, 100000, 1, 2),
 ('Policy 8', 'Some other thing', 85, 110, 100000, 2, 1);
 
+INSERT INTO api_dotnet.dbo.InsuranceAdmin (Username, Password, [Role], CompanyId) VALUES
+('manager1', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 1),
+('manager2', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 2),
+('manager3', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 3),
+('manager4', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 4),
+('manager5', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 5),
+('manager6', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 6),
+('manager7', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 7),
+('manager8', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IMANAGER', 8),
+('finman1', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IFINMAN', 1),
+('finman2', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IFINMAN', 2),
+('finman3', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IFINMAN', 3),
+('finman4', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IFINMAN', 4),
+('finman5', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IFINMAN', 5),
+('finman6', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IFINMAN', 6),
+('finman7', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IFINMAN', 7),
+('finman8', 'aW5zdXJhbmNlc2VjcmV0QGtleUBA', 'IFINMAN', 8);
+
 -- INSERT INTO ClaimEmployee ([Status], Reason, TotalCost, EmployeeId, PolicyId) VALUES 
 -- (0, 'chua nghi ra reason', 500000, 3, 1),
 -- (0, 'chua nghi ra reason', 500000, 3, 2),
