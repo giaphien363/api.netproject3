@@ -23,6 +23,12 @@
         REJECT, // 3
     }
     
+    public enum StatusPolicyPayment
+    {
+        PAID = 1, // 1
+        UNPAID, // 2
+    }
+    
     public enum StatusClaimEmployee
     {
         PENDING = 1, // 1
@@ -30,5 +36,12 @@
         PAY, // 3
         REJECT_BY_MAN, // 4
         REJECT_BY_FIN, // 5
+    }
+
+    public enum StatusPolicy
+    {
+        PENDING = 1, // 1
+        APPROVE, // 2
+        REJECT, // 3
     }
 }

@@ -184,8 +184,6 @@ namespace BaseProject.ApiDbContext
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Emi).HasColumnType("decimal(12, 2)");
-
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
                 entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
@@ -379,8 +377,6 @@ namespace BaseProject.ApiDbContext
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Emi).HasColumnType("decimal(12, 2)");
 
                 entity.Property(e => e.IsDeleted).HasDefaultValueSql("((0))");
 

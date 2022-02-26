@@ -52,7 +52,20 @@ INSERT INTO api_dotnet.dbo.Policy (Name, [Description], SupportPercent, Duration
 -- (0, 'chua nghi ra', 3, 13);
 
 select * from InsuranceAdmin
+ -- update InsuranceAdmin set CompanyId = 1
 
 select * from InsuranceCompany
 
 select * from ClaimAction
+select * from ClaimEmployee where PolicyId in (1,2,3,5,7,10)
+
+select * from Policy where CompanyId = 1 -- 1,2,3,5,7,10
+
+
+select * from ContractPolicy
+
+select * from PolicyOrder
+
+-- ALTER TABLE ContractPolicy DROP COLUMN PaymentType;
+-- ALTER TABLE PolicyOrder DROP COLUMN PaymentType;
+-- ALTER TABLE PolicyOrder DROP COLUMN Emi;

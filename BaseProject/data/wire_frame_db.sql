@@ -111,10 +111,10 @@ create table [ContractPolicy](
 	[Description] varchar(255) null,
 	StartDate datetime not null,
 	EndDate datetime not null,
-	Emi decimal(12,2) null, -- so tien tra gop hang thang
+	-- Emi decimal(12,2) null, -- so tien tra gop hang thang
 	AmountOwing decimal(12,2) null, -- so no can phai tra
-	PaymentStatus int not null, -- trang thai da thanh toan hay chua ? 0: not yet, 1: done, 2: emi
-	PaymentType int not null, -- kieu thanh toan, tra gop hay 1 lan ?	
+	PaymentStatus int not null, -- trang thai da thanh toan hay chua ? 1: paid, 2: unpaid
+	-- PaymentType int not null, -- kieu thanh toan, tra gop hay 1 lan ?	
 	CreatedAt datetime default(GETDATE()),
 	UpdatedAt datetime default(GETDATE()),
 	IsDeleted int default(0)
@@ -170,6 +170,6 @@ create table ClaimAction(
 
 GO;
 
--- select * from [Policy]
+-- select * from [ContractPolicy]
 
--- ALTER TABLE PolicyOrder ADD [Status] int default(0);
+-- ALTER TABLE [ContractPolicy] ADD PaymentStatus int not null;

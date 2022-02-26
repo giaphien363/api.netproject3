@@ -75,22 +75,14 @@ namespace BaseProject.Controllers
             current = OrderDto.UpdateOrder(current, policyOrder);
             _context.PolicyOrders.Update(current);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-
+            await _context.SaveChangesAsync();
             return Ok(current);
         }
 
         // PUT: api/PolicyOrders/5/udpate-status
         [HttpPut("{id}/update-status")]
         [Authorize]
-        public async Task<IActionResult> PutPolicyOrderStatus(int id, int statusType)
+        public async Task<IActionResult> PutPolicyOrderStatus(int id, [FromBody] UpdateStatus statusObj)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -100,26 +92,27 @@ namespace BaseProject.Controllers
                 return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
             if (
-                statusType == null || 
-                statusType != (int)StatusPolicyOrder.APPROVE || 
-                statusType != (int)StatusPolicyOrder.REJECT
+                statusObj.Status < 0 ||
+                (statusObj.Status != (int)StatusPolicyOrder.APPROVE &&
+                statusObj.Status != (int)StatusPolicyOrder.REJECT)
                 )
             {
                 return BadRequest(new CustomError { Detail = "Status invalid!" });
             }
 
             var current = await _context.PolicyOrders
-            .Where(item => item.Id == id && item.IsDeleted == 0)
-            .FirstOrDefaultAsync();
+                .Where(item => item.Id == id && item.IsDeleted == 0)
+                .Include(item => item.Policy)
+                .FirstOrDefaultAsync();
             if (current == null)
                 return NotFound(new CustomError { Detail = "Policy order not found!" });
 
-            current.Status = statusType;
+            current.Status = statusObj.Status;
             _context.PolicyOrders.Update(current);
 
 
             // create contract_policy and update total_amount in employee's contract
-            if (statusType == (int)StatusPolicyOrder.APPROVE)
+            if (statusObj.Status == (int)StatusPolicyOrder.APPROVE)
             {
                 ContractPolicy newContract = ContractPolicyDto.CreateContractPolicy(current, current.Policy);
                 _context.ContractPolicies.Add(newContract);
@@ -130,18 +123,9 @@ namespace BaseProject.Controllers
                 existContract.TotalAmount += current.Policy.Price;
             }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-
+            await _context.SaveChangesAsync();
             return Ok(current);
         }
-
 
         // POST: api/PolicyOrders
         [HttpPost]
@@ -149,14 +133,14 @@ namespace BaseProject.Controllers
         public async Task<ActionResult<PolicyOrder>> PostPolicyOrder(OrderDto policyOrderDto)
         {
             // check permission
-            //ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            //ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
-            //if (role.Role != RoleUser.ADMIN)
-            //{
-            //    return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
-            //}
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (role.Role != RoleUser.EMPLOYEE)
+            {
+                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+            }
 
-            // check policy exist in contract ?
+            // check policy_type exist in contract ?
             ContractPolicy[] listContractPolicies = _context.ContractPolicies
                 .Where(item => item.IsDeleted == 0 && item.ContractId == policyOrderDto.EmployeeId)
                 .ToArray();
@@ -164,7 +148,7 @@ namespace BaseProject.Controllers
             // get type policy want to add
             var policy_add = _context.Policies
                 .Where(item => item.IsDeleted == 0 && item.Id == policyOrderDto.PolicyId)
-                .First();
+                .FirstOrDefault();
             if (policy_add == null)
                 return BadRequest(new CustomError { Code = 400, Detail = "Policy not found!" });
             // check that type exist in contract?
@@ -176,7 +160,6 @@ namespace BaseProject.Controllers
                 }
             }
             PolicyOrder order = OrderDto.CreateOrder(policyOrderDto);
-            // check if exist username
             _context.PolicyOrders.Add(order);
             await _context.SaveChangesAsync();
 

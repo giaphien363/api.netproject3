@@ -9,8 +9,6 @@ namespace BaseProject.Models
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
-        public int PaymentType { get; set; }
-        public decimal? Emi { get; set; }
         public int? EmployeeId { get; set; }
         public int? PolicyId { get; set; }
         public DateTime? CreatedAt { get; set; }

@@ -13,13 +13,11 @@ namespace BaseProject.Models
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public decimal? Emi { get; set; }
         public decimal? AmountOwing { get; set; }
-        public int PaymentStatus { get; set; }
-        public int PaymentType { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int? IsDeleted { get; set; }
+        public int PaymentStatus { get; set; }
 
         public virtual Contract Contract { get; set; }
         public virtual Policy Policy { get; set; }

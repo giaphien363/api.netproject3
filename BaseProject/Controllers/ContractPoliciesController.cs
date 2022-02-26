@@ -87,6 +87,43 @@ namespace BaseProject.Controllers
             return Ok(contractPolicy);
         }
 
+
+        // PUT: api/ContractPolicies/5/payment-status
+        [HttpPut("{id}/payment-status")]
+        [Authorize]
+        public async Task<IActionResult> ContractPolicyStatus(int id, [FromBody] UpdateStatus statusObj)
+        {
+            // check permission
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (role.Role != RoleUser.ADMIN)
+            {
+                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+            }
+            if (
+                statusObj.Status < 0 ||
+                statusObj.Status != (int)StatusPolicyPayment.PAID
+                )
+            {
+                return BadRequest(new CustomError { Detail = "Status invalid!" });
+            }
+
+            var current = await _context.ContractPolicies
+                .Where(item => item.Id == id && item.IsDeleted == 0)
+                .Include(item => item.Policy)
+                .FirstOrDefaultAsync();
+            if (current == null)
+                return BadRequest(new CustomError { Detail = "Contract Policy order not found!" });
+
+            current.PaymentStatus = statusObj.Status;
+            current.AmountOwing = 0;
+            _context.ContractPolicies.Update(current);
+
+            await _context.SaveChangesAsync();
+            return Ok(current);
+        }
+
+
         // POST: api/ContractPolicies: auto add record when admin approve
         /**
         [HttpPost]
@@ -129,5 +166,5 @@ namespace BaseProject.Controllers
             return Ok();
         }
 
-    } 
+    }
 }

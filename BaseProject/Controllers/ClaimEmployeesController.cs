@@ -32,7 +32,6 @@ namespace BaseProject.Controllers
         {
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
-            // if employee thi return nhung claim cua no
             if (role.Role == RoleUser.IFINMAN || role.Role == RoleUser.IMANAGER)
             {
                 return BadRequest(new CustomError { Code = 403, Detail = "Permission denied!" });
@@ -43,40 +42,45 @@ namespace BaseProject.Controllers
             }
 
             ClaimFilter validFilter = new ClaimFilter(filter.PageNumber, filter.PageSize, filter.EmId, filter.Status);
-            var totalRecords = await _context.ClaimEmployees.CountAsync();
-            var pagedData = validFilter.GetClaimFilter(_context);
+            var rawData = validFilter.GetClaimFilter(_context);
+            var totalRecords = rawData.Count();
+            var pagedData = rawData
+                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                .Take(validFilter.PageSize)
+                .ToList();
             PagedResponse<IEnumerable<ClaimEmployee>> page_response = new PagedResponse<IEnumerable<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
             return Ok(page_response);
         }
 
-        // GET: api/ClaimEmployees/employee ---> failure
-        [HttpGet("employee")]
+        // GET: api/ClaimEmployees/insurance ---> only insurance admin
+        [HttpGet("insurance")]
         [Authorize]
-        public async Task<ActionResult<PagedResponse<List<ClaimEmployee>>>> GetClaimForEmployee([FromQuery] PaginationFilter filter)
+        public async Task<ActionResult<PagedResponse<IEnumerable<ClaimEmployee>>>> GetClaimEmployeesForInsu([FromQuery] ClaimFilter filter)
         {
-            //ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            //ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
-            //// if employee thi return nhung claim cua no
-            //if (role.Role != RoleUser.EMPLOYEE)
-            //{
-            //    return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
-            //}
-            //var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-            //List<ClaimEmployee> pagedData = await _context.ClaimEmployees
-            //    .Where(item => item.IsDeleted == 0)
-            //    .Where(item => item.EmployeeId == role.Id)
-            //    .Include(item => item.Policy)
-            //    .Include(item => item.ClaimActions)
-            //    .OrderByDescending(d => d.CreatedAt)
-            //    .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-            //    .Take(validFilter.PageSize)
-            //    .ToListAsync();
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (role.Role != RoleUser.IFINMAN && role.Role != RoleUser.IMANAGER)
+            {
+                return BadRequest(new CustomError { Code = 403, Detail = "Permission denied!" });
+            }
+            filter.EmId = 0;
+            // get current insurance admin login
+            InsuranceAdmin currentAdmin = _context.InsuranceAdmins.Where(item => item.Id == role.Id).FirstOrDefault();
+            // get company id
+            int company_id = (int)currentAdmin.CompanyId;
+            // pass within claimFilter
 
-            //var totalRecords = await _context.ClaimEmployees.Where(item => item.EmployeeId == role.Id).CountAsync();
-            //PagedResponse<List<ClaimEmployee>> page_response = new PagedResponse<List<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
-            return Forbid();
+            ClaimFilter validFilter = new ClaimFilter(filter.PageNumber, filter.PageSize, filter.EmId, filter.Status);
+            //var totalRecords = await _context.ClaimEmployees.CountAsync();
+            var rawData = validFilter.GetClaimFilterForInsu(_context, company_id);
+            var totalRecords = rawData.Count();
+            var pagedData = rawData
+                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                .Take(validFilter.PageSize)
+                .ToList();
+            PagedResponse<IEnumerable<ClaimEmployee>> page_response = new PagedResponse<IEnumerable<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            return Ok(page_response);
         }
-
         // GET: api/ClaimEmployees/5
         [HttpGet("{id}")]
         [Authorize]
@@ -222,6 +226,12 @@ namespace BaseProject.Controllers
             {
                 return BadRequest(new CustomError { Code = 400, Detail = "You need to purchase this policy first" });
             }
+
+            if(contractPolicies.PaymentStatus != (int)StatusPolicyPayment.PAID)
+            {
+                return BadRequest(new CustomError { Code = 400, Detail = "You need to paid this policy first" });
+            }
+
             var claim = ClaimDto.CreateClaimEmployee(claimDto);
             _context.ClaimEmployees.Add(claim);
 

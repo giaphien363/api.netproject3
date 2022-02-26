@@ -13,9 +13,6 @@ namespace BaseProject.MyModels
         [Required]
         public DateTime StartDate { get; set; }
         [Required]
-        public int PaymentType { get; set; }
-        public decimal? Emi { get; set; }
-        [Required]
         public int? EmployeeId { get; set; }
         [Required]
         public int? PolicyId { get; set; }
@@ -25,15 +22,9 @@ namespace BaseProject.MyModels
             PolicyOrder order = new PolicyOrder();
 
             order.StartDate = dto.StartDate;
-            order.PaymentType = dto.PaymentType;
             order.EmployeeId = dto.EmployeeId;
             order.PolicyId = dto.PolicyId;
             order.Status = (int)StatusPolicyOrder.PENDING;
-
-            if (dto.Emi != null)
-            {
-                order.Emi = dto.Emi;
-            }
             return order;
         }
 
@@ -43,10 +34,6 @@ namespace BaseProject.MyModels
             {
                 current.StartDate = order.StartDate;
             }
-            if (order.PaymentType != null)
-            {
-                current.PaymentType = order.PaymentType;
-            }
             if (order.EmployeeId != null)
             {
                 current.EmployeeId = order.EmployeeId;
@@ -54,11 +41,6 @@ namespace BaseProject.MyModels
             if (order.PolicyId != null)
             {
                 current.PolicyId = order.PolicyId;
-            }
-
-            if (order.Emi != null)
-            {
-                current.Emi = order.Emi;
             }
 
             DateTime datetimeNow = DateTime.Now;

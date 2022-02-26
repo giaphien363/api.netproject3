@@ -29,18 +29,18 @@ namespace BaseProject.MyModels
                     .Where(item => item.IsDeleted == 0)
                     .Where(item => item.Name.Contains(this.Name))
                     .Where(item => item.Status == this.Status)
-                    .OrderBy(item => item.Name)
-                    .Skip((this.PageNumber - 1) * this.PageSize)
-                    .Take(this.PageSize)
-                    .ToList();
+                    .OrderBy(item => item.Name);
+                    //.Skip((this.PageNumber - 1) * this.PageSize)
+                    //.Take(this.PageSize)
+                    //.ToList();
                 }
                 return context.Policies
                     .Where(item => item.IsDeleted == 0)
                     .Where(item => item.Name.Contains(this.Name))
-                    .OrderBy(item => item.Name)
-                    .Skip((this.PageNumber - 1) * this.PageSize)
-                    .Take(this.PageSize)
-                    .ToList();
+                    .OrderBy(item => item.Name);
+                //.Skip((this.PageNumber - 1) * this.PageSize)
+                //.Take(this.PageSize)
+                //.ToList();
             }
 
             if (this.Status == 0 || this.Status == 1 || this.Status == 2)
@@ -48,17 +48,17 @@ namespace BaseProject.MyModels
                 return context.Policies
                 .Where(item => item.IsDeleted == 0)
                 .Where(item => item.Status < this.Status)
-                .OrderBy(item => item.Name)
-                .Skip((this.PageNumber - 1) * this.PageSize)
-                .Take(this.PageSize)
-                .ToList();
+                .OrderBy(item => item.Name);
+                //.Skip((this.PageNumber - 1) * this.PageSize)
+                //.Take(this.PageSize)
+                //.ToList();
             }
             return context.Policies
                 .Where(item => item.IsDeleted == 0)
-                .OrderBy(item => item.Name)
-                .Skip((this.PageNumber - 1) * this.PageSize)
-                .Take(this.PageSize)
-                .ToList();
+                .OrderBy(item => item.Name);
+            //.Skip((this.PageNumber - 1) * this.PageSize)
+            //.Take(this.PageSize)
+            //.ToList();
         }
     }
 }

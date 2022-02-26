@@ -31,12 +31,12 @@ namespace BaseProject.Controllers
         public async Task<ActionResult<IEnumerable<TypePolicy>>> GetTypePolicies()
         {
             // check permission
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            ObjReturnToken user = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
-            if (user.Role != RoleUser.ADMIN)
-            {
-                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
-            }
+            //ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            //ObjReturnToken user = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            //if (user.Role == RoleUser.EMPLOYEE)
+            //{
+            //    return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+            //}
             return await _context.TypePolicies.Where(item => item.IsDeleted == 0).ToListAsync();
         }
 

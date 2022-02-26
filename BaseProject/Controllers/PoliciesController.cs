@@ -29,9 +29,22 @@ namespace BaseProject.Controllers
         [Authorize]
         public async Task<ActionResult<PagedResponse<IEnumerable<Policy>>>> GetPolicies([FromQuery] PolicyFilter filter)
         {
+            // check role
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (role.Role == RoleUser.EMPLOYEE)
+            {
+                filter.Status = (int)StatusPolicy.APPROVE;
+            }
             PolicyFilter validFilter = new PolicyFilter(filter.PageNumber, filter.PageSize, filter.Name, filter.Status);
-            var totalRecords = await _context.Policies.CountAsync();
-            var pagedData = validFilter.GetPolicyFilter(_context);
+
+            var rawData = validFilter.GetPolicyFilter(_context);
+            var totalRecords = rawData.Count();
+            var pagedData = rawData
+                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                .Take(validFilter.PageSize)
+                .ToList();
+
             PagedResponse<IEnumerable<Policy>> page_response = new PagedResponse<IEnumerable<Policy>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
             return Ok(page_response);
         }
@@ -63,7 +76,7 @@ namespace BaseProject.Controllers
             {
                 return BadRequest(new CustomError { Detail = "Permission denied!" });
             }
-
+            policy.Status = (int)StatusPolicy.PENDING;
             _context.Policies.Add(policy);
             await _context.SaveChangesAsync();
             return Ok();
@@ -87,7 +100,7 @@ namespace BaseProject.Controllers
             if (policy == null)
                 return BadRequest(new CustomError { Code = 400, Detail = "Policy not found!" });
 
-            if (policyPut.Status <= 0)
+            if (policyPut.Status != (int)StatusPolicy.APPROVE && policyPut.Status != (int)StatusPolicy.REJECT)
                 return BadRequest(new CustomError { Code = 400, Detail = "Status invalid!" });
             policy.Status = policyPut.Status;
 
