@@ -28,7 +28,7 @@ namespace BaseProject.Controllers
         // GET: api/ClaimEmployees
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<PagedResponse<IEnumerable<ClaimEmployee>>>> GetClaimEmployees([FromQuery] ClaimFilter filter)
+        public ActionResult<PagedResponse<IEnumerable<ClaimEmployee>>> GetClaimEmployees([FromQuery] ClaimFilter filter)
         {
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
@@ -43,11 +43,11 @@ namespace BaseProject.Controllers
 
             ClaimFilter validFilter = new ClaimFilter(filter.PageNumber, filter.PageSize, filter.EmId, filter.Status);
             var rawData = validFilter.GetClaimFilter(_context);
-            var totalRecords = rawData.Count();
             var pagedData = rawData
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                 .Take(validFilter.PageSize)
                 .ToList();
+            var totalRecords = rawData.Count();
             PagedResponse<IEnumerable<ClaimEmployee>> page_response = new PagedResponse<IEnumerable<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
             return Ok(page_response);
         }
@@ -227,7 +227,7 @@ namespace BaseProject.Controllers
                 return BadRequest(new CustomError { Code = 400, Detail = "You need to purchase this policy first" });
             }
 
-            if(contractPolicies.PaymentStatus != (int)StatusPolicyPayment.PAID)
+            if (contractPolicies.PaymentStatus != (int)StatusPolicyPayment.PAID)
             {
                 return BadRequest(new CustomError { Code = 400, Detail = "You need to paid this policy first" });
             }

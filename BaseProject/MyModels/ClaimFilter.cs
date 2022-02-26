@@ -1,7 +1,8 @@
 ﻿using BaseProject.ApiDbContext;
 using BaseProject.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Data.Entity;
+//using System.Data.Entity;
 using System.Linq;
 
 namespace BaseProject.MyModels
@@ -109,20 +110,20 @@ namespace BaseProject.MyModels
                     .Where(item => item.Status == this.Status)
                     .Include(item => item.Policy)
                     .Include(item => item.ClaimActions)
-                    .OrderByDescending(d => d.CreatedAt)
-                    .Skip((this.PageNumber - 1) * this.PageSize)
-                    .Take(this.PageSize)
-                    .ToList();
+                    .OrderByDescending(d => d.CreatedAt);
+                    //.Skip((this.PageNumber - 1) * this.PageSize)
+                    //.Take(this.PageSize)
+                    //.ToList();
                 }
                 return context.ClaimEmployees
                     .Where(item => item.IsDeleted == 0)
                     .Where(item => item.EmployeeId == this.EmId)
                     .Include(item => item.Policy)
                     .Include(item => item.ClaimActions)
-                    .OrderByDescending(d => d.CreatedAt)
-                    .Skip((this.PageNumber - 1) * this.PageSize)
-                    .Take(this.PageSize)
-                    .ToList();
+                    .OrderByDescending(d => d.CreatedAt);
+                    //.Skip((this.PageNumber - 1) * this.PageSize)
+                    //.Take(this.PageSize)
+                    //.ToList();
             }
 
             if (this.Status >= 0)
@@ -132,19 +133,19 @@ namespace BaseProject.MyModels
                      .Where(item => item.Status == this.Status)
                      .Include(item => item.Policy)
                      .Include(item => item.ClaimActions)
-                     .OrderByDescending(d => d.CreatedAt)
-                     .Skip((this.PageNumber - 1) * this.PageSize)
-                     .Take(this.PageSize)
-                     .ToList();
+                     .OrderByDescending(d => d.CreatedAt);
+                     //.Skip((this.PageNumber - 1) * this.PageSize)
+                     //.Take(this.PageSize)
+                     //.ToList();
             }
             return context.ClaimEmployees
                    .Where(item => item.IsDeleted == 0)
                    .Include(item => item.Policy)
                    .Include(item => item.ClaimActions)
-                   .OrderByDescending(d => d.CreatedAt)
-                   .Skip((this.PageNumber - 1) * this.PageSize)
-                   .Take(this.PageSize)
-                   .ToList();
+                   .OrderByDescending(d => d.CreatedAt);
+                   //.Skip((this.PageNumber - 1) * this.PageSize)
+                   //.Take(this.PageSize)
+                   //.ToList();
         }
     }
 }
