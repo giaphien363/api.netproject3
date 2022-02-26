@@ -49,13 +49,14 @@ namespace BaseProject.Controllers
         {
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
-            if (role.Role != RoleUser.ADMIN)
+            if (role.Role == RoleUser.EMPLOYEE)
             {
-                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+                return BadRequest(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
 
             var insuranceAdmin = await _context.InsuranceAdmins
                 .Where(item => item.Id == id && item.IsDeleted == 0)
+                .Include(item => item.Company)
                 .FirstOrDefaultAsync();
 
             if (insuranceAdmin == null)
@@ -63,7 +64,7 @@ namespace BaseProject.Controllers
                 return NotFound();
             }
 
-            return insuranceAdmin;
+            return Ok(insuranceAdmin);
         }
 
         // PUT: api/InsuranceAdmins/5
@@ -119,8 +120,8 @@ namespace BaseProject.Controllers
             if (
                 insuranceAdmin.Username == null ||
                 insuranceAdmin.Password == null ||
-                insuranceAdmin.Role == null || 
-                insuranceAdmin.CompanyId <=0 
+                insuranceAdmin.Role == null ||
+                insuranceAdmin.CompanyId <= 0
               )
             {
                 return BadRequest(new CustomError { Code = 400, Detail = "Missing some field!" });
