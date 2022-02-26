@@ -36,16 +36,22 @@ namespace BaseProject.Controllers
             {
                 filter.Status = (int)StatusPolicy.APPROVE;
             }
-            PolicyFilter validFilter = new PolicyFilter(filter.PageNumber, filter.PageSize, filter.Name, filter.Status);
+            //PolicyFilter validFilter = new PolicyFilter(
+            //    filter.PageNumber, 
+            //    filter.PageSize, 
+            //    filter.Name, 
+            //    filter.Status, 
+            //    filter.CompanyId
+            //    );
 
-            var rawData = validFilter.GetPolicyFilter(_context);
+            var rawData = filter.GetPolicyFilter(_context);
             var pagedData = rawData
-                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                .Take(validFilter.PageSize)
+                .Skip((filter.PageNumber - 1) * filter.PageSize)
+                .Take(filter.PageSize)
                 .ToList();
             var totalRecords = rawData.Count();
 
-            PagedResponse<IEnumerable<Policy>> page_response = new PagedResponse<IEnumerable<Policy>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            PagedResponse<IEnumerable<Policy>> page_response = new PagedResponse<IEnumerable<Policy>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 
