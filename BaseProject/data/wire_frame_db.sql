@@ -82,7 +82,7 @@ create table TypePolicy(
 create table Policy(
 	Id int identity(1,1) primary key,
 	Name varchar(200) not null,
-	[Description] varchar(255) null,
+	[Description] varchar(1000) null,
 	SupportPercent int not null,
 	DurationInDays int not null,	
 	Price decimal(12,2) not null,
@@ -97,7 +97,7 @@ create table Policy(
 create table [Contract](
 	EmployeeId int FOREIGN KEY REFERENCES Employees(Id) primary key,
 	Name varchar(200) not null,
-	[Description] varchar(255) null,
+	[Description] varchar(1000) null,
 	TotalAmount decimal(12,2) null,
 	CreatedAt datetime default(GETDATE()),
 	UpdatedAt datetime default(GETDATE()),
@@ -138,7 +138,7 @@ create table PolicyOrder(
 create table ClaimEmployee(
 	Id int identity(1,1) primary key, 
 	[Status] int default(0), -- trang thai yeu cau 0: chua duyet, 1: manager duyet, 2: tai chinh duyet 
-	Reason varchar(255) not null,
+	Reason varchar(1000) not null,
 	TotalCost decimal(12,2) not null, -- tong chi phi ma employee phai tra cho hospital
 	EmployeeId int FOREIGN KEY REFERENCES Employees(Id),
 	PolicyId int FOREIGN KEY REFERENCES Policy(Id),
@@ -159,7 +159,7 @@ create table Bill(
 create table ClaimAction(
 	Id int identity(1,1) primary key, 
 	ActionType int not null,
-	Reason varchar(255) null,
+	Reason varchar(500) null,
 	CreatebyEmployeeId int null,
 	CreatebyInsuranceAdminId int null,
 	ClaimId int FOREIGN KEY REFERENCES ClaimEmployee(Id),
