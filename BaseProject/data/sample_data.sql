@@ -76,12 +76,14 @@ INSERT INTO api_dotnet.dbo.InsuranceAdmin (Username, Password, [Role], CompanyId
 -- (0, 'chua nghi ra', 3, 13);
 
 select * from InsuranceAdmin
- -- update ClaimEmployee set status = 4 where PolicyId=9
+
+  -- update ClaimEmployee set CreatedAt = '20220118 10:34:09 AM'  where Id in(1,2,5,7);
 
 select * from InsuranceCompany
 
 select * from ClaimAction
-select * from ClaimEmployee where IsDeleted =0
+
+select * from ClaimEmployee where [Status] = 1
 
 select * from Policy where CompanyId = 1 -- 1,2,3,5,7,10
 
