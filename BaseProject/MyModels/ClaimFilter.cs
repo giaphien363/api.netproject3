@@ -23,129 +23,66 @@ namespace BaseProject.MyModels
 
         public IEnumerable<ClaimEmployee> GetClaimFilterForInsu(ApiNetContext context, int company_id)
         {
+
+            IEnumerable<ClaimEmployee> query = context.ClaimEmployees
+                        .Join(
+                            context.Policies,
+                            claim => claim.PolicyId,
+                            po => po.Id,
+                            (claim, poli) => new { claim, poli }
+                        )
+                        .Where(item => item.poli.CompanyId == company_id)
+                        .Select(item => item.claim)
+                        .Where(item => item.IsDeleted == 0)
+                        .Include(item => item.Policy)
+                        .Include(item => item.ClaimActions)
+                        .OrderByDescending(d => d.CreatedAt);
+
             if (this.EmId > 0)
             {
-                if (this.Status >= 0)
-                {
-                    return context.ClaimEmployees
-                        .Join(
-                            context.Policies,
-                            claim => claim.PolicyId,
-                            po => po.Id,
-                            (claim, poli) => new { claim, poli }
-                        )
-                        .Where(item => item.claim.IsDeleted == 0)
-                        .Where(item => item.poli.CompanyId == company_id)
-                        .Where(item => item.claim.EmployeeId == this.EmId)
-                        .Where(item => item.claim.Status == this.Status)
-                        .Include(item => item.claim.Policy)
-                        .Include(item => item.claim.ClaimActions)
-                        .OrderByDescending(d => d.claim.CreatedAt)
-                        .Select(item => item.claim);
-                        
-                }
-                return context.ClaimEmployees
-                        .Join(
-                            context.Policies,
-                            claim => claim.PolicyId,
-                            po => po.Id,
-                            (claim, poli) => new { claim, poli }
-                        )
-                        .Where(item => item.claim.IsDeleted == 0)
-                        .Where(item => item.poli.CompanyId == company_id)
-                        .Where(item => item.claim.EmployeeId == this.EmId)
-                        .Include(item => item.claim.Policy)
-                        .Include(item => item.claim.ClaimActions)
-                        .OrderByDescending(d => d.claim.CreatedAt)
-                        .Select(item => item.claim);                        
+                query = this.FilterByEmId(query);
             }
 
-            if (this.Status >= 0)
+            if (this.Status > 0)
             {
-                return context.ClaimEmployees
-                        .Join(
-                            context.Policies,
-                            claim => claim.PolicyId,
-                            po => po.Id,
-                            (claim, poli) => new { claim, poli }
-                        )
-                        .Where(item => item.claim.IsDeleted == 0)
-                        .Where(item => item.poli.CompanyId == company_id)
-                        .Where(item => item.claim.Status == this.Status)
-                        .Include(item => item.claim.Policy)
-                        .Include(item => item.claim.ClaimActions)
-                        .OrderByDescending(d => d.claim.CreatedAt)
-                        .Select(item => item.claim);
-                        //.Skip((this.PageNumber - 1) * this.PageSize)
-                        //.Take(this.PageSize)
-                        //.ToList();
+                query = this.FilterByStatus(query);
             }
-            return context.ClaimEmployees
-                        .Join(
-                            context.Policies,
-                            claim => claim.PolicyId,
-                            po => po.Id,
-                            (claim, poli) => new { claim, poli }
-                        )
-                        .Where(item => item.claim.IsDeleted == 0)
-                        .Where(item => item.poli.CompanyId == company_id)
-                        .Include(item => item.claim.Policy)
-                        .Include(item => item.claim.ClaimActions)
-                        .OrderByDescending(d => d.claim.CreatedAt)
-                        .Select(item => item.claim);
-                        //.Skip((this.PageNumber - 1) * this.PageSize)
-                        //.Take(this.PageSize)
-                        //.ToList();
+            return query;
+            //.Skip((this.PageNumber - 1) * this.PageSize)
+            //.Take(this.PageSize)
+            //.ToList();
         }
-   
+
         public IEnumerable<ClaimEmployee> GetClaimFilter(ApiNetContext context)
         {
+            IEnumerable<ClaimEmployee> query = context.ClaimEmployees
+                                    .Where(item => item.IsDeleted == 0)
+                                    .Include(item => item.ClaimActions)
+                                    .Include(item => item.Policy)
+                                    .OrderByDescending(d => d.CreatedAt);
             if (this.EmId > 0)
             {
-                if (this.Status >= 0)
-                {
-                    return context.ClaimEmployees
-                    .Where(item => item.IsDeleted == 0)
-                    .Where(item => item.EmployeeId == this.EmId)
-                    .Where(item => item.Status == this.Status)
-                    .Include(item => item.Policy)
-                    .Include(item => item.ClaimActions)
-                    .OrderByDescending(d => d.CreatedAt);
-                    //.Skip((this.PageNumber - 1) * this.PageSize)
-                    //.Take(this.PageSize)
-                    //.ToList();
-                }
-                return context.ClaimEmployees
-                    .Where(item => item.IsDeleted == 0)
-                    .Where(item => item.EmployeeId == this.EmId)
-                    .Include(item => item.Policy)
-                    .Include(item => item.ClaimActions)
-                    .OrderByDescending(d => d.CreatedAt);
-                    //.Skip((this.PageNumber - 1) * this.PageSize)
-                    //.Take(this.PageSize)
-                    //.ToList();
+                query = this.FilterByEmId(query);
             }
 
-            if (this.Status >= 0)
+            if (this.Status > 0)
             {
-                return context.ClaimEmployees
-                     .Where(item => item.IsDeleted == 0)
-                     .Where(item => item.Status == this.Status)
-                     .Include(item => item.Policy)
-                     .Include(item => item.ClaimActions)
-                     .OrderByDescending(d => d.CreatedAt);
-                     //.Skip((this.PageNumber - 1) * this.PageSize)
-                     //.Take(this.PageSize)
-                     //.ToList();
+                query = this.FilterByStatus(query);
             }
-            return context.ClaimEmployees
-                   .Where(item => item.IsDeleted == 0)
-                   .Include(item => item.Policy)
-                   .Include(item => item.ClaimActions)
-                   .OrderByDescending(d => d.CreatedAt);
-                   //.Skip((this.PageNumber - 1) * this.PageSize)
-                   //.Take(this.PageSize)
-                   //.ToList();
+            return query;
+
+            //.Skip((this.PageNumber - 1) * this.PageSize)
+            //.Take(this.PageSize)
+            //.ToList();
+        }
+
+        private IEnumerable<ClaimEmployee> FilterByStatus(IEnumerable<ClaimEmployee> context)
+        {
+            return context.Where(item => item.Status == this.Status);
+        }
+        private IEnumerable<ClaimEmployee> FilterByEmId(IEnumerable<ClaimEmployee> context)
+        {
+            return context.Where(item => item.EmployeeId == this.EmId);
         }
     }
 }

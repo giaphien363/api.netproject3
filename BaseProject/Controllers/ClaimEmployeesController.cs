@@ -73,14 +73,16 @@ namespace BaseProject.Controllers
             ClaimFilter validFilter = new ClaimFilter(filter.PageNumber, filter.PageSize, filter.EmId, filter.Status);
             //var totalRecords = await _context.ClaimEmployees.CountAsync();
             var rawData = validFilter.GetClaimFilterForInsu(_context, company_id);
-            var totalRecords = rawData.Count();
             var pagedData = rawData
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                 .Take(validFilter.PageSize)
                 .ToList();
+            var totalRecords = rawData.Count();
             PagedResponse<IEnumerable<ClaimEmployee>> page_response = new PagedResponse<IEnumerable<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
             return Ok(page_response);
         }
+       
+        
         // GET: api/ClaimEmployees/5
         [HttpGet("{id}")]
         [Authorize]
