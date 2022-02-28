@@ -10,6 +10,7 @@ namespace BaseProject.MyModels
         public int SupportPercent { get; set; }
         public int DurationInDays { get; set; }
         public decimal Price { get; set; }
+        public int? Status { get; set; }
         public int? TypeId { get; set; }
         public int? CompanyId { get; set; }
         public DateTime? UpdatedAt { get; set; }
@@ -29,6 +30,8 @@ namespace BaseProject.MyModels
             if (policyDto.Price != null)
                 current.Price = policyDto.Price;
 
+            if (policyDto.Status != null)
+                current.Status = policyDto.Status;
             if (policyDto.TypeId != null)
                 current.TypeId = policyDto.TypeId;
             if (policyDto.CompanyId != null)
