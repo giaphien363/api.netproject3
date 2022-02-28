@@ -79,7 +79,7 @@ namespace BaseProject.Controllers
             return Ok(current);
         }
 
-        // PUT: api/PolicyOrders/5/udpate-status
+        // PUT: api/PolicyOrders/5/update-status
         [HttpPut("{id}/update-status")]
         [Authorize]
         public async Task<IActionResult> PutPolicyOrderStatus(int id, [FromBody] UpdateStatus statusObj)
