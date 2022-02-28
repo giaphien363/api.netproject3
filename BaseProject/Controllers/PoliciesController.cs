@@ -132,7 +132,7 @@ namespace BaseProject.Controllers
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
-            if (role.Role != RoleUser.IFINMAN || role.Role != RoleUser.IMANAGER)
+            if (role.Role != RoleUser.IFINMAN && role.Role != RoleUser.IMANAGER)
             {
                 return BadRequest(new CustomError { Detail = "Permission denied!" });
             }
