@@ -123,8 +123,8 @@ create table [ContractPolicy](
 create table PolicyOrder(
 	Id int identity(1,1) primary key, 
 	StartDate datetime not null, 
-	PaymentType int not null,
-	Emi decimal(12,2) null,
+	-- PaymentType int not null,
+	-- Emi decimal(12,2) null,
 	[Status] int default(0), -- 0: pending, 1: approval, 2: reject
 	EmployeeId int FOREIGN KEY REFERENCES Employees(Id),
 	PolicyId int FOREIGN KEY REFERENCES Policy(Id),
