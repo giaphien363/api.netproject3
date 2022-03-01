@@ -56,6 +56,11 @@ namespace BaseProject.Controllers
                     .Where(item => item.IsDeleted == 0)
                     .Where(item => item.EmployeeId == id)
                     .Include(item => item.ContractPolicies)
+                        .ThenInclude(cp => cp.Policy)
+                            .ThenInclude(p => p.Company)
+                    .Include(item => item.ContractPolicies)
+                        .ThenInclude(cp => cp.Policy)
+                            .ThenInclude(p => p.Type)
                     .FirstOrDefaultAsync();
 
             if (contract == null)
