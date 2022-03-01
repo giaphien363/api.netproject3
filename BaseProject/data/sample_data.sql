@@ -77,13 +77,13 @@ INSERT INTO api_dotnet.dbo.InsuranceAdmin (Username, Password, [Role], CompanyId
 
 select * from InsuranceAdmin
 
-  -- update ClaimEmployee set CreatedAt = '20220118 10:34:09 AM'  where Id in(1,2,5,7);
+  -- update Policy set CreatedAt = '20220101 10:34:09 AM'  where Id in(1,2,5,7);
 
 select * from InsuranceCompany
 
 select * from ClaimAction
 
-select * from ClaimEmployee where [Status] = 1
+select * from Employees where [Status] = 1
 
 select * from Policy where CompanyId = 1 -- 1,2,3,5,7,10
 
@@ -91,6 +91,8 @@ select * from Policy where CompanyId = 1 -- 1,2,3,5,7,10
 select * from ContractPolicy
 
 select * from PolicyOrder
+
+select * from Bill
 
 -- ALTER TABLE ContractPolicy DROP COLUMN PaymentType;
 -- ALTER TABLE PolicyOrder DROP COLUMN PaymentType;

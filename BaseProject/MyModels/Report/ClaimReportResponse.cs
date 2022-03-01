@@ -16,6 +16,6 @@ namespace BaseProject.MyModels
         public int NoUser { get; set; }
         public int NoPolicy { get; set; }
         public int NoClaimCreated { get; set; }
-        public int NoClaimApproval { get; set; }
+        public int NoBill { get; set; }
     }
 }
