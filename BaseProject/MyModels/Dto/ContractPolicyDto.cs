@@ -14,7 +14,7 @@ namespace BaseProject.MyModels
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public decimal? AmountOwing { get; set; }
+        // public decimal? AmountOwing { get; set; }
         public int PaymentStatus { get; set; }
 
 
@@ -27,7 +27,20 @@ namespace BaseProject.MyModels
             newContractPolicy.StartDate = dto.StartDate;
             newContractPolicy.EndDate = dto.StartDate.AddDays(policy.DurationInDays);
             newContractPolicy.PaymentStatus = (int)StatusPolicyPayment.UNPAID;
-            newContractPolicy.AmountOwing = policy.Price;
+            // newContractPolicy.AmountOwing = policy.Price;
+
+            return newContractPolicy;
+        }
+        public static ContractPolicy CreateContractPolicyDirectly(ContractPolicyDto dto, Policy policy)
+        {
+            ContractPolicy newContractPolicy = new ContractPolicy();
+
+            newContractPolicy.ContractId = dto.ContractId;
+            newContractPolicy.PolicyId = dto.PolicyId;
+            newContractPolicy.StartDate = dto.StartDate;
+            newContractPolicy.EndDate = dto.StartDate.AddDays(policy.DurationInDays);
+            newContractPolicy.PaymentStatus = (int)StatusPolicyPayment.UNPAID;
+            // newContractPolicy.AmountOwing = policy.Price;
 
             return newContractPolicy;
         }
@@ -44,8 +57,8 @@ namespace BaseProject.MyModels
                 current.StartDate = newConPo.StartDate;
             if (newConPo.EndDate != null)
                 current.EndDate = newConPo.EndDate;
-            if (newConPo.AmountOwing != null)
-                current.AmountOwing = newConPo.AmountOwing;
+            //if (newConPo.AmountOwing != null)
+            //    current.AmountOwing = newConPo.AmountOwing;
             if (newConPo.PaymentStatus > 0)
                 current.PaymentStatus = newConPo.PaymentStatus;
 

@@ -287,6 +287,7 @@ select * from PolicyOrder
 
 select * from Bill
 
--- ALTER TABLE ContractPolicy DROP COLUMN PaymentType;
+-- ALTER TABLE ContractPolicy DROP COLUMN AmountOwing;
 -- ALTER TABLE PolicyOrder DROP COLUMN PaymentType;
 -- ALTER TABLE PolicyOrder DROP COLUMN Emi;
+

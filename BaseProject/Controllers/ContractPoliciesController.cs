@@ -116,7 +116,6 @@ namespace BaseProject.Controllers
                 return BadRequest(new CustomError { Detail = "Contract Policy order not found!" });
 
             current.PaymentStatus = statusObj.Status;
-            current.AmountOwing = 0;
             _context.ContractPolicies.Update(current);
 
             await _context.SaveChangesAsync();
@@ -125,17 +124,33 @@ namespace BaseProject.Controllers
 
 
         // POST: api/ContractPolicies: auto add record when admin approve
-        /**
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<ContractPolicy>> PostContractPolicy(ContractPolicy contractPolicy)
+        public async Task<ActionResult<ContractPolicy>> PostContractPolicy([FromBody] ContractPolicyDto contractPLDto)
         {
-            _context.ContractPolicies.Add(contractPolicy);
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (role.Role != RoleUser.ADMIN)
+            {
+                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+            }
+
+            Policy policy = _context.Policies
+                   .Where(item => item.Id == contractPLDto.PolicyId)
+                   .FirstOrDefault();
+
+            ContractPolicy conPolicy = ContractPolicyDto.CreateContractPolicyDirectly(contractPLDto, policy);
+            _context.ContractPolicies.Add(conPolicy);
+
+            Contract existContract = _context.Contracts
+                   .Where(item => item.EmployeeId == contractPLDto.ContractId)
+                   .FirstOrDefault();
+
+            existContract.TotalAmount += policy.Price;
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetContractPolicy", new { id = contractPolicy.Id }, contractPolicy);
+            return Ok();
         }
-         * */
 
         // DELETE: api/ContractPolicies/5
         [HttpDelete("{id}")]

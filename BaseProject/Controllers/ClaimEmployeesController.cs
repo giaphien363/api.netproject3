@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 //using System.Data.Entity;
 using System.Linq;
@@ -81,8 +82,8 @@ namespace BaseProject.Controllers
             PagedResponse<IEnumerable<ClaimEmployee>> page_response = new PagedResponse<IEnumerable<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
             return Ok(page_response);
         }
-       
-        
+
+
         // GET: api/ClaimEmployees/5
         [HttpGet("{id}")]
         [Authorize]
@@ -232,6 +233,10 @@ namespace BaseProject.Controllers
             if (contractPolicies.PaymentStatus != (int)StatusPolicyPayment.PAID)
             {
                 return BadRequest(new CustomError { Code = 400, Detail = "You need to paid this policy first" });
+            }
+            if (contractPolicies.EndDate < DateTime.Now)
+            {
+                return BadRequest(new CustomError { Code = 400, Detail = "Your policy expired!" });
             }
 
             var claim = ClaimDto.CreateClaimEmployee(claimDto);

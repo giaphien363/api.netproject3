@@ -112,7 +112,7 @@ create table [ContractPolicy](
 	StartDate datetime not null,
 	EndDate datetime not null,
 	-- Emi decimal(12,2) null, -- so tien tra gop hang thang
-	AmountOwing decimal(12,2) null, -- so no can phai tra
+	-- AmountOwing decimal(12,2) null, -- so no can phai tra
 	PaymentStatus int not null, -- trang thai da thanh toan hay chua ? 1: paid, 2: unpaid
 	-- PaymentType int not null, -- kieu thanh toan, tra gop hay 1 lan ?	
 	CreatedAt datetime default(GETDATE()),

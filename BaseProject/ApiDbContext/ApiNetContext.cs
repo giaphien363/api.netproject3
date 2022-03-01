@@ -174,8 +174,6 @@ namespace BaseProject.ApiDbContext
             {
                 entity.ToTable("ContractPolicy");
 
-                entity.Property(e => e.AmountOwing).HasColumnType("decimal(12, 2)");
-
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
