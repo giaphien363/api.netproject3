@@ -92,6 +92,9 @@ namespace BaseProject.Controllers
             ClaimEmployee claimEmployee = await _context.ClaimEmployees
                 .Where(item => item.IsDeleted == 0 && item.Id == id)
                 .Include(it => it.Policy)
+                    .ThenInclude(policy => policy.Company)
+                .Include(it => it.Policy)
+                    .ThenInclude(policy => policy.Type)
                 .Include(item => item.ClaimActions)
                 .FirstOrDefaultAsync();
 
