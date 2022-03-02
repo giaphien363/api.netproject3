@@ -48,7 +48,7 @@ INSERT INTO api_dotnet.dbo.Policy (Name, [Description], SupportPercent, Duration
 ('COVID‑19 vaccine','Intended to provide acquired immunity against severe acute respiratory syndrome coronavirus',100,720,100,1,3,8),
 ('Pregnancy care and childbirth','Pregnancy care and childbirth are both covered under AIA.',100,360,1000,1,1,2),
 ('Travel and accommodation','Up to $500 per calendar year per policy.',60,180,270,1,1,6),
-('Robotic assisted surgery','In most cases robotic assisted systems used in surgery is covered under our contractwith the hospital',90,365,340,2,1,3),
+('Robotic assisted surgery','In most cases robotic assisted systems used in surgery is covered under our contract with the hospital',90,365,340,2,1,3),
 ('Sleep Studies','For the investigation of sleep patterns and anomalies. For example: sleep apnoea and snoring.',100,720,300,3,1,1),
 ('Insulin pumps','For the provision and replacement of insulin pumps for treatment of diabetes',80,365,123,1,1,4),
 ('Weight loss surgery','For surgery that is designed to reduce a person’s weight, remove excess skin due to weight loss and reversal of a bariatric procedure. For example: gastric banding, gastric bypass, sleeve gastrectomy.',75,365,1200,1,1,4),
@@ -91,13 +91,13 @@ INSERT INTO api_dotnet.dbo.Employees(Username,Password,Salary,Firstname,Lastname
 ('employee6','YWRtaW5zZWNyZXRAa2V5QEA=',20000,'Sofia','Carson','Thanh Binh','0987584932','Viet Nam','Ha Noi');
 
 --select * from api_dotnet.dbo.Employees
-insert into api_dotnet.dbo.Contract(EmployeeId,Name,CreatedAt,UpdatedAt) values
-(1,'HD1','2022-02-27','2022-02-27'),
-(2,'HD2','2022-02-28','2022-02-28'),
-(3,'HD3','2022-02-28','2022-02-28'),
-(4,'HD4','2022-03-01','2022-03-02'),
-(5,'HD5','2022-03-01','2022-03-02'),
-(6,'HD6','2022-03-02','2022-03-03');
+insert into api_dotnet.dbo.Contract(EmployeeId,Name,CreatedAt,UpdatedAt, TotalAmount) values
+(1,'HD1','2022-02-27','2022-02-27', 0),
+(2,'HD2','2022-02-28','2022-02-28', 0),
+(3,'HD3','2022-02-28','2022-02-28', 0),
+(4,'HD4','2022-03-01','2022-03-02', 0),
+(5,'HD5','2022-03-01','2022-03-02', 0),
+(6,'HD6','2022-03-02','2022-03-03', 0);
 --select * from Contract
 --select * from ContractPolicy
 insert into api_dotnet.dbo.ContractPolicy( ContractId,PolicyId,Description,StartDate,EndDate,PaymentStatus,CreatedAt) values
