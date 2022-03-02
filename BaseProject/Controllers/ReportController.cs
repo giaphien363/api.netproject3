@@ -124,7 +124,7 @@ namespace BaseProject.Controllers
             }
             else
             {
-                last_7_days = DateTime.Now.AddDays(-8);
+                last_7_days = DateTime.Now.AddDays(-7);
             }
             var allBills = await _context.Bills.ToListAsync();
 
@@ -163,18 +163,35 @@ namespace BaseProject.Controllers
             //}
             DateTime last_month = DateTime.Now.AddMonths(-1);
 
-            var no_user = _context.Employees.Where(item => item.IsDeleted == 0).ToList().Count();
-            var policy_created = _context.Policies.Where(item => item.CreatedAt > last_month).ToList().Count();
-            var claim_created = _context.ClaimEmployees.Where(item => item.CreatedAt > last_month).ToList().Count();
-            var bill_created = _context.Bills
-                .Where(item => item.CreatedAt > last_month)
+            var no_user_now = _context.Employees.ToList().Count();
+            var no_user_last = _context.Employees
+                    .Where(item => item.CreatedAt <= last_month)
+                    .ToList().Count();
+            int percentUser = CalPercent(no_user_now, no_user_last);
+
+            var policy_created_now = _context.Policies.ToList().Count();
+            var policy_created_last = _context.Policies
+                .Where(item => item.CreatedAt <= last_month)
                 .ToList().Count();
+            int percentPolicy = CalPercent(policy_created_now, policy_created_last);
+
+            var claim_created_now = _context.ClaimEmployees.ToList().Count();
+            var claim_created_last = _context.ClaimEmployees.Where(item => item.CreatedAt <= last_month).ToList().Count();
+            int percentClaim = CalPercent(claim_created_now, claim_created_last);
+
+            var bill_created_now = _context.Bills.ToList().Count();
+            var bill_created_last = _context.Bills.Where(item => item.CreatedAt <= last_month).ToList().Count();
+            int percentBill = CalPercent(bill_created_now, bill_created_last);
             SquareChartResponse result = new SquareChartResponse
             {
-                NoUser = no_user,
-                NoPolicy = policy_created,
-                NoClaimCreated = claim_created,
-                NoBill = bill_created
+                NoUser = no_user_now,
+                PeUser = percentUser,
+                NoPolicy = policy_created_now,
+                PePolicy = percentPolicy,
+                NoClaimCreated = claim_created_now,
+                PeClaimCreated = percentClaim,
+                NoBill = bill_created_now,
+                PeBill = percentBill
             };
 
             return Ok(result);
@@ -198,6 +215,13 @@ namespace BaseProject.Controllers
             return all_record;
         }
 
-
+        private int CalPercent(int now, int last)
+        {
+            if (last <= 0)
+            {
+                return 0;
+            }
+            return (now - last) * 100 / last;
+        }
     }
 }

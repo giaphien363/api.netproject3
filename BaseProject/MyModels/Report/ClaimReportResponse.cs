@@ -14,8 +14,12 @@ namespace BaseProject.MyModels
     public class SquareChartResponse
     {
         public int NoUser { get; set; }
+        public int PeUser { get; set; }
         public int NoPolicy { get; set; }
+        public int PePolicy { get; set; }
         public int NoClaimCreated { get; set; }
+        public int PeClaimCreated { get; set; }
         public int NoBill { get; set; }
+        public int PeBill { get; set; }
     }
 }
