@@ -9,15 +9,17 @@ namespace BaseProject.MyModels
     public class PolicyFilter : PaginationFilter
     {
         public string Name { get; set; }
+        public string Decs { get; set; }
         public int Status { get; set; }
         public int CompanyId { get; set; }
 
         public PolicyFilter() { }
-        public PolicyFilter(int pageNumber, int pageSize, string name, int status, int company_id)
+        public PolicyFilter(int pageNumber, int pageSize, string name, int status, int company_id, string decs)
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
             this.Name = name;
+            this.Decs = decs;
             this.Status = status;
             this.CompanyId = company_id;
         }
@@ -32,6 +34,10 @@ namespace BaseProject.MyModels
             if (this.Name != null)
             {
                 query = this.QueryFilterName(query);
+            }
+            if (this.Decs != null)
+            {
+                query = this.QueryFilterDecs(query);
             }
 
             if (this.Status > 0)
@@ -53,6 +59,10 @@ namespace BaseProject.MyModels
         private IEnumerable<Policy> QueryFilterName(IEnumerable<Policy> context)
         {
             return context.Where(item => item.Name.Contains(this.Name));
+        }
+        private IEnumerable<Policy> QueryFilterDecs(IEnumerable<Policy> context)
+        {
+            return context.Where(item => item.Description.Contains(this.Decs));
         }
         private IEnumerable<Policy> QueryFilterStatus(IEnumerable<Policy> context)
         {

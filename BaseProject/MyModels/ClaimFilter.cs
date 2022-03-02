@@ -10,14 +10,16 @@ namespace BaseProject.MyModels
     public class ClaimFilter : PaginationFilter
     {
         public int EmId { get; set; }
+        public string Name { get; set; }
         public int Status { get; set; }
 
         public ClaimFilter() { }
-        public ClaimFilter(int pageNumber, int pageSize, int emId, int status)
+        public ClaimFilter(int pageNumber, int pageSize, int emId, int status, string name)
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
             this.EmId = emId;
+            this.Name = name;
             this.Status = status;
         }
 
@@ -35,12 +37,18 @@ namespace BaseProject.MyModels
                         .Select(item => item.claim)
                         .Where(item => item.IsDeleted == 0)
                         .Include(item => item.Policy)
+                        .Include(item => item.Employee)
                         .Include(item => item.ClaimActions)
                         .OrderByDescending(d => d.CreatedAt);
 
             if (this.EmId > 0)
             {
                 query = this.FilterByEmId(query);
+            }
+            
+            if (this.Name != null)
+            {
+                query = this.FilterByName(query);
             }
 
             if (this.Status > 0)
@@ -76,10 +84,17 @@ namespace BaseProject.MyModels
             //.ToList();
         }
 
+        private IEnumerable<ClaimEmployee> FilterByName(IEnumerable<ClaimEmployee> context)
+        {
+            return context.Where(item => item.Employee.Username.Contains(this.Name))
+                .Where(item => item.Employee.Firstname.Contains(this.Name))
+                .Where(item => item.Employee.Lastname.Contains(this.Name));
+        }
         private IEnumerable<ClaimEmployee> FilterByStatus(IEnumerable<ClaimEmployee> context)
         {
             return context.Where(item => item.Status == this.Status);
         }
+        
         private IEnumerable<ClaimEmployee> FilterByEmId(IEnumerable<ClaimEmployee> context)
         {
             return context.Where(item => item.EmployeeId == this.EmId);

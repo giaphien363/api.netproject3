@@ -72,7 +72,6 @@ namespace BaseProject.Controllers
         }
 
         //// PUT: api/Contracts/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]
         //public async Task<IActionResult> PutContract(int id, Contract contract)
         //{
@@ -103,7 +102,6 @@ namespace BaseProject.Controllers
         //}
 
         //// POST: api/Contracts
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPost]
         //public async Task<ActionResult<Contract>> PostContract(Contract contract)
         //{
