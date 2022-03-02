@@ -42,7 +42,13 @@ namespace BaseProject.Controllers
                 filter.EmId = role.Id;
             }
 
-            ClaimFilter validFilter = new ClaimFilter(filter.PageNumber, filter.PageSize, filter.EmId, filter.Status);
+            ClaimFilter validFilter = new ClaimFilter(
+                                        filter.PageNumber,
+                                        filter.PageSize,
+                                        filter.EmId,
+                                        filter.Status,
+                                        filter.Name
+                                        );
             var rawData = validFilter.GetClaimFilter(_context);
             var pagedData = rawData
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
@@ -71,7 +77,13 @@ namespace BaseProject.Controllers
             int company_id = (int)currentAdmin.CompanyId;
             // pass within claimFilter
 
-            ClaimFilter validFilter = new ClaimFilter(filter.PageNumber, filter.PageSize, filter.EmId, filter.Status);
+            ClaimFilter validFilter = new ClaimFilter(
+                                filter.PageNumber, 
+                                filter.PageSize, 
+                                filter.EmId, 
+                                filter.Status,
+                                filter.Name
+                                );
             //var totalRecords = await _context.ClaimEmployees.CountAsync();
             var rawData = validFilter.GetClaimFilterForInsu(_context, company_id);
             var pagedData = rawData
