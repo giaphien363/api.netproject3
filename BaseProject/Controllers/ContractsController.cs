@@ -10,6 +10,7 @@ using BaseProject.Models;
 using System.Security.Claims;
 using BaseProject.Common;
 using BaseProject.MyModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BaseProject.Controllers
 {
@@ -26,6 +27,7 @@ namespace BaseProject.Controllers
 
         // GET: api/Contracts
         [HttpGet]
+        [Authorize]
         public ActionResult<PagedResponse<IEnumerable<Contract>>> GetContracts([FromQuery] ContractFilter filter)
         {
             // check role
@@ -50,6 +52,7 @@ namespace BaseProject.Controllers
 
         // GET: api/Contracts/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Contract>> GetContract(int id)
         {
             var contract = await _context.Contracts

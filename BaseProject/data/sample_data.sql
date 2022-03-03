@@ -290,4 +290,5 @@ select * from Bill
 -- ALTER TABLE ContractPolicy DROP COLUMN AmountOwing;
 -- ALTER TABLE PolicyOrder DROP COLUMN PaymentType;
 -- ALTER TABLE PolicyOrder DROP COLUMN Emi;
+-- update UserAdmin set [Password] = 'YWRtaW5zZWNyZXRAa2V5QEA='
 
