@@ -10,7 +10,8 @@ namespace BaseProject.MyModels
             Contract new_contract = new Contract();
             new_contract.EmployeeId = employee.Id;
             new_contract.Name = "HD" + employee.Id;
-            new_contract.Description = "A contract listing all medical insurance policies that " + employee.Username + " has taken out";
+            new_contract.Description = "A contract listing all medical insurance policies that " + employee.Username + " has taken out.";
+            new_contract.TotalAmount = 0;
 
             return new_contract;
         }

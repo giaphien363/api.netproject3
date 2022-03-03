@@ -36,6 +36,7 @@ namespace BaseProject.MyModels
             }
             return context.Contracts
                 .Where(item => item.IsDeleted == 0)
+                .Include(item => item.Employee)
                 .OrderBy(item => item.Name);
             //.Skip((this.PageNumber - 1) * this.PageSize)
             //.Take(this.PageSize)
