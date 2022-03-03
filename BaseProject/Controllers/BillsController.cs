@@ -28,7 +28,7 @@ namespace BaseProject.Controllers
         // GET: api/Bills ==> for insurance admin
         [HttpGet("insurance")]
         [Authorize]
-        public async Task<ActionResult<PagedResponse<IEnumerable<Bill>>>> GetBillsInsu([FromQuery] BillFilter filter)
+        public async Task<ActionResult<PagedResponse<IEnumerable<ResponseBill>>>> GetBillsInsu([FromQuery] BillFilter filter)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -51,7 +51,7 @@ namespace BaseProject.Controllers
 
             var totalRecords = rawData.Count();
 
-            PagedResponse<IEnumerable<Bill>> page_response = new PagedResponse<IEnumerable<Bill>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
+            PagedResponse<IEnumerable<ResponseBill>> page_response = new PagedResponse<IEnumerable<ResponseBill>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
             // return await _context.Bills.ToListAsync();
         }
@@ -83,19 +83,24 @@ namespace BaseProject.Controllers
 
 
         // GET: api/Bills/5
-        [HttpGet("{id}")]
-        [Authorize]
-        public async Task<ActionResult<Bill>> GetBill(int id)
-        {
-            var bill = await _context.Bills.FindAsync(id);
+        //[HttpGet("{id}")]
+        //[Authorize]
+        //public async Task<ActionResult<Bill>> GetBill(int id)
+        //{
+        //    var bill = await _context.Bills
+        //        .Where(item => item.ClaimId == id)
+        //        .Include(item => item.Policy)
+        //        .Include(item => item.Claim)
+        //        .FirstOrDefaultAsync();
 
-            if (bill == null)
-            {
-                return NotFound();
-            }
+        //    if (bill == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return bill;
-        }
+        //    return bill;
+        //}
+
 
         //// PUT: api/Bills/5
         //[HttpPut("{id}")]
@@ -173,4 +178,5 @@ namespace BaseProject.Controllers
         //}
 
     }
+
 }

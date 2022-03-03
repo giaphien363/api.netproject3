@@ -49,10 +49,10 @@ namespace BaseProject.Controllers
             else if (role.Role == RoleUser.IFINMAN)
             {
                 var user = _db.InsuranceAdmins.FirstOrDefault(obj => obj.Username == role.Username);
-                return Ok(new UserResponse { Id = user.Id, Username = user.Username, Role = role.Role });
+                return Ok(new UserResponse { Id = user.Id, Username = user.Username, Role = role.Role, CompanyId = (int)user.CompanyId });
             }
             var admin = _db.InsuranceAdmins.FirstOrDefault(obj => obj.Username == role.Username);
-            return Ok(new UserResponse { Id = admin.Id, Username = admin.Username, Role = RoleUser.IMANAGER });
+            return Ok(new UserResponse { Id = admin.Id, Username = admin.Username, Role = RoleUser.IMANAGER, CompanyId = (int)admin.CompanyId });
 
         }
 
@@ -190,6 +190,7 @@ namespace BaseProject.Controllers
         public int Id { get; set; }
         public string Username { get; set; }
         public string Role { get; set; }
+        public int CompanyId { get; set; }
     }
 
     public class ChangePasswordForm

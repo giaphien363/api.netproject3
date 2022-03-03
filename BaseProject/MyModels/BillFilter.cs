@@ -19,19 +19,32 @@ namespace BaseProject.MyModels
             this.PageSize = pageSize;
         }
 
-        public IEnumerable<Bill> GetBillFilterInsu(ApiNetContext context, int companyId)
+        public IEnumerable<ResponseBill> GetBillFilterInsu(ApiNetContext context, int companyId)
         {
-            IEnumerable<Bill> query = context.Bills
+            IEnumerable<ResponseBill> query = context.Bills
                     .Join(
                         context.Policies,
                         bill => bill.PolicyId,
                         po => po.Id,
                         (bill, poli) => new { bill, poli }
                     )
+                    .Join(
+                        context.Employees,
+                        bill => bill.bill.EmployeeId,
+                        em => em.Id,
+                        (bill, em) => new { bill.bill, bill.poli, em }
+                    )
                     .Where(item => item.poli.CompanyId == companyId)
-                    .Select(item => item.bill);
+                    .Select(item => new ResponseBill()
+                    {
+                        SupportCost = item.bill.SupportCost,
+                        CreateAt = (DateTime)item.bill.CreatedAt,
+                        PolicyName = item.poli.Name,
+                        PolicySupport = item.poli.SupportPercent,
+                        EmployeeName = item.em.Firstname + " " + item.em.Lastname
+                    });
 
-            return query.OrderBy(item => item.CreatedAt);
+            return query.OrderBy(item => item.CreateAt);
         }
 
         public IEnumerable<Bill> GetBillFilter(ApiNetContext context)

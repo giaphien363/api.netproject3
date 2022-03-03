@@ -1,5 +1,6 @@
 ﻿using BaseProject.ApiDbContext;
 using BaseProject.Models;
+using System;
 
 namespace BaseProject.MyModels
 {
@@ -17,5 +18,14 @@ namespace BaseProject.MyModels
             context.Bills.Add(bill);
             context.SaveChanges();
         }
+    }
+
+    public class ResponseBill
+    {
+        public decimal SupportCost { get; set; }
+        public string PolicyName { get; set; }
+        public int PolicySupport { get; set; }
+        public DateTime CreateAt { get; set; }
+        public string EmployeeName { get; set; }
     }
 }

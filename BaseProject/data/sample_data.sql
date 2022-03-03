@@ -274,7 +274,7 @@ select * from InsuranceAdmin
 
 select * from InsuranceCompany
 
-select * from ClaimAction
+select * from ClaimEmployee
 
 select * from Employees where [Status] = 1
 
@@ -286,9 +286,14 @@ select * from ContractPolicy
 select * from PolicyOrder
 
 select * from Bill
+-- insert into Bill (SupportCost, EmployeeId, ClaimId, PolicyId, CreatedAt, UpdatedAt, IsDeleted) 
+-- values 
+-- (100,1,1,1,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0),
+-- (100,1,2,2,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0),
+-- (100,1,3,3,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0);
 
 -- ALTER TABLE ContractPolicy DROP COLUMN AmountOwing;
 -- ALTER TABLE PolicyOrder DROP COLUMN PaymentType;
 -- ALTER TABLE PolicyOrder DROP COLUMN Emi;
--- update UserAdmin set [Password] = 'YWRtaW5zZWNyZXRAa2V5QEA='
+-- update UserAdmin set [Password] = 'YWRtaW5zZWNyZXRAa2V5QEA='  2022-01-01 10:34:09.000
 
