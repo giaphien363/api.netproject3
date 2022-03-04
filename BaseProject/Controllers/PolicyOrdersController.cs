@@ -31,6 +31,30 @@ namespace BaseProject.Controllers
         [Authorize]
         public async Task<ActionResult<PagedResponse<IEnumerable<PolicyOrder>>>> GetPolicyOrders([FromQuery] PolicyOrderFilter filter)
         {
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (role.Role == RoleUser.EMPLOYEE)
+            {
+                var rawData_em = filter.GetPolicyOrderFilter(_context)
+                            .Join(
+                                _context.Employees,
+                                poliOrder => poliOrder.EmployeeId,
+                                em => em.Id,
+                                (poliOrder, emp) => new { poliOrder, emp }
+                            )
+                            .Where(item => item.emp.Id == role.Id)
+                            .Select(item => item.poliOrder);
+
+                var pagedData_em = rawData_em
+                    .Skip((filter.PageNumber - 1) * filter.PageSize)
+                    .Take(filter.PageSize)
+                    .ToList();
+                var totalRecords_em = rawData_em.Count();
+
+                PagedResponse<IEnumerable<PolicyOrder>> page_response_em = new PagedResponse<IEnumerable<PolicyOrder>>(pagedData_em, filter.PageNumber, filter.PageSize, totalRecords_em);
+                return Ok(page_response_em);
+            }
+
             var rawData = filter.GetPolicyOrderFilter(_context);
             var pagedData = rawData
                 .Skip((filter.PageNumber - 1) * filter.PageSize)
