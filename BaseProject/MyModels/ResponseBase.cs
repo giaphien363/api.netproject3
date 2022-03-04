@@ -26,9 +26,6 @@ namespace BaseProject.MyModels
     public class ClaimResponseDetail
     {
         public ClaimEmployee ClaimRes { get; set; }
-        public ICollection<ClaimAction> ActionRes { get; set; }
         public Policy PolicyRes { get; set; }
-        public TypePolicy TypeRes { get; set; }
-        public InsuranceCompany CompanyRes { get; set; }
     }
 }

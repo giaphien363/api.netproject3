@@ -98,9 +98,6 @@ namespace BaseProject.Controllers
                     {
                         ClaimRes = item.claim,
                         PolicyRes = item.policy,
-                        TypeRes = item.policy.Type,
-                        CompanyRes = item.policy.Company,
-                        ActionRes = item.claim.ClaimActions,
                     }).FirstOrDefaultAsync();
             if (claimEmployee == null)
             {
