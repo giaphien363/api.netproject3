@@ -8,7 +8,7 @@
 
 # run individual to import data
 ### open bash in container: 
-- `docker exec -it baseproject_mssql_1 bash`
+- `docker exec -it apinetproject3_mssql_1 bash`
 ### import .sql file 
-- `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./data/wire_frame_db.sql`
-- `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./data/sample_data.sql`
+- `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./wire_frame_db.sql`
+- `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./sample_data.sql`
