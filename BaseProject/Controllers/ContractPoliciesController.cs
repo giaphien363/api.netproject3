@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,6 +30,16 @@ namespace BaseProject.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ContractPolicy>>> GetContractPolicies()
         {
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            ObjReturnToken user = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            if (user.Role == RoleUser.EMPLOYEE )
+            {
+                return await _context.ContractPolicies
+                    .Where(item => item.IsDeleted == 0)
+                    .Where(item => item.ContractId == user.Id)
+                    .ToListAsync();
+      }
+
             return await _context.ContractPolicies
                 .Where(item => item.IsDeleted == 0)
                 .ToListAsync();
