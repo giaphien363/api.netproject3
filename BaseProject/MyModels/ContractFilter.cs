@@ -30,9 +30,7 @@ namespace BaseProject.MyModels
                     .Where(item => item.Employee.Username.Contains(this.Name))
                     .Include(item => item.Employee)
                     .OrderBy(item => item.Name);
-                //.Skip((this.PageNumber - 1) * this.PageSize)
-                //.Take(this.PageSize)
-                //.ToList();
+              
             }
             return context.Contracts
                 .Where(item => item.IsDeleted == 0)

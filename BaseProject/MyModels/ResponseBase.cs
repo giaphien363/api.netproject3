@@ -15,5 +15,12 @@ namespace BaseProject.MyModels
         public Policy PolicyRes { get; set; }
         public TypePolicy TypeRes { get; set; }
         public InsuranceCompany CompanyRes { get; set; }
+
+    }
+    public class ClaimResponse
+    {
+        public ClaimEmployee ClaimRes { get; set; }
+        public ClaimAction ActionRes { get; set; }
+        public Policy PolicyRes { get; set; }
     }
 }

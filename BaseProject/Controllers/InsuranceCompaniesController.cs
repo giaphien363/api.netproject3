@@ -28,12 +28,15 @@ namespace BaseProject.Controllers
         // GET: api/InsuranceCompanies
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<PagedResponse<IEnumerable<InsuranceCompany>>>> GetInsuranceCompanies([FromQuery] InsuranceCompanyFilter inCompany)
+        public async Task<ActionResult<PagedResponse<IEnumerable<InsuranceCompany>>>> GetInsuranceCompanies([FromQuery] InsuranceCompanyFilter filter)
         {
-            InsuranceCompanyFilter validFilter = new InsuranceCompanyFilter(inCompany.PageNumber, inCompany.PageSize, inCompany.Name);
-            var totalRecords = await _context.InsuranceCompanies.CountAsync();
-            var pagedData = validFilter.GetInCompanyFilter(_context);
-            PagedResponse<IEnumerable<InsuranceCompany>> page_response = new PagedResponse<IEnumerable<InsuranceCompany>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            var rawData = filter.GetInCompanyFilter(_context);
+            var pagedData = rawData
+                    .Skip((filter.PageNumber - 1) * filter.PageSize)
+                    .Take(filter.PageSize)
+                    .ToList();
+            var totalRecords = rawData.Count();
+            PagedResponse<IEnumerable<InsuranceCompany>> page_response = new PagedResponse<IEnumerable<InsuranceCompany>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 

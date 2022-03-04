@@ -30,17 +30,15 @@ namespace BaseProject.MyModels
                     item.Firstname.Contains(this.Name) ||
                     item.Lastname.Contains(this.Name)
                     )
-                .OrderBy(item => item.Username)
-                .Skip((this.PageNumber - 1) * this.PageSize)
-                .Take(this.PageSize)
-                .ToList();
+                .OrderBy(item => item.Username);
+                
             }
             return context.Employees
                 .Where(item => item.IsDeleted == 0)
-                .OrderBy(item => item.Username)
-                .Skip((this.PageNumber - 1) * this.PageSize)
-                .Take(this.PageSize)
-                .ToList();
+                .OrderBy(item => item.Username);
+                //.Skip((this.PageNumber - 1) * this.PageSize)
+                //.Take(this.PageSize)
+                //.ToList();
         }
 
     }

@@ -53,7 +53,6 @@ namespace BaseProject.Controllers
 
             PagedResponse<IEnumerable<ResponseBill>> page_response = new PagedResponse<IEnumerable<ResponseBill>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
-            // return await _context.Bills.ToListAsync();
         }
 
         // GET: api/Bills

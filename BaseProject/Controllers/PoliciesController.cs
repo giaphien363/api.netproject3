@@ -36,13 +36,6 @@ namespace BaseProject.Controllers
             {
                 filter.Status = (int)StatusPolicy.APPROVE;
             }
-            //PolicyFilter validFilter = new PolicyFilter(
-            //    filter.PageNumber, 
-            //    filter.PageSize, 
-            //    filter.Name, 
-            //    filter.Status, 
-            //    filter.CompanyId
-            //    );
 
             var rawData = filter.GetPolicyFilter(_context);
             var pagedData = rawData

@@ -29,7 +29,7 @@ namespace BaseProject.Controllers
         // GET: api/ClaimEmployees
         [HttpGet]
         [Authorize]
-        public ActionResult<PagedResponse<IEnumerable<ClaimEmployee>>> GetClaimEmployees([FromQuery] ClaimFilter filter)
+        public ActionResult<PagedResponse<IEnumerable<ClaimResponse>>> GetClaimEmployees([FromQuery] ClaimFilter filter)
         {
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
@@ -42,27 +42,20 @@ namespace BaseProject.Controllers
                 filter.EmId = role.Id;
             }
 
-            ClaimFilter validFilter = new ClaimFilter(
-                                        filter.PageNumber,
-                                        filter.PageSize,
-                                        filter.EmId,
-                                        filter.Status,
-                                        filter.Name
-                                        );
-            var rawData = validFilter.GetClaimFilter(_context);
+            var rawData = filter.GetClaimFilter(_context);
             var pagedData = rawData
-                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                .Take(validFilter.PageSize)
+                .Skip((filter.PageNumber - 1) * filter.PageSize)
+                .Take(filter.PageSize)
                 .ToList();
             var totalRecords = rawData.Count();
-            PagedResponse<IEnumerable<ClaimEmployee>> page_response = new PagedResponse<IEnumerable<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            PagedResponse<IEnumerable<ClaimResponse>> page_response = new PagedResponse<IEnumerable<ClaimResponse>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 
         // GET: api/ClaimEmployees/insurance ---> only insurance admin
         [HttpGet("insurance")]
         [Authorize]
-        public async Task<ActionResult<PagedResponse<IEnumerable<ClaimEmployee>>>> GetClaimEmployeesForInsu([FromQuery] ClaimFilter filter)
+        public async Task<ActionResult<PagedResponse<IEnumerable<ClaimResponse>>>> GetClaimEmployeesForInsu([FromQuery] ClaimFilter filter)
         {
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
@@ -75,23 +68,14 @@ namespace BaseProject.Controllers
             InsuranceAdmin currentAdmin = _context.InsuranceAdmins.Where(item => item.Id == role.Id).FirstOrDefault();
             // get company id
             int company_id = (int)currentAdmin.CompanyId;
-            // pass within claimFilter
 
-            ClaimFilter validFilter = new ClaimFilter(
-                                filter.PageNumber, 
-                                filter.PageSize, 
-                                filter.EmId, 
-                                filter.Status,
-                                filter.Name
-                                );
-            //var totalRecords = await _context.ClaimEmployees.CountAsync();
-            var rawData = validFilter.GetClaimFilterForInsu(_context, company_id);
+            var rawData = filter.GetClaimFilterForInsu(_context, company_id);
             var pagedData = rawData
-                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                .Take(validFilter.PageSize)
+                .Skip((filter.PageNumber - 1) * filter.PageSize)
+                .Take(filter.PageSize)
                 .ToList();
             var totalRecords = rawData.Count();
-            PagedResponse<IEnumerable<ClaimEmployee>> page_response = new PagedResponse<IEnumerable<ClaimEmployee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            PagedResponse<IEnumerable<ClaimResponse>> page_response = new PagedResponse<IEnumerable<ClaimResponse>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 

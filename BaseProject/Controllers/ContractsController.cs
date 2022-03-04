@@ -37,16 +37,15 @@ namespace BaseProject.Controllers
             {
                 return BadRequest();
             }
-            ContractFilter validFilter = new ContractFilter(filter.PageNumber, filter.PageSize, filter.Name);
 
-            var rawData = validFilter.GetContractFilter(_context);
-            var totalRecords = rawData.Count();
+            var rawData = filter.GetContractFilter(_context);
             var pagedData = rawData
-                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                .Take(validFilter.PageSize)
+                .Skip((filter.PageNumber - 1) * filter.PageSize)
+                .Take(filter.PageSize)
                 .ToList();
+            var totalRecords = rawData.Count();
 
-            PagedResponse<IEnumerable<Contract>> page_response = new PagedResponse<IEnumerable<Contract>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+            PagedResponse<IEnumerable<Contract>> page_response = new PagedResponse<IEnumerable<Contract>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 

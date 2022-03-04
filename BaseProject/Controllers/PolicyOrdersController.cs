@@ -29,11 +29,17 @@ namespace BaseProject.Controllers
         // GET: api/PolicyOrders
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<PolicyOrder>>> GetPolicyOrders()
+        public async Task<ActionResult<PagedResponse<IEnumerable<PolicyOrder>>>> GetPolicyOrders([FromQuery] PolicyOrderFilter filter)
         {
-            return await _context.PolicyOrders
-                .Where(item => item.IsDeleted == 0)
-                .ToListAsync();
+            var rawData = filter.GetPolicyOrderFilter(_context);
+            var pagedData = rawData
+                .Skip((filter.PageNumber - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .ToList();
+            var totalRecords = rawData.Count();
+
+            PagedResponse<IEnumerable<PolicyOrder>> page_response = new PagedResponse<IEnumerable<PolicyOrder>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
+            return Ok(page_response);
         }
 
         // GET: api/PolicyOrders/5

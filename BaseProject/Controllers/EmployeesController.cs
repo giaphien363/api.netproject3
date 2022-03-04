@@ -37,10 +37,14 @@ namespace BaseProject.Controllers
             {
                 return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
-            EmployeeFilter validFilter = new EmployeeFilter(filter.PageNumber, filter.PageSize, filter.Name);
-            var totalRecords = await _context.Employees.CountAsync();
-            var pagedData = validFilter.GetEmployeeFilter(_context);
-            PagedResponse<IEnumerable<Employee>> page_response = new PagedResponse<IEnumerable<Employee>>(pagedData, validFilter.PageNumber, validFilter.PageSize, totalRecords);
+
+            var rawData = filter.GetEmployeeFilter(_context);
+            var pagedData = rawData
+                .Skip((filter.PageNumber - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .ToList();
+            var totalRecords = rawData.Count();
+            PagedResponse<IEnumerable<Employee>> page_response = new PagedResponse<IEnumerable<Employee>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 
