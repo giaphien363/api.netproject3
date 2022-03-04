@@ -28,16 +28,10 @@ namespace BaseProject.MyModels
 
             IEnumerable<ClaimResponse> query = context.ClaimEmployees
                     .Join(
-                        context.ClaimActions,
-                        claim => claim.Id,
-                        action => action.Id,
-                        (claim, action) => new { claim, action }
-                    )
-                    .Join(
                         context.Policies,
-                        claim => claim.claim.Id,
+                        claim => claim.Id,
                         policy => policy.Id,
-                        (group, policy) => new { group.claim, group.action, policy }
+                        (claim, policy) => new { claim, policy }
                     )
                     .Where(item => item.policy.CompanyId == company_id)
                     .OrderByDescending(d => d.claim.CreatedAt)
@@ -45,7 +39,6 @@ namespace BaseProject.MyModels
                     {
                         PolicyRes = item.policy,
                         ClaimRes = item.claim,
-                        ActionRes = item.action
                     });
 
 
@@ -74,23 +67,16 @@ namespace BaseProject.MyModels
 
             IEnumerable<ClaimResponse> query = context.ClaimEmployees
                     .Join(
-                        context.ClaimActions,
-                        claim => claim.Id,
-                        action => action.Id,
-                        (claim, action) => new { claim, action }
-                    )
-                    .Join(
                         context.Policies,
-                        claim => claim.claim.Id,
+                        claim => claim.Id,
                         policy => policy.Id,
-                        (group, policy) => new { group.claim, group.action, policy }
+                        (claim, policy) => new { claim, policy }
                     )
                     .OrderByDescending(d => d.claim.CreatedAt)
                     .Select(item => new ClaimResponse()
                     {
                         PolicyRes = item.policy,
                         ClaimRes = item.claim,
-                        ActionRes = item.action
                     });
 
             if (this.EmId > 0)
@@ -120,7 +106,6 @@ namespace BaseProject.MyModels
                                     {
                                         PolicyRes = item.claim.PolicyRes,
                                         ClaimRes = item.claim.ClaimRes,
-                                        ActionRes = item.claim.ActionRes
                                     }
                                     );
 

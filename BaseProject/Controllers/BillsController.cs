@@ -25,7 +25,7 @@ namespace BaseProject.Controllers
             _context = context;
         }
 
-        // GET: api/Bills ==> for insurance admin
+        // GET: api/Bills/insurance ==> for insurance admin
         [HttpGet("insurance")]
         [Authorize]
         public async Task<ActionResult<PagedResponse<IEnumerable<ResponseBill>>>> GetBillsInsu([FromQuery] BillFilter filter)
@@ -58,7 +58,7 @@ namespace BaseProject.Controllers
         // GET: api/Bills
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<PagedResponse<IEnumerable<Bill>>>> GetBills([FromQuery] BillFilter filter)
+        public async Task<ActionResult<PagedResponse<IEnumerable<ResponseBill>>>> GetBills([FromQuery] BillFilter filter)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -67,8 +67,21 @@ namespace BaseProject.Controllers
             {
                 return BadRequest(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
-            var rawData = filter.GetBillFilter(_context);
 
+            if (role.Role == RoleUser.EMPLOYEE)
+            {
+                var rawDataEm = filter.GetBillFilterEmployee(_context, role.Id);
+                var pagedDataEm = rawDataEm
+                    .Skip((filter.PageNumber - 1) * filter.PageSize)
+                    .Take(filter.PageSize)
+                    .ToList();
+                var totalRecordsEm = rawDataEm.Count();
+
+                PagedResponse<IEnumerable<ResponseBill>> page_responseEm = new PagedResponse<IEnumerable<ResponseBill>>(pagedDataEm, filter.PageNumber, filter.PageSize, totalRecordsEm);
+                return Ok(page_responseEm);
+            }
+
+            var rawData = filter.GetBillFilterAdmin(_context);
             var pagedData = rawData
                 .Skip((filter.PageNumber - 1) * filter.PageSize)
                 .Take(filter.PageSize)
@@ -76,7 +89,7 @@ namespace BaseProject.Controllers
 
             var totalRecords = rawData.Count();
 
-            PagedResponse<IEnumerable<Bill>> page_response = new PagedResponse<IEnumerable<Bill>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
+            PagedResponse<IEnumerable<ResponseBill>> page_response = new PagedResponse<IEnumerable<ResponseBill>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 

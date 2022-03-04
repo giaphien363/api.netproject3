@@ -1,0 +1,13 @@
+# Get the base image
+FROM mcr.microsoft.com/mssql/server:latest
+WORKDIR /mssql_data
+
+COPY ./mssql-data .
+
+# import data from file .sql below
+# run exec -it 
+### import .sql file 
+# `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./mssql-data/wire_frame_db.sql`
+# `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./mssql-data/sample_data.sql`
+
+# import first time, commit into image and push to hub

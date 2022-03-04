@@ -20,7 +20,6 @@ namespace BaseProject.MyModels
     public class ClaimResponse
     {
         public ClaimEmployee ClaimRes { get; set; }
-        public ClaimAction ActionRes { get; set; }
         public Policy PolicyRes { get; set; }
     }
 }

@@ -13,7 +13,7 @@ services:
       - "1433:1433"
     restart: always
     volumes:
-      - ./data:/data
+      - ./mssql-data:/mssql_data
     networks:
       local:
 
