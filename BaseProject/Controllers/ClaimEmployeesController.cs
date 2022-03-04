@@ -83,17 +83,25 @@ namespace BaseProject.Controllers
         // GET: api/ClaimEmployees/5
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<ClaimEmployee>> GetClaimEmployee(int id)
+        public async Task<ActionResult<ClaimResponseDetail>> GetClaimEmployee(int id)
         {
-            ClaimEmployee claimEmployee = await _context.ClaimEmployees
-                .Where(item => item.IsDeleted == 0 && item.Id == id)
-                .Include(it => it.Policy)
-                    .ThenInclude(policy => policy.Company)
-                .Include(it => it.Policy)
-                    .ThenInclude(policy => policy.Type)
-                .Include(item => item.ClaimActions)
-                .FirstOrDefaultAsync();
-
+            ClaimResponseDetail claimEmployee = await _context.ClaimEmployees
+                    .Where(item => item.IsDeleted == 0 && item.Id == id)
+                    .Join(
+                        _context.Policies,
+                        claim => claim.PolicyId,
+                        policy => policy.Id,
+                        (claim, policy) => new { claim, policy }
+                    )
+                    .OrderByDescending(item => item.claim.CreatedAt)
+                    .Select(item => new ClaimResponseDetail()
+                    {
+                        ClaimRes = item.claim,
+                        PolicyRes = item.policy,
+                        TypeRes = item.policy.Type,
+                        CompanyRes = item.policy.Company,
+                        ActionRes = item.claim.ClaimActions,
+                    }).FirstOrDefaultAsync();
             if (claimEmployee == null)
             {
                 return BadRequest();

@@ -29,7 +29,7 @@ namespace BaseProject.MyModels
             IEnumerable<ClaimResponse> query = context.ClaimEmployees
                     .Join(
                         context.Policies,
-                        claim => claim.Id,
+                        claim => claim.PolicyId,
                         policy => policy.Id,
                         (claim, policy) => new { claim, policy }
                     )
@@ -68,7 +68,7 @@ namespace BaseProject.MyModels
             IEnumerable<ClaimResponse> query = context.ClaimEmployees
                     .Join(
                         context.Policies,
-                        claim => claim.Id,
+                        claim => claim.PolicyId,
                         policy => policy.Id,
                         (claim, policy) => new { claim, policy }
                     )
