@@ -28,7 +28,7 @@ namespace BaseProject.Controllers
         // GET: api/Contracts
         [HttpGet]
         [Authorize]
-        public ActionResult<PagedResponse<IEnumerable<Contract>>> GetContracts([FromQuery] ContractFilter filter)
+        public ActionResult<PagedResponse<IEnumerable<ContractResponse>>> GetContracts([FromQuery] ContractFilter filter)
         {
             // check role
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -45,7 +45,7 @@ namespace BaseProject.Controllers
                 .ToList();
             var totalRecords = rawData.Count();
 
-            PagedResponse<IEnumerable<Contract>> page_response = new PagedResponse<IEnumerable<Contract>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
+            PagedResponse<IEnumerable<ContractResponse>> page_response = new PagedResponse<IEnumerable<ContractResponse>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 

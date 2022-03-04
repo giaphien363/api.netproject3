@@ -29,9 +29,9 @@ namespace BaseProject.Models
         public int? IsDeleted { get; set; }
         public int? Status { get; set; }
 
-        [JsonIgnore]
+        
         public virtual InsuranceCompany Company { get; set; }
-        [JsonIgnore]
+        
         public virtual TypePolicy Type { get; set; }
         [JsonIgnore]
         public virtual ICollection<Bill> Bills { get; set; }

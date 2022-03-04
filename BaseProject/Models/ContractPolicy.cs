@@ -20,7 +20,6 @@ namespace BaseProject.Models
         public int PaymentStatus { get; set; }
         [JsonIgnore]
         public virtual Contract Contract { get; set; }
-        [JsonIgnore]
         public virtual Policy Policy { get; set; }
     }
 }

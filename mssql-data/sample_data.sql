@@ -274,7 +274,7 @@ select * from InsuranceAdmin
 
 select * from InsuranceCompany
 
-select * from ClaimEmployee
+select * from ClaimAction
 
 select * from Employees where [Status] = 1
 

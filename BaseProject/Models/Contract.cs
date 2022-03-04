@@ -20,9 +20,7 @@ namespace BaseProject.Models
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int? IsDeleted { get; set; }
-        [JsonIgnore]
         public virtual Employee Employee { get; set; }
-        [JsonIgnore]
         public virtual ICollection<ContractPolicy> ContractPolicies { get; set; }
     }
 }

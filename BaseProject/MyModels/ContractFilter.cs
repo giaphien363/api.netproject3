@@ -18,7 +18,7 @@ namespace BaseProject.MyModels
             this.Name = name;
         }
 
-        public IEnumerable<Contract> GetContractFilter(ApiNetContext context)
+        public IEnumerable<ContractResponse> GetContractFilter(ApiNetContext context)
         {
             if (this.Name != null)
             {
@@ -28,17 +28,23 @@ namespace BaseProject.MyModels
                     .Where(item => item.Employee.Firstname.Contains(this.Name))
                     .Where(item => item.Employee.Lastname.Contains(this.Name))
                     .Where(item => item.Employee.Username.Contains(this.Name))
-                    .Include(item => item.Employee)
-                    .OrderBy(item => item.Name);
-              
+                    .OrderBy(item => item.Name)
+                    .Select(item => new ContractResponse()
+                    {
+                        EmployeeRes = item.Employee,
+                        TotalContractPolicy = item.ContractPolicies.Count
+                    });
+
             }
             return context.Contracts
                 .Where(item => item.IsDeleted == 0)
-                .Include(item => item.Employee)
-                .OrderBy(item => item.Name);
-            //.Skip((this.PageNumber - 1) * this.PageSize)
-            //.Take(this.PageSize)
-            //.ToList();
+                .OrderBy(item => item.Name)
+                .Select(item => new ContractResponse()
+                {
+                    EmployeeRes = item.Employee,
+                    TotalContractPolicy = item.ContractPolicies.Count
+                });
+
         }
 
     }
