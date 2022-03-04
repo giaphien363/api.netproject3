@@ -24,12 +24,27 @@ namespace BaseProject.MyModels
             this.CompanyId = company_id;
         }
 
-        public IEnumerable<Policy> GetPolicyFilter(ApiNetContext context)
+        public IEnumerable<PolicyResponse> GetPolicyFilter(ApiNetContext context)
         {
-            IEnumerable<Policy> query = context.Policies
-                    .Where(item => item.IsDeleted == 0)
-                    .Include(item => item.Company)
-                    .Include(item => item.Type);
+            IEnumerable<PolicyResponse> query = context.Policies
+                    .Join(
+                        context.InsuranceCompanies,
+                        policy => policy.Id,
+                        comp => comp.Id,
+                        (policy, comp) => new { policy, comp }
+                    )
+                    .Join(
+                        context.TypePolicies,
+                        policy => policy.policy.Id,
+                        typePolicy => typePolicy.Id,
+                        (group, type) => new { group.policy, group.comp, type }
+                    )
+                    .Select(item => new PolicyResponse()
+                    {
+                        PolicyRes = item.policy,
+                        TypeRes = item.type,
+                        CompanyRes = item.comp
+                    });
 
             if (this.Name != null)
             {
@@ -50,27 +65,24 @@ namespace BaseProject.MyModels
                 query = this.QueryFilterCompanyId(query);
             }
 
-            return query.OrderBy(item => item.Name);
-            //.Skip((this.PageNumber - 1) * this.PageSize)
-            //.Take(this.PageSize)
-            //.ToList();
+            return query.OrderBy(item => item.PolicyRes.Name);
         }
 
-        private IEnumerable<Policy> QueryFilterName(IEnumerable<Policy> context)
+        private IEnumerable<PolicyResponse> QueryFilterName(IEnumerable<PolicyResponse> context)
         {
-            return context.Where(item => item.Name.Contains(this.Name));
+            return context.Where(item => item.PolicyRes.Name.Contains(this.Name));
         }
-        private IEnumerable<Policy> QueryFilterDecs(IEnumerable<Policy> context)
+        private IEnumerable<PolicyResponse> QueryFilterDecs(IEnumerable<PolicyResponse> context)
         {
-            return context.Where(item => item.Description.Contains(this.Decs));
+            return context.Where(item => item.PolicyRes.Description.Contains(this.Decs));
         }
-        private IEnumerable<Policy> QueryFilterStatus(IEnumerable<Policy> context)
+        private IEnumerable<PolicyResponse> QueryFilterStatus(IEnumerable<PolicyResponse> context)
         {
-            return context.Where(item => item.Status == this.Status);
+            return context.Where(item => item.PolicyRes.Status == this.Status);
         }
-        private IEnumerable<Policy> QueryFilterCompanyId(IEnumerable<Policy> context)
+        private IEnumerable<PolicyResponse> QueryFilterCompanyId(IEnumerable<PolicyResponse> context)
         {
-            return context.Where(item => item.CompanyId == this.CompanyId);
+            return context.Where(item => item.CompanyRes.Id == this.CompanyId);
         }
     }
 }

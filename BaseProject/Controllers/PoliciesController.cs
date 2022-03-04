@@ -27,7 +27,7 @@ namespace BaseProject.Controllers
         // GET: api/Policies ---> list
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<PagedResponse<IEnumerable<Policy>>>> GetPolicies([FromQuery] PolicyFilter filter)
+        public async Task<ActionResult<PagedResponse<IEnumerable<PolicyResponse>>>> GetPolicies([FromQuery] PolicyFilter filter)
         {
             // check role
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -51,7 +51,7 @@ namespace BaseProject.Controllers
                 .ToList();
             var totalRecords = rawData.Count();
 
-            PagedResponse<IEnumerable<Policy>> page_response = new PagedResponse<IEnumerable<Policy>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
+            PagedResponse<IEnumerable<PolicyResponse>> page_response = new PagedResponse<IEnumerable<PolicyResponse>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 
