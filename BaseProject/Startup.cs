@@ -30,21 +30,21 @@ namespace BaseProject
             services.AddCors();
 
             // // inject database connection string (run docker)
-            var server = Configuration["DbServer"] ?? "localhost";
-            var port = Configuration["DbPort"] ?? "1433"; // Default SQL Server port
-            var user = Configuration["DbUser"] ?? "SA"; // Warning do not use the SA account
-            var password = Configuration["Password"] ?? "root@123456";
-            var database = Configuration["Database"] ?? "api_dotnet";
+            //var server = Configuration["DbServer"] ?? "localhost";
+            //var port = Configuration["DbPort"] ?? "1433"; // Default SQL Server port
+            //var user = Configuration["DbUser"] ?? "SA"; // Warning do not use the SA account
+            //var password = Configuration["Password"] ?? "root@123456";
+            //var database = Configuration["Database"] ?? "api_dotnet";
 
-            services.AddDbContext<ApiNetContext>(options => 
-               options.UseSqlServer($"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password}"));
+            //services.AddDbContext<ApiNetContext>(options => 
+            //   options.UseSqlServer($"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password}"));
 
             // inject database connection string (run local)
-            // services.AddDbContext<ApiNetContext>(
-            //     options => options.UseSqlServer(
-            //         Configuration.GetConnectionString("ApiDB")
-            //         )
-            //      );
+            services.AddDbContext<ApiNetContext>(
+                options => options.UseSqlServer(
+                    Configuration.GetConnectionString("ApiDB")
+                    )
+                 );
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

@@ -245,6 +245,7 @@ namespace BaseProject.Controllers
 
             var claim = ClaimDto.CreateClaimEmployee(claimDto);
             _context.ClaimEmployees.Add(claim);
+            await _context.SaveChangesAsync();
 
             // add record claim action 
             ClaimActionDto new_action = new ClaimActionDto();
