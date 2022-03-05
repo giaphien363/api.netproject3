@@ -10,7 +10,6 @@ namespace BaseProject.MyModels
 {
     public class OrderDto
     {
-        [Required]
         public DateTime StartDate { get; set; }
         [Required]
         public int? EmployeeId { get; set; }
