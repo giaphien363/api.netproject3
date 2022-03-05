@@ -29,13 +29,13 @@ namespace BaseProject.MyModels
             IEnumerable<PolicyResponse> query = context.Policies
                     .Join(
                         context.InsuranceCompanies,
-                        policy => policy.Id,
+                        policy => policy.CompanyId,
                         comp => comp.Id,
                         (policy, comp) => new { policy, comp }
                     )
                     .Join(
                         context.TypePolicies,
-                        policy => policy.policy.Id,
+                        policy => policy.policy.TypeId,
                         typePolicy => typePolicy.Id,
                         (group, type) => new { group.policy, group.comp, type }
                     )

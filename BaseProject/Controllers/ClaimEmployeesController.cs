@@ -82,7 +82,7 @@ namespace BaseProject.Controllers
 
         // GET: api/ClaimEmployees/5
         [HttpGet("{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<ClaimResponseDetail>> GetClaimEmployee(int id)
         {
             ClaimResponseDetail claimEmployee = await _context.ClaimEmployees
@@ -98,6 +98,7 @@ namespace BaseProject.Controllers
                     {
                         ClaimRes = item.claim,
                         PolicyRes = item.policy,
+                        ActionsRes = item.claim.ClaimActions
                     }).FirstOrDefaultAsync();
             if (claimEmployee == null)
             {

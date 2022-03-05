@@ -29,6 +29,7 @@ namespace BaseProject.Models
         public virtual Policy Policy { get; set; }
         [JsonIgnore]
         public virtual Bill Bill { get; set; }
+        [JsonIgnore]
         public virtual ICollection<ClaimAction> ClaimActions { get; set; }
     }
 }

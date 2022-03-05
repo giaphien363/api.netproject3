@@ -11,3 +11,10 @@ COPY . .
 # `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./mssql-data/sample_data.sql`
 
 # import first time, commit into image and push to hub
+# ACCEPT_EULA: "Y"
+#       SA_PASSWORD: "root@123456"
+#       MSSQL_PID: Express
+# docker run --name mssql-hiengv -p 1433:1433 -e ACCEPT_EULA=Y -e SA_PASSWORD="root@123456" -e MSSQL_PID=Express -d hiengv/mssql:0.1
+# - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=root@123456' -e 'MSSQL_PID=Express' --name mssql-hiengv -p 1433:1433 -d hiengv/mssql:0.1
+
+## image demo : hiencoday363/test-mssql-image

@@ -272,18 +272,21 @@ select * from InsuranceAdmin
 
   -- update Policy set CreatedAt = '20220101 10:34:09 AM'  where Id in(1,2,5,7);
 
-select COUNT(id) from InsuranceCompany
+select * from InsuranceCompany
 
 select * from ClaimAction
+select * from ClaimEmployee
 
 select * from Employees where [Status] = 1
 
-select * from Policy where CompanyId = 1 -- 1,2,3,5,7,10
+select * from Policy where [Status] = 2 -- 1,2,3,5,7,10
 
 
 select * from ContractPolicy
 
 select * from PolicyOrder
+
+select * from TypePolicy
 
 insert into PolicyOrder (StartDate, EmployeeId, PolicyId, [Status], CreatedAt, UpdatedAt, IsDeleted)  values  
 ('2022-01-01 10:34:09.000',7,1,1,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0),
@@ -291,11 +294,15 @@ insert into PolicyOrder (StartDate, EmployeeId, PolicyId, [Status], CreatedAt, U
 ('2022-01-01 10:34:09.000',7,3,2,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0), 
 ('2022-01-01 10:34:09.000',4,4,1,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0);
 
-select * from Bill
+select * from UserAdmin
+
+ -- DROP DATABASE api_dotnet;
 -- insert into Bill (SupportCost, EmployeeId, ClaimId, PolicyId, CreatedAt, UpdatedAt, IsDeleted)  values  (100,3,14,1,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0), (100,3,15,2,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0), (100,3,16,3,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0);
 
 -- ALTER TABLE ContractPolicy DROP COLUMN AmountOwing;
 -- ALTER TABLE PolicyOrder DROP COLUMN PaymentType;
 -- ALTER TABLE PolicyOrder DROP COLUMN Emi;
 -- update UserAdmin set [Password] = 'YWRtaW5zZWNyZXRAa2V5QEA='  2022-01-01 10:34:09.000
--- update PolicyOrder set IsDeleted = 0  2022-01-01 10:34:09.000
+-- update Contract set TotalAmount = 300000  2022-01-01 10:34:09.000
+
+-- SELECT p.Id , insu.Id, typePo.id FROM Policy as p left JOIN InsuranceCompany as insu ON insu.Id =p.CompanyId left JOIN TypePolicy as typePo ON typePo.Id =p.TypeId where p.Status = 2 
