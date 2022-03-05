@@ -82,7 +82,7 @@ namespace BaseProject.Controllers
 
         // GET: api/ClaimEmployees/5
         [HttpGet("{id}")]
-        //[Authorize]
+        [Authorize]
         public async Task<ActionResult<ClaimResponseDetail>> GetClaimEmployee(int id)
         {
             ClaimResponseDetail claimEmployee = await _context.ClaimEmployees

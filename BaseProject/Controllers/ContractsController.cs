@@ -31,12 +31,12 @@ namespace BaseProject.Controllers
         public ActionResult<PagedResponse<IEnumerable<ContractResponse>>> GetContracts([FromQuery] ContractFilter filter)
         {
             // check role
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
-            if (role.Role == RoleUser.EMPLOYEE)
-            {
-                return BadRequest();
-            }
+            //ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            //ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
+            //if (role.Role == RoleUser.EMPLOYEE)
+            //{
+            //    return BadRequest();
+            //}
 
             var rawData = filter.GetContractFilter(_context);
             var pagedData = rawData
