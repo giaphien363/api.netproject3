@@ -27,5 +27,7 @@ namespace BaseProject.MyModels
         public int PolicySupport { get; set; }
         public DateTime CreateAt { get; set; }
         public string EmployeeName { get; set; }
+        public string ClaimReason { get; set; }
+        public int ClaimId { get; set; }
     }
 }
