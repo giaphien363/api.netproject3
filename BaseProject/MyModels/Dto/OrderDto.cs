@@ -21,7 +21,7 @@ namespace BaseProject.MyModels
         {
             PolicyOrder order = new PolicyOrder();
 
-            order.StartDate = dto.StartDate;
+            order.StartDate = DateTime.Now;
             order.EmployeeId = dto.EmployeeId;
             order.PolicyId = dto.PolicyId;
             order.Status = (int)StatusPolicyOrder.PENDING;

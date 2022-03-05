@@ -28,4 +28,11 @@ namespace BaseProject.MyModels
         public ClaimEmployee ClaimRes { get; set; }
         public Policy PolicyRes { get; set; }
     }
+    
+    public class OrderResponse
+    {
+        public Employee EmployeeRes { get; set; }
+        public Policy PolicyRes { get; set; }
+        public PolicyOrder OrderRes { get; set; }
+    }
 }

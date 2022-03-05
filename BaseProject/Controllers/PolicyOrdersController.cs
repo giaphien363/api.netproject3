@@ -29,21 +29,13 @@ namespace BaseProject.Controllers
         // GET: api/PolicyOrders
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<PagedResponse<IEnumerable<PolicyOrder>>>> GetPolicyOrders([FromQuery] PolicyOrderFilter filter)
+        public async Task<ActionResult<PagedResponse<IEnumerable<OrderResponse>>>> GetPolicyOrders([FromQuery] PolicyOrderFilter filter)
         {
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
             if (role.Role == RoleUser.EMPLOYEE)
             {
-                var rawData_em = filter.GetPolicyOrderFilter(_context)
-                            .Join(
-                                _context.Employees,
-                                poliOrder => poliOrder.EmployeeId,
-                                em => em.Id,
-                                (poliOrder, emp) => new { poliOrder, emp }
-                            )
-                            .Where(item => item.emp.Id == role.Id)
-                            .Select(item => item.poliOrder);
+                var rawData_em = filter.GetPolicyOrderFilterEmployee(_context, role.Id);
 
                 var pagedData_em = rawData_em
                     .Skip((filter.PageNumber - 1) * filter.PageSize)
@@ -51,7 +43,7 @@ namespace BaseProject.Controllers
                     .ToList();
                 var totalRecords_em = rawData_em.Count();
 
-                PagedResponse<IEnumerable<PolicyOrder>> page_response_em = new PagedResponse<IEnumerable<PolicyOrder>>(pagedData_em, filter.PageNumber, filter.PageSize, totalRecords_em);
+                PagedResponse<IEnumerable<OrderResponse>> page_response_em = new PagedResponse<IEnumerable<OrderResponse>>(pagedData_em, filter.PageNumber, filter.PageSize, totalRecords_em);
                 return Ok(page_response_em);
             }
 
@@ -62,7 +54,7 @@ namespace BaseProject.Controllers
                 .ToList();
             var totalRecords = rawData.Count();
 
-            PagedResponse<IEnumerable<PolicyOrder>> page_response = new PagedResponse<IEnumerable<PolicyOrder>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
+            PagedResponse<IEnumerable<OrderResponse>> page_response = new PagedResponse<IEnumerable<OrderResponse>>(pagedData, filter.PageNumber, filter.PageSize, totalRecords);
             return Ok(page_response);
         }
 
@@ -86,7 +78,7 @@ namespace BaseProject.Controllers
         // PUT: api/PolicyOrders/5
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> PutPolicyOrder(int id, PolicyOrder policyOrder)
+        public async Task<IActionResult> PutPolicyOrder(int id, [FromBody] PolicyOrder policyOrder)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -204,7 +196,7 @@ namespace BaseProject.Controllers
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
-            if (role.Role != RoleUser.ADMIN)
+            if (role.Role != RoleUser.ADMIN && role.Role != RoleUser.EMPLOYEE)
             {
                 return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
