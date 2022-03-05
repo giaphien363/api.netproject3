@@ -31,6 +31,7 @@ namespace BaseProject.MyModels
                     .OrderBy(item => item.Name)
                     .Select(item => new ContractResponse()
                     {
+                        ContractRes = item,
                         EmployeeRes = item.Employee,
                         TotalContractPolicy = item.ContractPolicies.Count
                     });
@@ -41,6 +42,7 @@ namespace BaseProject.MyModels
                 .OrderBy(item => item.Name)
                 .Select(item => new ContractResponse()
                 {
+                    ContractRes = item,
                     EmployeeRes = item.Employee,
                     TotalContractPolicy = item.ContractPolicies.Count
                 });
