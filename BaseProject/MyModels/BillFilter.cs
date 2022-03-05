@@ -33,6 +33,12 @@ namespace BaseProject.MyModels
                         em => em.Id,
                         (bill, em) => new { bill.bill, bill.poli, em }
                     )
+                    .Join(
+                        context.ClaimEmployees,
+                        item => item.bill.ClaimId,
+                        claim => claim.Id,
+                        (item, claim) => new { item.bill, item.poli, item.em, claim }
+                    )
                     .Where(item => item.poli.CompanyId == companyId)
                     .Select(item => new ResponseBill()
                     {
@@ -40,7 +46,9 @@ namespace BaseProject.MyModels
                         CreateAt = (DateTime)item.bill.CreatedAt,
                         PolicyName = item.poli.Name,
                         PolicySupport = item.poli.SupportPercent,
-                        EmployeeName = item.em.Firstname + " " + item.em.Lastname
+                        EmployeeName = item.em.Firstname + " " + item.em.Lastname,
+                        ClaimReason = item.claim.Reason,
+                        ClaimId = item.claim.Id,
                     });
 
             return query.OrderBy(item => item.CreateAt);
@@ -61,13 +69,21 @@ namespace BaseProject.MyModels
                         em => em.Id,
                         (bill, em) => new { bill.bill, bill.poli, em }
                     )
+                    .Join(
+                        context.ClaimEmployees,
+                        item => item.bill.ClaimId,
+                        claim => claim.Id,
+                        (item, claim) => new { item.bill, item.poli, item.em, claim }
+                    )
                     .Select(item => new ResponseBill()
                     {
                         SupportCost = item.bill.SupportCost,
                         CreateAt = (DateTime)item.bill.CreatedAt,
                         PolicyName = item.poli.Name,
                         PolicySupport = item.poli.SupportPercent,
-                        EmployeeName = item.em.Firstname + " " + item.em.Lastname
+                        EmployeeName = item.em.Firstname + " " + item.em.Lastname,
+                        ClaimReason = item.claim.Reason,
+                        ClaimId = item.claim.Id,
                     });
 
             return query.OrderBy(item => item.CreateAt);
@@ -84,12 +100,20 @@ namespace BaseProject.MyModels
                         po => po.Id,
                         (bill, poli) => new { bill, poli }
                     )
+                    .Join(
+                        context.ClaimEmployees,
+                        item => item.bill.ClaimId,
+                        claim => claim.Id,
+                        (item, claim) => new { item.bill, item.poli, claim }
+                    )
                     .Select(item => new ResponseBill()
                     {
                         SupportCost = item.bill.SupportCost,
                         CreateAt = (DateTime)item.bill.CreatedAt,
                         PolicyName = item.poli.Name,
                         PolicySupport = item.poli.SupportPercent,
+                        ClaimReason = item.claim.Reason,
+                        ClaimId = item.claim.Id,
                     });
 
             return query.OrderBy(item => item.CreateAt);
