@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/mssql/server:latest
 WORKDIR /mssql_data
 
-COPY ./mssql-data .
+COPY . .
 
 # import data from file .sql below
 # run exec -it 

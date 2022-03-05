@@ -1,9 +1,10 @@
-version: '3'
+version: "3"
 services:
   mssql:
-    build: 
+    container_name: eproject-mssql
+    build:
       dockerfile: ./Dockerfile.db
-      context: .
+      context: ./mssql-data
     image: eproject_mssql:latest
     environment:
       ACCEPT_EULA: "Y"
@@ -11,30 +12,51 @@ services:
       MSSQL_PID: Express
     ports:
       - "1433:1433"
-    restart: always
+    restart: on-failure
     volumes:
-      - ./mssql-data:/mssql_data
+      - eproject:/mssql_data
     networks:
       local:
 
-  api-app:
-    build: 
+  backend:
+    container_name: eproject-backend
+    build:
       dockerfile: ./Dockerfile
-      context: .
+      context: ./BaseProject
     image: eproject_backend:latest
     environment:
       DbServer: "mssql"
-      DbPort: "1433"
+      DbPort: 1433
       DbUser: "SA"
       Password: "root@123456"
       Database: "api_dotnet"
-    ports: 
+    ports:
       - "8008:80"
-    restart: always
+    restart: on-failure
     volumes:
-      - eproject:/source_code
+      - eproject:/source-code
     depends_on:
       - mssql
+    networks:
+      local:
+
+  frontend:
+    container_name: eproject-frontend
+    build:
+      dockerfile: ./Dockerfile.react
+      context: ./React-FE
+      args:
+        - REACT_APP_API_BASE_URL=http://localhost:8008/
+    image: eproject_frontend:latest
+    ports:
+      - "3003:3000"
+    restart: on-failure
+    volumes:
+      - ./React-FE:/app-react
+      - /app-react/node_modules
+    depends_on:
+      - mssql
+      - backend
     networks:
       local:
 

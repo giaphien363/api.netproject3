@@ -285,6 +285,12 @@ select * from ContractPolicy
 
 select * from PolicyOrder
 
+insert into PolicyOrder (StartDate, EmployeeId, PolicyId, [Status], CreatedAt, UpdatedAt, IsDeleted)  values  
+('2022-01-01 10:34:09.000',7,1,1,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0),
+('2022-01-01 10:34:09.000',4,2,1,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0),
+('2022-01-01 10:34:09.000',7,3,2,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0), 
+('2022-01-01 10:34:09.000',4,4,1,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0);
+
 select * from Bill
 -- insert into Bill (SupportCost, EmployeeId, ClaimId, PolicyId, CreatedAt, UpdatedAt, IsDeleted)  values  (100,3,14,1,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0), (100,3,15,2,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0), (100,3,16,3,'2022-01-01 10:34:09.000','2022-01-01 10:34:09.000',0);
 
@@ -292,3 +298,4 @@ select * from Bill
 -- ALTER TABLE PolicyOrder DROP COLUMN PaymentType;
 -- ALTER TABLE PolicyOrder DROP COLUMN Emi;
 -- update UserAdmin set [Password] = 'YWRtaW5zZWNyZXRAa2V5QEA='  2022-01-01 10:34:09.000
+-- update PolicyOrder set IsDeleted = 0  2022-01-01 10:34:09.000
