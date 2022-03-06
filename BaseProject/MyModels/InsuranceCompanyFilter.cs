@@ -7,23 +7,23 @@ namespace BaseProject.MyModels
 {
     public class InsuranceCompanyFilter : PaginationFilter
     {
-        public string Name { get; set; }
+        public string SearchString { get; set; }
 
         public InsuranceCompanyFilter() { }
-        public InsuranceCompanyFilter(int pageNumber, int pageSize, string name)
+        public InsuranceCompanyFilter(int pageNumber, int pageSize, string searchString)
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
-            this.Name = name;
+            this.SearchString = searchString.ToLower();
         }
 
         public IEnumerable<InsuranceCompany> GetInCompanyFilter(ApiNetContext context)
         {
-            if (this.Name != null)
+            if (this.SearchString != null)
             {
                 return context.InsuranceCompanies
                     .Where(item => item.IsDeleted == 0)
-                    .Where(item => item.Name.Contains(this.Name))
+                    .Where(item => item.Name.ToLower().Contains(this.SearchString))
                     .OrderBy(item => item.Name);
 
             }
