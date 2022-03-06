@@ -39,7 +39,7 @@ namespace BaseProject.MyModels
     public class DetailContractResponse
     {
         public Contract ContractRes { get; set; }
-        public ICollection<PolicyCompanyTypeResponse> GroupRes { get; set; }
+        public ICollection<PolicyCompanyTypeResponse> PoliciesRes { get; set; }
     }
     public class PolicyCompanyTypeResponse
     {

@@ -107,7 +107,7 @@ namespace BaseProject.Controllers
             DetailContractResponse dataResponse = new DetailContractResponse()
             {
                 ContractRes = contract,
-                GroupRes = listContractPolicies
+                PoliciesRes = listContractPolicies
             };
             return Ok(dataResponse);
         }
