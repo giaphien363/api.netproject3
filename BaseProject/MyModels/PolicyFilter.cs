@@ -8,18 +8,17 @@ namespace BaseProject.MyModels
 {
     public class PolicyFilter : PaginationFilter
     {
-        public string Name { get; set; }
-        public string Decs { get; set; }
+        public string SearchString { get; set; }
         public int Status { get; set; }
         public int CompanyId { get; set; }
 
         public PolicyFilter() { }
-        public PolicyFilter(int pageNumber, int pageSize, string name, int status, int company_id, string decs)
+        public PolicyFilter(int pageNumber, int pageSize, string searchString, int status, int company_id)
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
-            this.Name = name;
-            this.Decs = decs;
+            this.SearchString = searchString.ToLower();
+
             this.Status = status;
             this.CompanyId = company_id;
         }
@@ -46,13 +45,9 @@ namespace BaseProject.MyModels
                         CompanyRes = item.comp
                     });
 
-            if (this.Name != null)
+            if (this.SearchString != null)
             {
-                query = this.QueryFilterName(query);
-            }
-            if (this.Decs != null)
-            {
-                query = this.QueryFilterDecs(query);
+                query = this.QueryFilterNameOrDesc(query);
             }
 
             if (this.Status > 0)
@@ -68,13 +63,9 @@ namespace BaseProject.MyModels
             return query.OrderBy(item => item.PolicyRes.Name);
         }
 
-        private IEnumerable<PolicyResponse> QueryFilterName(IEnumerable<PolicyResponse> context)
+        private IEnumerable<PolicyResponse> QueryFilterNameOrDesc(IEnumerable<PolicyResponse> context)
         {
-            return context.Where(item => item.PolicyRes.Name.Contains(this.Name));
-        }
-        private IEnumerable<PolicyResponse> QueryFilterDecs(IEnumerable<PolicyResponse> context)
-        {
-            return context.Where(item => item.PolicyRes.Description.Contains(this.Decs));
+            return context.Where(item => item.PolicyRes.Name.ToLower().Contains(this.SearchString) || item.PolicyRes.Description.ToLower().Contains(this.SearchString));
         }
         private IEnumerable<PolicyResponse> QueryFilterStatus(IEnumerable<PolicyResponse> context)
         {
