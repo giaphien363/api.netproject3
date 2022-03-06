@@ -10,22 +10,22 @@ namespace BaseProject.MyModels
     public class ClaimFilter : PaginationFilter
     {
         public int EmId { get; set; }
-        public string Name { get; set; }
+        public string SearchString { get; set; }
         public int Status { get; set; }
 
         public ClaimFilter() { }
-        public ClaimFilter(int pageNumber, int pageSize, int emId, int status, string name)
+        public ClaimFilter(int pageNumber, int pageSize, int emId, int status, string searchString)
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
             this.EmId = emId;
-            this.Name = name;
+            this.SearchString = searchString.ToLower();
             this.Status = status;
         }
 
         public IEnumerable<ClaimResponse> GetClaimFilterForInsu(ApiNetContext context, int company_id)
         {
-            if (this.Name != null)
+            if (this.SearchString != null)
             {
                 //                query = this.FilterByName(context, query);
                 IEnumerable<ClaimResponse> query = context.ClaimEmployees
@@ -42,7 +42,9 @@ namespace BaseProject.MyModels
                                         emp => emp.Id,
                                         (group, emp) => new { group, emp }
                                     )
-                                    .Where(item => item.emp.Username.Contains(this.Name) || item.emp.Firstname.Contains(this.Name) || item.emp.Lastname.Contains(this.Name))
+                                    .Where(item => item.emp.Username.ToLower().Contains(this.SearchString) 
+                                        || (item.emp.Firstname + " " + item.emp.Lastname).ToLower().Contains(this.SearchString) 
+                                        || item.group.claim.Reason.ToLower().Contains(this.SearchString))
                                     .OrderByDescending(d => d.group.claim.CreatedAt)
                                     .Select(item => new ClaimResponse()
                                     {
@@ -83,7 +85,43 @@ namespace BaseProject.MyModels
         public IEnumerable<ClaimResponse> GetClaimFilter(ApiNetContext context)
         {
 
-            IEnumerable<ClaimResponse> query = context.ClaimEmployees
+            if (this.SearchString != null)
+            {
+                IEnumerable<ClaimResponse> query = context.ClaimEmployees
+                                    .Join(
+                                        context.Policies,
+                                        claim => claim.PolicyId,
+                                        policy => policy.Id,
+                                        (claim, policy) => new { claim, policy }
+                                    )
+                                    .Join(
+                                        context.Employees,
+                                        claim => claim.claim.EmployeeId,
+                                        emp => emp.Id,
+                                        (group, emp) => new { group, emp }
+                                    )
+                                    .Where(item => item.emp.Username.ToLower().Contains(this.SearchString) 
+                                        || (item.emp.Firstname + " " + item.emp.Lastname).ToLower().Contains(this.SearchString) 
+                                        || item.group.claim.Reason.ToLower().Contains(this.SearchString))
+                                    .OrderByDescending(d => d.group.claim.CreatedAt)
+                                    .Select(item => new ClaimResponse()
+                                    {
+                                        PolicyRes = item.group.policy,
+                                        ClaimRes = item.group.claim,
+                                    });
+                if (this.EmId > 0)
+                {
+                    query = this.FilterByEmId(query);
+                }
+                if (this.Status > 0)
+                {
+                    query = this.FilterByStatus(query);
+                }
+                return query;
+            }
+            else
+            {
+                IEnumerable<ClaimResponse> query = context.ClaimEmployees
                     .Join(
                         context.Policies,
                         claim => claim.PolicyId,
@@ -97,38 +135,19 @@ namespace BaseProject.MyModels
                         ClaimRes = item.claim,
                     });
 
-            if (this.EmId > 0)
-            {
-                query = this.FilterByEmId(query);
-            }
+                if (this.EmId > 0)
+                {
+                    query = this.FilterByEmId(query);
+                }
 
-            if (this.Status > 0)
-            {
-                query = this.FilterByStatus(query);
+                if (this.Status > 0)
+                {
+                    query = this.FilterByStatus(query);
+                }
+                return query;
             }
-            return query;
         }
 
-        private IEnumerable<ClaimResponse> FilterByName(ApiNetContext api, IEnumerable<ClaimResponse> context)
-        {
-            IEnumerable<ClaimResponse> res = context.Join(
-                                        api.Employees,
-                                        claim => claim.ClaimRes.EmployeeId,
-                                        emp => emp.Id,
-                                        (claim, emp) => new { claim, emp }
-                                    )
-                                    .Where(item => item.emp.Username.Contains(this.Name))
-                                    .Where(item => item.emp.Firstname.Contains(this.Name))
-                                    .Where(item => item.emp.Lastname.Contains(this.Name))
-                                    .Select(item => new ClaimResponse()
-                                    {
-                                        PolicyRes = item.claim.PolicyRes,
-                                        ClaimRes = item.claim.ClaimRes,
-                                    }
-                                    );
-
-            return res;
-        }
         private IEnumerable<ClaimResponse> FilterByStatus(IEnumerable<ClaimResponse> context)
         {
             return context.Where(item => item.ClaimRes.Status == this.Status);
