@@ -1,0 +1,65 @@
+// Here you can add other styles
+.custom-pagination {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  &__active {
+    color: red;
+  }
+}
+.custom-pagination li {
+  text-align: center;
+  border: 1px solid;
+  border-color: gray;
+  border-radius: 5px;
+  margin: 0 5px;
+  padding: 5px 10px;
+}
+.custom-pagination li a {
+  text-decoration: none;
+}
+
+.custom-claim-status-1 {
+  color: $gray-500;
+}
+
+.custom-claim-status-2 {
+  color: $warning;
+}
+
+.custom-claim-status-3 {
+  color: $success;
+}
+
+.custom-claim-status-4 {
+  color: $danger;
+}
+.custom-claim-status-5 {
+  color: $danger;
+}
+
+.custom-order-status-1 {
+  color: $gray-500;
+}
+.custom-order-status-2 {
+  color: $success;
+}
+.custom-order-status-3 {
+  color: $danger;
+}
+
+/* START hide arrows on number inputs */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* END hide arrows on number inputs */

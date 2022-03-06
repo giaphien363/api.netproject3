@@ -1,0 +1,6 @@
+export default {
+  ADMIN: 'ADMIN',
+  EMPLOYEE: 'EMPLOYEE',
+  IMANAGER: 'IMANAGER',
+  IFINMAN: 'IFINMAN',
+}

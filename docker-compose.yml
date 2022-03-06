@@ -2,14 +2,7 @@ version: "3"
 services:
   mssql:
     container_name: eproject-mssql
-    build:
-      dockerfile: ./Dockerfile.db
-      context: ./mssql-data
-    image: eproject_mssql:latest
-    environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "root@123456"
-      MSSQL_PID: Express
+    image: hiencoday363/eproject-mssql:latest
     ports:
       - "1433:1433"
     restart: on-failure

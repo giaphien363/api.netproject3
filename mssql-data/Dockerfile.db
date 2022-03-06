@@ -4,17 +4,17 @@ WORKDIR /mssql_data
 
 COPY . .
 
-# import data from file .sql below
 # run exec -it 
+# docker exec -it mssql-hiengv bash
 ### import .sql file 
-# `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./mssql-data/wire_frame_db.sql`
+# `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./Database-Insurance.sql`
+
+# `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./wire_frame_db.sql`
 # `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./mssql-data/sample_data.sql`
 
-# import first time, commit into image and push to hub
-# ACCEPT_EULA: "Y"
-#       SA_PASSWORD: "root@123456"
-#       MSSQL_PID: Express
-# docker run --name mssql-hiengv -p 1433:1433 -e ACCEPT_EULA=Y -e SA_PASSWORD="root@123456" -e MSSQL_PID=Express -d hiengv/mssql:0.1
-# - docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=root@123456' -e 'MSSQL_PID=Express' --name mssql-hiengv -p 1433:1433 -d hiengv/mssql:0.1
+# run image, commit into image and push to hub
+
+#  docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=root@123456' -e 'MSSQL_PID=Express' --name mssql-hiengv -p 1433:1433 -d hiencoday/mssql:0.1
+#  docker run  --name mssql-hienanh -p 1433:1433 -d  hiencoday363/eproject-mssql:latest
 
 ## image demo : hiencoday363/test-mssql-image
