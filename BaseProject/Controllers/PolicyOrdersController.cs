@@ -152,36 +152,65 @@ namespace BaseProject.Controllers
         // POST: api/PolicyOrders
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<PolicyOrder>> PostPolicyOrder(OrderDto policyOrderDto)
+        public async Task<ActionResult<PolicyOrder>> PostPolicyOrder([FromBody] OrderDto policyOrderDto)
         {
             // check permission
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             ObjReturnToken role = GenToken.GetCurrentUser(identity).Value as ObjReturnToken;
             if (role.Role != RoleUser.EMPLOYEE)
             {
-                return Unauthorized(new CustomError { Code = 403, Detail = "Permission denied!" });
+                return BadRequest(new CustomError { Code = 403, Detail = "Permission denied!" });
             }
 
             // check policy_type exist in contract ?
-            ContractPolicy[] listContractPolicies = _context.ContractPolicies
-                .Where(item => item.IsDeleted == 0 && item.ContractId == policyOrderDto.EmployeeId)
+            PolicyResponse[] listContractPolicies = _context.ContractPolicies
+                .Where(item => item.IsDeleted == 0 && item.ContractId == role.Id)
+                .Join(
+                    _context.Policies,
+                    ctP => ctP.PolicyId,
+                    poli => poli.Id,
+                    (ctp, poli) => new { poli }
+                )
+                .Join(
+                    _context.TypePolicies,
+                    poli => poli.poli.TypeId,
+                    type => type.Id,
+                    (poli, type) => new { poli.poli, type }
+                )
+                .Select(item => new PolicyResponse()
+                {
+                    PolicyRes = item.poli,
+                    TypeRes = item.type
+                })
                 .ToArray();
 
             // get type policy want to add
-            var policy_add = _context.Policies
+            PolicyResponse policy_add = _context.Policies
                 .Where(item => item.IsDeleted == 0 && item.Id == policyOrderDto.PolicyId)
+                .Join(
+                    _context.TypePolicies,
+                    poli => poli.TypeId,
+                    type => type.Id,
+                    (poli, type) => new { poli, type }
+                )
+                .Select(item => new PolicyResponse()
+                {
+                    PolicyRes = item.poli,
+                    TypeRes = item.type
+                })
                 .FirstOrDefault();
+
             if (policy_add == null)
                 return BadRequest(new CustomError { Code = 400, Detail = "Policy not found!" });
             // check that type exist in contract?
             foreach (var item in listContractPolicies)
             {
-                if (item.Policy.TypeId == policy_add.TypeId)
+                if (item.TypeRes.Id == policy_add.TypeRes.Id)
                 {
                     return BadRequest(new CustomError { Code = 400, Detail = "Type Policy exist!" });
                 }
             }
-            PolicyOrder order = OrderDto.CreateOrder(policyOrderDto);
+            PolicyOrder order = OrderDto.CreateOrder(policyOrderDto, role.Id);
             _context.PolicyOrders.Add(order);
             await _context.SaveChangesAsync();
 

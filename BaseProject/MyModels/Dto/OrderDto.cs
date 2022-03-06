@@ -11,17 +11,16 @@ namespace BaseProject.MyModels
     public class OrderDto
     {
         public DateTime StartDate { get; set; }
-        [Required]
         public int? EmployeeId { get; set; }
         [Required]
         public int? PolicyId { get; set; }
 
-        public static PolicyOrder CreateOrder(OrderDto dto)
+        public static PolicyOrder CreateOrder(OrderDto dto, int emId)
         {
             PolicyOrder order = new PolicyOrder();
 
             order.StartDate = DateTime.Now;
-            order.EmployeeId = dto.EmployeeId;
+            order.EmployeeId = emId;
             order.PolicyId = dto.PolicyId;
             order.Status = (int)StatusPolicyOrder.PENDING;
             return order;
