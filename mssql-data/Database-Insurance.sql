@@ -7,7 +7,7 @@ IF EXISTS(SELECT * FROM sys.databases WHERE name = 'api_dotnet')
   GO
   USE [api_dotnet];
   GO
-/****** Object:  Table [dbo].[Bill]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[Bill]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -26,7 +26,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ClaimAction]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[ClaimAction]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -47,7 +47,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ClaimEmployee]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[ClaimEmployee]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -68,7 +68,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Contract]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[Contract]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -87,7 +87,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ContractPolicy]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[ContractPolicy]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -109,7 +109,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Employees]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[Employees]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,7 +136,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InsuranceAdmin]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[InsuranceAdmin]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -156,7 +156,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InsuranceCompany]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[InsuranceCompany]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -176,7 +176,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Policy]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[Policy]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -200,7 +200,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PolicyOrder]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[PolicyOrder]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -220,7 +220,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TypePolicy]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[TypePolicy]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -238,7 +238,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserAdmin]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Table [dbo].[UserAdmin]    Script Date: 3/6/2022 12:11:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -257,7 +257,6 @@ INSERT [dbo].[Bill] ([SupportCost], [EmployeeId], [ClaimId], [PolicyId], [Create
 INSERT [dbo].[Bill] ([SupportCost], [EmployeeId], [ClaimId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (CAST(181.00 AS Decimal(12, 2)), 1, 16, 15, CAST(N'2021-12-22T00:00:00.000' AS DateTime), CAST(N'2021-12-22T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[Bill] ([SupportCost], [EmployeeId], [ClaimId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (CAST(789.00 AS Decimal(12, 2)), 3, 17, 25, CAST(N'2022-01-21T00:00:00.000' AS DateTime), CAST(N'2022-01-21T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[Bill] ([SupportCost], [EmployeeId], [ClaimId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (CAST(144.00 AS Decimal(12, 2)), 13, 18, 15, CAST(N'2022-02-22T00:00:00.000' AS DateTime), CAST(N'2022-02-22T00:00:00.000' AS DateTime), 0)
-INSERT [dbo].[Bill] ([SupportCost], [EmployeeId], [ClaimId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (CAST(1089.00 AS Decimal(12, 2)), 1, 19, 2, CAST(N'2022-03-04T00:00:00.000' AS DateTime), CAST(N'2022-03-04T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[Bill] ([SupportCost], [EmployeeId], [ClaimId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (CAST(1135.00 AS Decimal(12, 2)), 10, 20, 11, CAST(N'2022-03-05T00:00:00.000' AS DateTime), CAST(N'2022-03-05T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[Bill] ([SupportCost], [EmployeeId], [ClaimId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (CAST(135.00 AS Decimal(12, 2)), 18, 21, 15, CAST(N'2022-02-18T00:00:00.000' AS DateTime), CAST(N'2022-02-18T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[Bill] ([SupportCost], [EmployeeId], [ClaimId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (CAST(1968.00 AS Decimal(12, 2)), 7, 22, 33, CAST(N'2022-01-23T00:00:00.000' AS DateTime), CAST(N'2022-01-23T00:00:00.000' AS DateTime), 0)
@@ -380,9 +379,6 @@ INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], 
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (42, 1, NULL, 13, NULL, 18, CAST(N'2022-02-20T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.357' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (43, 4, NULL, NULL, 5, 18, CAST(N'2022-02-21T00:00:00.000' AS DateTime), CAST(N'2022-02-21T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (44, 7, NULL, NULL, 13, 18, CAST(N'2022-02-22T00:00:00.000' AS DateTime), CAST(N'2022-02-22T00:00:00.000' AS DateTime), 0)
-INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (45, 1, NULL, 1, NULL, 19, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.357' AS DateTime), 0)
-INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (46, 4, NULL, NULL, 1, 19, CAST(N'2022-03-03T00:00:00.000' AS DateTime), CAST(N'2022-03-03T00:00:00.000' AS DateTime), 0)
-INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (47, 7, NULL, NULL, 9, 19, CAST(N'2022-03-04T00:00:00.000' AS DateTime), CAST(N'2022-03-04T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (48, 1, NULL, 10, NULL, 20, CAST(N'2022-03-03T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.360' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (49, 4, NULL, NULL, 1, 20, CAST(N'2022-03-04T00:00:00.000' AS DateTime), CAST(N'2022-03-04T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (50, 7, NULL, NULL, 9, 20, CAST(N'2022-03-05T00:00:00.000' AS DateTime), CAST(N'2022-03-05T00:00:00.000' AS DateTime), 0)
@@ -435,10 +431,10 @@ INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], 
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (97, 4, NULL, NULL, 8, 36, CAST(N'2022-01-12T00:00:00.000' AS DateTime), CAST(N'2022-01-12T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (98, 7, NULL, NULL, 16, 36, CAST(N'2022-01-13T00:00:00.000' AS DateTime), CAST(N'2022-01-13T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (99, 1, NULL, 2, NULL, 37, CAST(N'2021-12-31T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.383' AS DateTime), 0)
-GO
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (100, 4, NULL, NULL, 6, 37, CAST(N'2022-01-01T00:00:00.000' AS DateTime), CAST(N'2022-01-01T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (101, 7, NULL, NULL, 14, 37, CAST(N'2022-01-02T00:00:00.000' AS DateTime), CAST(N'2022-01-02T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (102, 1, NULL, 19, NULL, 38, CAST(N'2022-03-01T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.383' AS DateTime), 0)
+GO
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (103, 4, NULL, NULL, 3, 38, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-02T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (104, 7, NULL, NULL, 11, 38, CAST(N'2022-03-03T00:00:00.000' AS DateTime), CAST(N'2022-03-03T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (105, 1, NULL, 18, NULL, 39, CAST(N'2021-12-05T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.387' AS DateTime), 0)
@@ -536,10 +532,10 @@ INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], 
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (197, 7, NULL, NULL, 13, 69, CAST(N'2021-12-05T00:00:00.000' AS DateTime), CAST(N'2021-12-05T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (198, 1, NULL, 17, NULL, 70, CAST(N'2021-12-29T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.420' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (199, 4, NULL, NULL, 2, 70, CAST(N'2021-12-30T00:00:00.000' AS DateTime), CAST(N'2021-12-30T00:00:00.000' AS DateTime), 0)
-GO
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (200, 7, NULL, NULL, 10, 70, CAST(N'2021-12-31T00:00:00.000' AS DateTime), CAST(N'2021-12-31T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (201, 1, NULL, 14, NULL, 71, CAST(N'2022-02-02T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.423' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (202, 4, NULL, NULL, 1, 71, CAST(N'2022-02-03T00:00:00.000' AS DateTime), CAST(N'2022-02-03T00:00:00.000' AS DateTime), 0)
+GO
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (203, 7, NULL, NULL, 9, 71, CAST(N'2022-02-04T00:00:00.000' AS DateTime), CAST(N'2022-02-04T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (204, 1, NULL, 13, NULL, 72, CAST(N'2022-01-12T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.423' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (205, 4, NULL, NULL, 1, 72, CAST(N'2022-01-13T00:00:00.000' AS DateTime), CAST(N'2022-01-13T00:00:00.000' AS DateTime), 0)
@@ -610,8 +606,6 @@ INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], 
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (270, 1, NULL, 19, NULL, 94, CAST(N'2021-11-05T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:44:53.470' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (271, 4, NULL, NULL, 5, 94, CAST(N'2021-11-06T00:00:00.000' AS DateTime), CAST(N'2021-11-06T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (272, 7, NULL, NULL, 13, 94, CAST(N'2021-11-07T00:00:00.000' AS DateTime), CAST(N'2021-11-07T00:00:00.000' AS DateTime), 0)
-INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (273, 1, NULL, 1, NULL, 95, CAST(N'2022-03-06T01:31:56.897' AS DateTime), CAST(N'2022-03-06T01:48:19.390' AS DateTime), 0)
-INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (274, 4, NULL, NULL, 1, 95, CAST(N'2022-03-07T01:31:56.897' AS DateTime), CAST(N'2022-03-07T01:31:56.897' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (275, 1, NULL, 4, NULL, 96, CAST(N'2022-03-06T11:31:56.897' AS DateTime), CAST(N'2022-03-06T01:48:50.890' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (276, 4, NULL, NULL, 5, 96, CAST(N'2022-03-07T11:31:56.897' AS DateTime), CAST(N'2022-03-07T11:31:56.897' AS DateTime), 0)
 INSERT [dbo].[ClaimAction] ([Id], [ActionType], [Reason], [CreatebyEmployeeId], [CreatebyInsuranceAdminId], [ClaimId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (277, 1, NULL, 1, NULL, 97, CAST(N'2022-03-06T21:31:56.897' AS DateTime), CAST(N'2022-03-06T01:49:11.423' AS DateTime), 0)
@@ -642,7 +636,6 @@ INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (16, 3, N'Feeling unwell', CAST(361.00 AS Decimal(12, 2)), 1, 15, CAST(N'2021-12-20T00:00:00.000' AS DateTime), CAST(N'2021-12-22T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (17, 3, N'Feeling unwell', CAST(1127.00 AS Decimal(12, 2)), 3, 25, CAST(N'2022-01-19T00:00:00.000' AS DateTime), CAST(N'2022-01-21T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (18, 3, N'Feeling unwell', CAST(288.00 AS Decimal(12, 2)), 13, 15, CAST(N'2022-02-20T00:00:00.000' AS DateTime), CAST(N'2022-02-22T00:00:00.000' AS DateTime), 0)
-INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (19, 3, N'Feeling unwell', CAST(1556.00 AS Decimal(12, 2)), 1, 2, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-04T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (20, 3, N'Feeling unwell', CAST(1135.00 AS Decimal(12, 2)), 10, 11, CAST(N'2022-03-03T00:00:00.000' AS DateTime), CAST(N'2022-03-05T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (21, 3, N'Feeling unwell', CAST(269.00 AS Decimal(12, 2)), 18, 15, CAST(N'2022-02-16T00:00:00.000' AS DateTime), CAST(N'2022-02-18T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (22, 3, N'Feeling unwell', CAST(1968.00 AS Decimal(12, 2)), 7, 33, CAST(N'2022-01-21T00:00:00.000' AS DateTime), CAST(N'2022-01-23T00:00:00.000' AS DateTime), 0)
@@ -718,12 +711,10 @@ INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (92, 3, N'Feeling unwell', CAST(1241.00 AS Decimal(12, 2)), 14, 14, CAST(N'2021-12-05T00:00:00.000' AS DateTime), CAST(N'2021-12-07T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (93, 3, N'Feeling unwell', CAST(654.00 AS Decimal(12, 2)), 3, 25, CAST(N'2022-01-05T00:00:00.000' AS DateTime), CAST(N'2022-01-07T00:00:00.000' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (94, 3, N'Feeling unwell', CAST(1072.00 AS Decimal(12, 2)), 19, 1, CAST(N'2021-11-05T00:00:00.000' AS DateTime), CAST(N'2021-11-07T00:00:00.000' AS DateTime), 0)
-INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (95, 2, N'Feeling unwell', CAST(1187.00 AS Decimal(12, 2)), 1, 2, CAST(N'2022-03-06T01:31:56.897' AS DateTime), CAST(N'2022-03-07T01:31:56.897' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (96, 2, N'Feeling unwell', CAST(365.00 AS Decimal(12, 2)), 4, 15, CAST(N'2022-03-06T11:31:56.897' AS DateTime), CAST(N'2022-03-07T12:31:56.897' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (97, 2, N'Feeling unwell', CAST(344.00 AS Decimal(12, 2)), 1, 15, CAST(N'2022-03-06T21:31:56.897' AS DateTime), CAST(N'2022-03-07T12:31:56.897' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (98, 2, N'Feeling unwell', CAST(1942.00 AS Decimal(12, 2)), 3, 13, CAST(N'2022-03-06T18:31:56.897' AS DateTime), CAST(N'2022-03-07T12:31:56.897' AS DateTime), 0)
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (99, 1, N'Feeling unwell', CAST(1953.00 AS Decimal(12, 2)), 19, 1, CAST(N'2022-01-16T01:31:56.897' AS DateTime), CAST(N'2022-03-06T01:53:31.810' AS DateTime), 0)
-GO
 INSERT [dbo].[ClaimEmployee] ([Id], [Status], [Reason], [TotalCost], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (100, 1, N'Feeling unwell', CAST(1078.00 AS Decimal(12, 2)), 5, 8, CAST(N'2022-01-15T14:31:56.897' AS DateTime), CAST(N'2022-03-06T01:53:46.993' AS DateTime), 0)
 SET IDENTITY_INSERT [dbo].[ClaimEmployee] OFF
 GO
@@ -768,7 +759,6 @@ INSERT [dbo].[ContractPolicy] ([Id], [ContractId], [PolicyId], [Description], [S
 INSERT [dbo].[ContractPolicy] ([Id], [ContractId], [PolicyId], [Description], [StartDate], [EndDate], [PaymentStatus], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (17, 17, 25, N'The cost of medical services is always quite high', CAST(N'2021-12-20T00:00:00.000' AS DateTime), CAST(N'2022-06-18T00:00:00.000' AS DateTime), 1, CAST(N'2021-12-20T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:32:10.377' AS DateTime), 0)
 INSERT [dbo].[ContractPolicy] ([Id], [ContractId], [PolicyId], [Description], [StartDate], [EndDate], [PaymentStatus], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (18, 18, 25, N'The cost of medical services is always quite high', CAST(N'2021-10-21T00:00:00.000' AS DateTime), CAST(N'2022-04-19T00:00:00.000' AS DateTime), 1, CAST(N'2021-10-21T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:32:10.377' AS DateTime), 0)
 INSERT [dbo].[ContractPolicy] ([Id], [ContractId], [PolicyId], [Description], [StartDate], [EndDate], [PaymentStatus], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (19, 19, 25, N'The cost of medical services is always quite high', CAST(N'2021-10-25T00:00:00.000' AS DateTime), CAST(N'2022-04-23T00:00:00.000' AS DateTime), 1, CAST(N'2021-10-25T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:32:10.377' AS DateTime), 0)
-INSERT [dbo].[ContractPolicy] ([Id], [ContractId], [PolicyId], [Description], [StartDate], [EndDate], [PaymentStatus], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (20, 1, 2, N'Covid-19 epidemic is very serious', CAST(N'2022-02-18T00:00:00.000' AS DateTime), CAST(N'2023-02-18T00:00:00.000' AS DateTime), 1, CAST(N'2022-02-18T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:32:48.223' AS DateTime), 0)
 INSERT [dbo].[ContractPolicy] ([Id], [ContractId], [PolicyId], [Description], [StartDate], [EndDate], [PaymentStatus], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (21, 2, 3, N'Covid-19 epidemic is very serious', CAST(N'2021-10-12T00:00:00.000' AS DateTime), CAST(N'2022-04-10T00:00:00.000' AS DateTime), 1, CAST(N'2021-10-12T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:32:48.223' AS DateTime), 0)
 INSERT [dbo].[ContractPolicy] ([Id], [ContractId], [PolicyId], [Description], [StartDate], [EndDate], [PaymentStatus], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (22, 3, 8, N'Covid-19 epidemic is very serious', CAST(N'2021-12-12T00:00:00.000' AS DateTime), CAST(N'2022-06-10T00:00:00.000' AS DateTime), 1, CAST(N'2021-12-12T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:32:48.223' AS DateTime), 0)
 INSERT [dbo].[ContractPolicy] ([Id], [ContractId], [PolicyId], [Description], [StartDate], [EndDate], [PaymentStatus], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (23, 4, 8, N'Covid-19 epidemic is very serious', CAST(N'2022-02-15T00:00:00.000' AS DateTime), CAST(N'2022-08-14T00:00:00.000' AS DateTime), 1, CAST(N'2022-02-15T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:32:48.223' AS DateTime), 0)
@@ -829,45 +819,45 @@ SET IDENTITY_INSERT [dbo].[ContractPolicy] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Employees] ON 
 
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (1, N'employee1', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(12000.00 AS Decimal(12, 2)), N'Martin', N'Garrix', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Nguyen Trai', N'0984938271', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (2, N'employee2', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(20000.00 AS Decimal(12, 2)), N'Justin', N'Bieber', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Cau Giay', N'0938276183', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (3, N'employee3', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(8000.00 AS Decimal(12, 2)), N'Tori', N'Kelly', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Ba Dinh', N'0938271634', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (4, N'employee4', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(9740.00 AS Decimal(12, 2)), N'Lukas', N'Graham', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Hai Ba Trung', N'0837261529', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (5, N'employee5', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(13000.00 AS Decimal(12, 2)), N'David', N'Guetta', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Duong Quang Ham', N'0392738239', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (6, N'employee6', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(20000.00 AS Decimal(12, 2)), N'John', N'Terry', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Thanh Binh', N'091584932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (7, N'employee7', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(25000.00 AS Decimal(12, 2)), N'Adam', N'Traore', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Thach Binh', N'0987582312', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (8, N'employee8', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(13400.00 AS Decimal(12, 2)), N'Mohamed', N'Sahla', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Binh Nhuong', N'0983493021', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (9, N'employee9', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(22300.00 AS Decimal(12, 2)), N'Ama', N'Boxie', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Thach Thanh', N'0987584222', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (10, N'employee10', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(19300.00 AS Decimal(12, 2)), N'Binh', N'Gold', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Ba Dinh', N'0987111932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (11, N'employee11', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(9000.00 AS Decimal(12, 2)), N'Amat', N'Oma', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Cau Giay', N'0987293232', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (12, N'employee12', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(9900.00 AS Decimal(12, 2)), N'Kai', N'Havert', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Thanh Xuan', N'0923584932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (13, N'employee13', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(10300.00 AS Decimal(12, 2)), N'Mason', N'Mount', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Tran Duy Hung', N'092384932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (14, N'employee14', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(11100.00 AS Decimal(12, 2)), N'Rees', N'James', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Nguyen Phong Sac', N'0983584932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (15, N'employee15', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(9200.00 AS Decimal(12, 2)), N'Kepa', N'Alee', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Nguyen Lieu', N'0987584934', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (16, N'employee16', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(39000.00 AS Decimal(12, 2)), N'King', N'Mont', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Phung Hung', N'0987583122', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (17, N'employee17', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(1300.00 AS Decimal(12, 2)), N'Bee', N'Mooh', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Hai Ba Trung', N'098793032', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (18, N'employee18', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(8400.00 AS Decimal(12, 2)), N'Osas', N'Kane', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Ho Dieu Hoa', N'0987000932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (19, N'employee19', N'ZW1wbG95ZWVzZWNyZXRAa2V5QEA=', CAST(7900.00 AS Decimal(12, 2)), N'Son', N'Hong', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Tran Thai Tong', N'0892384932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (1, N'employee1', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(12000.00 AS Decimal(12, 2)), N'Martin', N'Garrix', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Nguyen Trai', N'0984938271', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (2, N'employee2', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(20000.00 AS Decimal(12, 2)), N'Justin', N'Bieber', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Cau Giay', N'0938276183', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (3, N'employee3', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(8000.00 AS Decimal(12, 2)), N'Tori', N'Kelly', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Ba Dinh', N'0938271634', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (4, N'employee4', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(9740.00 AS Decimal(12, 2)), N'Lukas', N'Graham', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Hai Ba Trung', N'0837261529', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (5, N'employee5', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(13000.00 AS Decimal(12, 2)), N'David', N'Guetta', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Duong Quang Ham', N'0392738239', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (6, N'employee6', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(20000.00 AS Decimal(12, 2)), N'John', N'Terry', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Thanh Binh', N'091584932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (7, N'employee7', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(25000.00 AS Decimal(12, 2)), N'Adam', N'Traore', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Thach Binh', N'0987582312', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (8, N'employee8', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(13400.00 AS Decimal(12, 2)), N'Mohamed', N'Sahla', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Binh Nhuong', N'0983493021', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (9, N'employee9', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(22300.00 AS Decimal(12, 2)), N'Ama', N'Boxie', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Thach Thanh', N'0987584222', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (10, N'employee10', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(19300.00 AS Decimal(12, 2)), N'Binh', N'Gold', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Ba Dinh', N'0987111932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (11, N'employee11', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(9000.00 AS Decimal(12, 2)), N'Amat', N'Oma', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Cau Giay', N'0987293232', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (12, N'employee12', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(9900.00 AS Decimal(12, 2)), N'Kai', N'Havert', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Thanh Xuan', N'0923584932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (13, N'employee13', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(10300.00 AS Decimal(12, 2)), N'Mason', N'Mount', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Tran Duy Hung', N'092384932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (14, N'employee14', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(11100.00 AS Decimal(12, 2)), N'Rees', N'James', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Nguyen Phong Sac', N'0983584932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (15, N'employee15', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(9200.00 AS Decimal(12, 2)), N'Kepa', N'Alee', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Nguyen Lieu', N'0987584934', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (16, N'employee16', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(39000.00 AS Decimal(12, 2)), N'King', N'Mont', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Phung Hung', N'0987583122', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (17, N'employee17', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(1300.00 AS Decimal(12, 2)), N'Bee', N'Mooh', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Hai Ba Trung', N'098793032', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (18, N'employee18', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(8400.00 AS Decimal(12, 2)), N'Osas', N'Kane', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Ho Dieu Hoa', N'0987000932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[Employees] ([Id], [Username], [Password], [Salary], [Firstname], [Lastname], [Joindate], [Designation], [Address], [Phone], [Country], [City], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (19, N'employee19', N'MTIzNDU2c2VjcmV0QGtleUBA', CAST(7900.00 AS Decimal(12, 2)), N'Son', N'Hong', CAST(N'2022-03-06T01:31:56.900' AS DateTime), NULL, N'Tran Thai Tong', N'0892384932', N'Viet Nam', N'Ha Noi', CAST(N'2021-08-27T00:00:00.000' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
 SET IDENTITY_INSERT [dbo].[Employees] OFF
 GO
 SET IDENTITY_INSERT [dbo].[InsuranceAdmin] ON 
 
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (1, N'manager1', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IMANAGER', 1, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (2, N'manager2', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IMANAGER', 2, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (3, N'manager3', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IMANAGER', 3, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (4, N'manager4', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IMANAGER', 4, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (5, N'manager5', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IMANAGER', 5, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (6, N'manager6', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IMANAGER', 6, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (7, N'manager7', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IMANAGER', 7, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (8, N'manager8', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IMANAGER', 8, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (9, N'finman1', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IFINMAN', 1, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (10, N'finman2', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IFINMAN', 2, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (11, N'finman3', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IFINMAN', 3, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (12, N'finman4', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IFINMAN', 4, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (13, N'finman5', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IFINMAN', 5, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (14, N'finman6', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IFINMAN', 6, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (15, N'finman7', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IFINMAN', 7, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
-INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (16, N'finman8', N'aW5zdXJhbmNlc2VjcmV0QGtleUBA', N'IFINMAN', 8, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (1, N'manager1', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IMANAGER', 1, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (2, N'manager2', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IMANAGER', 2, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (3, N'manager3', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IMANAGER', 3, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (4, N'manager4', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IMANAGER', 4, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (5, N'manager5', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IMANAGER', 5, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (6, N'manager6', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IMANAGER', 6, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (7, N'manager7', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IMANAGER', 7, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (8, N'manager8', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IMANAGER', 8, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (9, N'finman1', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IFINMAN', 1, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (10, N'finman2', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IFINMAN', 2, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (11, N'finman3', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IFINMAN', 3, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (12, N'finman4', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IFINMAN', 4, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (13, N'finman5', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IFINMAN', 5, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (14, N'finman6', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IFINMAN', 6, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (15, N'finman7', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IFINMAN', 7, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
+INSERT [dbo].[InsuranceAdmin] ([Id], [Username], [Password], [Role], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (16, N'finman8', N'MTIzNDU2c2VjcmV0QGtleUBA', N'IFINMAN', 8, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
 SET IDENTITY_INSERT [dbo].[InsuranceAdmin] OFF
 GO
 SET IDENTITY_INSERT [dbo].[InsuranceCompany] ON 
@@ -941,7 +931,6 @@ INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId
 INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (17, CAST(N'2021-12-20T04:00:00.000' AS DateTime), 2, 17, 25, CAST(N'2021-12-20T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.313' AS DateTime), 0)
 INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (18, CAST(N'2021-10-21T04:00:00.000' AS DateTime), 2, 18, 25, CAST(N'2021-10-21T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.313' AS DateTime), 0)
 INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (19, CAST(N'2021-10-25T04:00:00.000' AS DateTime), 2, 19, 25, CAST(N'2021-10-25T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.313' AS DateTime), 0)
-INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (20, CAST(N'2022-02-18T04:00:00.000' AS DateTime), 2, 1, 2, CAST(N'2022-02-18T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.313' AS DateTime), 0)
 INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (21, CAST(N'2021-10-12T04:00:00.000' AS DateTime), 2, 2, 3, CAST(N'2021-10-12T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
 INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (22, CAST(N'2021-12-12T04:00:00.000' AS DateTime), 2, 3, 8, CAST(N'2021-12-12T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
 INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (23, CAST(N'2022-02-15T04:00:00.000' AS DateTime), 2, 4, 8, CAST(N'2022-02-15T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
@@ -1010,15 +999,15 @@ SET IDENTITY_INSERT [dbo].[TypePolicy] OFF
 GO
 SET IDENTITY_INSERT [dbo].[UserAdmin] ON 
 
-INSERT [dbo].[UserAdmin] ([Id], [Username], [Password]) VALUES (1, N'hienanh', N'YWRtaW5zZWNyZXRAa2V5QEA=')
-INSERT [dbo].[UserAdmin] ([Id], [Username], [Password]) VALUES (2, N'giaphien', N'YWRtaW5zZWNyZXRAa2V5QEA=')
-INSERT [dbo].[UserAdmin] ([Id], [Username], [Password]) VALUES (3, N'huyhoang', N'YWRtaW5zZWNyZXRAa2V5QEA=')
-INSERT [dbo].[UserAdmin] ([Id], [Username], [Password]) VALUES (4, N'tienduong', N'YWRtaW5zZWNyZXRAa2V5QEA=')
+INSERT [dbo].[UserAdmin] ([Id], [Username], [Password]) VALUES (1, N'hienanh', N'MTIzNDU2c2VjcmV0QGtleUBA')
+INSERT [dbo].[UserAdmin] ([Id], [Username], [Password]) VALUES (2, N'giaphien', N'MTIzNDU2c2VjcmV0QGtleUBA')
+INSERT [dbo].[UserAdmin] ([Id], [Username], [Password]) VALUES (3, N'huyhoang', N'MTIzNDU2c2VjcmV0QGtleUBA')
+INSERT [dbo].[UserAdmin] ([Id], [Username], [Password]) VALUES (4, N'tienduong', N'MTIzNDU2c2VjcmV0QGtleUBA')
 SET IDENTITY_INSERT [dbo].[UserAdmin] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__Employee__536C85E482652AE2]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Index [UQ__Employee__536C85E482652AE2]    Script Date: 3/6/2022 12:11:09 ******/
 ALTER TABLE [dbo].[Employees] ADD UNIQUE NONCLUSTERED 
 (
 	[Username] ASC
@@ -1026,7 +1015,7 @@ ALTER TABLE [dbo].[Employees] ADD UNIQUE NONCLUSTERED
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__UserAdmi__536C85E4DCAE3AA0]    Script Date: 3/6/2022 09:48:02 ******/
+/****** Object:  Index [UQ__UserAdmi__536C85E4DCAE3AA0]    Script Date: 3/6/2022 12:11:09 ******/
 ALTER TABLE [dbo].[UserAdmin] ADD UNIQUE NONCLUSTERED 
 (
 	[Username] ASC
