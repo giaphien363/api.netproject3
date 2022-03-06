@@ -8,27 +8,26 @@ namespace BaseProject.MyModels
 {
     public class ContractFilter : PaginationFilter
     {
-        public string Name { get; set; }
+        public string SearchString { get; set; }
         public int ContractId { get; set; } // chinh la employee id
 
         public ContractFilter() { }
-        public ContractFilter(int pageNumber, int pageSize, string name)
+        public ContractFilter(int pageNumber, int pageSize, string searchString)
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
-            this.Name = name;
+            this.SearchString = searchString.ToLower();
         }
 
         public IEnumerable<ContractResponse> GetContractFilter(ApiNetContext context)
         {
-            if (this.Name != null)
+            if (this.SearchString != null)
             {
                 return context.Contracts
                     .Where(item => item.IsDeleted == 0)
-                    .Where(item => item.Name.Contains(this.Name))
-                    .Where(item => item.Employee.Firstname.Contains(this.Name))
-                    .Where(item => item.Employee.Lastname.Contains(this.Name))
-                    .Where(item => item.Employee.Username.Contains(this.Name))
+                    .Where(item => item.Name.ToLower().Contains(this.SearchString) 
+                        || (item.Employee.Firstname + ' ' + item.Employee.Lastname).ToLower().Contains(this.SearchString)
+                        || item.Employee.Username.ToLower().Contains(this.SearchString))
                     .OrderBy(item => item.Name)
                     .Select(item => new ContractResponse()
                     {
