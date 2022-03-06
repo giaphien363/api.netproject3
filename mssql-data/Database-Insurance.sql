@@ -1,4 +1,3 @@
-/****** Object:  Table [dbo].[Bill]    Script Date: 3/6/2022 03:35:03 ******/
 IF EXISTS(SELECT * FROM sys.databases WHERE name = 'api_dotnet')
   BEGIN
     DROP DATABASE [api_dotnet];
@@ -8,7 +7,7 @@ IF EXISTS(SELECT * FROM sys.databases WHERE name = 'api_dotnet')
   GO
   USE [api_dotnet];
   GO
-  
+/****** Object:  Table [dbo].[Bill]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -27,7 +26,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ClaimAction]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[ClaimAction]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -48,7 +47,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ClaimEmployee]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[ClaimEmployee]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -69,7 +68,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Contract]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[Contract]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -88,7 +87,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ContractPolicy]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[ContractPolicy]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,7 +109,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Employees]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[Employees]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -137,7 +136,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InsuranceAdmin]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[InsuranceAdmin]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -157,7 +156,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InsuranceCompany]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[InsuranceCompany]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -177,7 +176,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Policy]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[Policy]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -201,7 +200,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PolicyOrder]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[PolicyOrder]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -221,7 +220,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TypePolicy]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[TypePolicy]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -239,7 +238,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserAdmin]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Table [dbo].[UserAdmin]    Script Date: 3/6/2022 09:48:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -921,6 +920,86 @@ INSERT [dbo].[Policy] ([Id], [Name], [Description], [SupportPercent], [DurationI
 INSERT [dbo].[Policy] ([Id], [Name], [Description], [SupportPercent], [DurationInDays], [Price], [Status], [TypeId], [CompanyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (34, N'Medical examination cost [MIC]', N'Covers all your medical examination cost by insurance MIC', 100, 180, CAST(600.00 AS Decimal(12, 2)), 2, 1, 8, CAST(N'2022-03-06T01:31:56.900' AS DateTime), CAST(N'2022-03-06T01:31:56.900' AS DateTime), 0)
 SET IDENTITY_INSERT [dbo].[Policy] OFF
 GO
+SET IDENTITY_INSERT [dbo].[PolicyOrder] ON 
+
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (1, CAST(N'2021-12-31T04:00:00.000' AS DateTime), 2, 1, 25, CAST(N'2021-12-31T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.307' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (2, CAST(N'2021-12-04T04:00:00.000' AS DateTime), 2, 2, 25, CAST(N'2021-12-04T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.307' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (3, CAST(N'2022-01-01T04:00:00.000' AS DateTime), 2, 3, 25, CAST(N'2022-01-01T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.307' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (4, CAST(N'2021-11-08T04:00:00.000' AS DateTime), 2, 4, 26, CAST(N'2021-11-08T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (5, CAST(N'2021-11-01T04:00:00.000' AS DateTime), 2, 5, 23, CAST(N'2021-11-01T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (6, CAST(N'2022-01-29T04:00:00.000' AS DateTime), 2, 6, 19, CAST(N'2022-01-29T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (7, CAST(N'2021-10-28T04:00:00.000' AS DateTime), 2, 7, 23, CAST(N'2021-10-28T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (8, CAST(N'2022-01-30T04:00:00.000' AS DateTime), 2, 8, 19, CAST(N'2022-01-30T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (9, CAST(N'2022-02-02T04:00:00.000' AS DateTime), 2, 9, 19, CAST(N'2022-02-02T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (10, CAST(N'2022-03-10T04:00:00.000' AS DateTime), 2, 10, 19, CAST(N'2022-03-10T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (11, CAST(N'2021-09-26T04:00:00.000' AS DateTime), 2, 11, 19, CAST(N'2021-09-26T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (12, CAST(N'2021-10-30T04:00:00.000' AS DateTime), 2, 12, 26, CAST(N'2021-10-30T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (13, CAST(N'2021-11-12T04:00:00.000' AS DateTime), 2, 13, 19, CAST(N'2021-11-12T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (14, CAST(N'2022-01-28T04:00:00.000' AS DateTime), 2, 14, 22, CAST(N'2022-01-28T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (15, CAST(N'2022-01-23T04:00:00.000' AS DateTime), 2, 15, 25, CAST(N'2022-01-23T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.310' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (16, CAST(N'2021-10-26T04:00:00.000' AS DateTime), 2, 16, 22, CAST(N'2021-10-26T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.313' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (17, CAST(N'2021-12-20T04:00:00.000' AS DateTime), 2, 17, 25, CAST(N'2021-12-20T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.313' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (18, CAST(N'2021-10-21T04:00:00.000' AS DateTime), 2, 18, 25, CAST(N'2021-10-21T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.313' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (19, CAST(N'2021-10-25T04:00:00.000' AS DateTime), 2, 19, 25, CAST(N'2021-10-25T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.313' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (20, CAST(N'2022-02-18T04:00:00.000' AS DateTime), 2, 1, 2, CAST(N'2022-02-18T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.313' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (21, CAST(N'2021-10-12T04:00:00.000' AS DateTime), 2, 2, 3, CAST(N'2021-10-12T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (22, CAST(N'2021-12-12T04:00:00.000' AS DateTime), 2, 3, 8, CAST(N'2021-12-12T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (23, CAST(N'2022-02-15T04:00:00.000' AS DateTime), 2, 4, 8, CAST(N'2022-02-15T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (24, CAST(N'2022-01-19T04:00:00.000' AS DateTime), 2, 5, 8, CAST(N'2022-01-19T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (25, CAST(N'2021-10-20T04:00:00.000' AS DateTime), 2, 6, 3, CAST(N'2021-10-20T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (26, CAST(N'2021-10-21T04:00:00.000' AS DateTime), 2, 7, 2, CAST(N'2021-10-21T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (27, CAST(N'2021-09-24T04:00:00.000' AS DateTime), 2, 8, 6, CAST(N'2021-09-24T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.317' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (28, CAST(N'2021-12-09T04:00:00.000' AS DateTime), 2, 9, 7, CAST(N'2021-12-09T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.320' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (29, CAST(N'2021-10-05T04:00:00.000' AS DateTime), 2, 10, 6, CAST(N'2021-10-05T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.320' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (30, CAST(N'2021-10-04T04:00:00.000' AS DateTime), 2, 11, 1, CAST(N'2021-10-04T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.320' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (31, CAST(N'2021-09-09T04:00:00.000' AS DateTime), 2, 12, 1, CAST(N'2021-09-09T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.320' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (32, CAST(N'2021-09-08T04:00:00.000' AS DateTime), 2, 13, 6, CAST(N'2021-09-08T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.320' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (33, CAST(N'2021-12-27T04:00:00.000' AS DateTime), 2, 14, 2, CAST(N'2021-12-27T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.320' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (34, CAST(N'2021-11-08T04:00:00.000' AS DateTime), 2, 15, 6, CAST(N'2021-11-08T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.320' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (35, CAST(N'2021-09-13T04:00:00.000' AS DateTime), 2, 16, 3, CAST(N'2021-09-13T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.320' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (36, CAST(N'2021-12-07T04:00:00.000' AS DateTime), 2, 17, 8, CAST(N'2021-12-07T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.323' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (37, CAST(N'2021-10-31T04:00:00.000' AS DateTime), 2, 18, 7, CAST(N'2021-10-31T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.323' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (38, CAST(N'2021-09-04T04:00:00.000' AS DateTime), 2, 19, 1, CAST(N'2021-09-04T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.323' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (39, CAST(N'2022-02-11T04:00:00.000' AS DateTime), 2, 1, 31, CAST(N'2022-02-11T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (40, CAST(N'2021-12-02T04:00:00.000' AS DateTime), 2, 2, 34, CAST(N'2021-12-02T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (41, CAST(N'2021-11-16T04:00:00.000' AS DateTime), 2, 3, 33, CAST(N'2021-11-16T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (42, CAST(N'2021-11-08T04:00:00.000' AS DateTime), 2, 4, 30, CAST(N'2021-11-08T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (43, CAST(N'2022-01-09T04:00:00.000' AS DateTime), 2, 5, 34, CAST(N'2022-01-09T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (44, CAST(N'2022-02-04T04:00:00.000' AS DateTime), 2, 6, 33, CAST(N'2022-02-04T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (45, CAST(N'2022-02-13T04:00:00.000' AS DateTime), 2, 7, 33, CAST(N'2022-02-13T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (46, CAST(N'2022-02-27T04:00:00.000' AS DateTime), 2, 8, 28, CAST(N'2022-02-27T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (47, CAST(N'2022-02-20T04:00:00.000' AS DateTime), 2, 9, 34, CAST(N'2022-02-20T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (48, CAST(N'2021-11-02T04:00:00.000' AS DateTime), 2, 10, 34, CAST(N'2021-11-02T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.327' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (49, CAST(N'2022-01-06T04:00:00.000' AS DateTime), 2, 11, 34, CAST(N'2022-01-06T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (50, CAST(N'2021-10-30T04:00:00.000' AS DateTime), 2, 12, 31, CAST(N'2021-10-30T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (51, CAST(N'2022-02-09T04:00:00.000' AS DateTime), 2, 13, 27, CAST(N'2022-02-09T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (52, CAST(N'2021-12-07T04:00:00.000' AS DateTime), 2, 14, 31, CAST(N'2021-12-07T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (53, CAST(N'2021-12-31T04:00:00.000' AS DateTime), 2, 15, 34, CAST(N'2021-12-31T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (54, CAST(N'2021-10-03T04:00:00.000' AS DateTime), 2, 16, 31, CAST(N'2021-10-03T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (55, CAST(N'2021-11-12T04:00:00.000' AS DateTime), 2, 17, 34, CAST(N'2021-11-12T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (56, CAST(N'2021-11-26T04:00:00.000' AS DateTime), 2, 18, 28, CAST(N'2021-11-26T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (57, CAST(N'2021-10-11T04:00:00.000' AS DateTime), 2, 19, 33, CAST(N'2021-10-11T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (58, CAST(N'2021-10-21T04:00:00.000' AS DateTime), 2, 1, 15, CAST(N'2021-10-21T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (59, CAST(N'2021-11-18T04:00:00.000' AS DateTime), 2, 2, 16, CAST(N'2021-11-18T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (60, CAST(N'2021-10-28T04:00:00.000' AS DateTime), 2, 3, 13, CAST(N'2021-10-28T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (61, CAST(N'2022-02-16T04:00:00.000' AS DateTime), 2, 4, 15, CAST(N'2022-02-16T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.330' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (62, CAST(N'2021-10-01T04:00:00.000' AS DateTime), 2, 5, 11, CAST(N'2021-10-01T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (63, CAST(N'2022-01-25T04:00:00.000' AS DateTime), 2, 6, 15, CAST(N'2022-01-25T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (64, CAST(N'2021-12-08T04:00:00.000' AS DateTime), 2, 7, 14, CAST(N'2021-12-08T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (65, CAST(N'2021-12-13T04:00:00.000' AS DateTime), 2, 8, 15, CAST(N'2021-12-13T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (66, CAST(N'2022-02-22T04:00:00.000' AS DateTime), 2, 9, 11, CAST(N'2022-02-22T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (67, CAST(N'2022-02-03T04:00:00.000' AS DateTime), 2, 10, 11, CAST(N'2022-02-03T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (68, CAST(N'2021-10-21T04:00:00.000' AS DateTime), 2, 11, 13, CAST(N'2021-10-21T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (69, CAST(N'2021-12-14T04:00:00.000' AS DateTime), 2, 12, 11, CAST(N'2021-12-14T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (70, CAST(N'2022-03-01T04:00:00.000' AS DateTime), 2, 13, 15, CAST(N'2022-03-01T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (71, CAST(N'2021-09-21T04:00:00.000' AS DateTime), 2, 14, 14, CAST(N'2021-09-21T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (72, CAST(N'2022-01-17T04:00:00.000' AS DateTime), 2, 15, 14, CAST(N'2022-01-17T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (73, CAST(N'2021-11-06T04:00:00.000' AS DateTime), 2, 16, 15, CAST(N'2021-11-06T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (74, CAST(N'2021-11-20T04:00:00.000' AS DateTime), 2, 17, 12, CAST(N'2021-11-20T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (75, CAST(N'2021-09-28T04:00:00.000' AS DateTime), 2, 18, 15, CAST(N'2021-09-28T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+INSERT [dbo].[PolicyOrder] ([Id], [StartDate], [Status], [EmployeeId], [PolicyId], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (76, CAST(N'2021-12-01T04:00:00.000' AS DateTime), 2, 19, 13, CAST(N'2021-12-01T04:00:00.000' AS DateTime), CAST(N'2022-03-06T09:42:50.333' AS DateTime), 0)
+SET IDENTITY_INSERT [dbo].[PolicyOrder] OFF
+GO
 SET IDENTITY_INSERT [dbo].[TypePolicy] ON 
 
 INSERT [dbo].[TypePolicy] ([Id], [Name], [Description], [CreatedAt], [UpdatedAt], [IsDeleted]) VALUES (1, N'CHECKUP', N'Covers medical checkups at certain locations', CAST(N'2022-03-06T01:31:56.897' AS DateTime), CAST(N'2022-03-06T01:31:56.897' AS DateTime), 0)
@@ -939,7 +1018,7 @@ SET IDENTITY_INSERT [dbo].[UserAdmin] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__Employee__536C85E482652AE2]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Index [UQ__Employee__536C85E482652AE2]    Script Date: 3/6/2022 09:48:02 ******/
 ALTER TABLE [dbo].[Employees] ADD UNIQUE NONCLUSTERED 
 (
 	[Username] ASC
@@ -947,7 +1026,7 @@ ALTER TABLE [dbo].[Employees] ADD UNIQUE NONCLUSTERED
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__UserAdmi__536C85E4DCAE3AA0]    Script Date: 3/6/2022 03:35:03 ******/
+/****** Object:  Index [UQ__UserAdmi__536C85E4DCAE3AA0]    Script Date: 3/6/2022 09:48:02 ******/
 ALTER TABLE [dbo].[UserAdmin] ADD UNIQUE NONCLUSTERED 
 (
 	[Username] ASC
@@ -1068,4 +1147,8 @@ REFERENCES [dbo].[Employees] ([Id])
 GO
 ALTER TABLE [dbo].[PolicyOrder]  WITH CHECK ADD FOREIGN KEY([PolicyId])
 REFERENCES [dbo].[Policy] ([Id])
+GO
+USE [master]
+GO
+ALTER DATABASE [api_dotnet] SET  READ_WRITE 
 GO
