@@ -1,14 +1,15 @@
-# run with docker 
-### open terminal and cd to working directory
-- `docker-compose up -d --build`
+# How to run the project
+## Step 1: Prepare the development environment
 
+Click [here](https://www.docker.com/products/docker-desktop) to download & install Docker for Desktop.
 
-### run images sql 
-- `docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=root@123456' -e 'MSSQL_PID=Express' --name mssql-eproject -p 1433:1433 -d eproject/mssql:latest`
+## Step 2: Run the program
 
-# run individual to import data
-### open bash in container: 
-- `docker exec -it eproject-mssql bash`
-### import .sql file 
-- `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./wire_frame_db.sql`
-- `/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "root@123456" -i  ./sample_data.sql`
+1.    Go to the project folder & open the command prompt.
+2.   In the command prompt, paste the following and hit enter:
+
+```
+docker-compose up --build
+```
+
+3.  The project is up and running. Visit the system at [http://localhost:3003/](http://localhost:3003/).
