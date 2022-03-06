@@ -25,41 +25,59 @@ namespace BaseProject.MyModels
 
         public IEnumerable<ClaimResponse> GetClaimFilterForInsu(ApiNetContext context, int company_id)
         {
-
-            IEnumerable<ClaimResponse> query = context.ClaimEmployees
-                    .Join(
-                        context.Policies,
-                        claim => claim.PolicyId,
-                        policy => policy.Id,
-                        (claim, policy) => new { claim, policy }
-                    )
-                    .Where(item => item.policy.CompanyId == company_id)
-                    .OrderByDescending(d => d.claim.CreatedAt)
-                    .Select(item => new ClaimResponse()
-                    {
-                        PolicyRes = item.policy,
-                        ClaimRes = item.claim,
-                    });
-
-
-            if (this.EmId > 0)
-            {
-                query = this.FilterByEmId(query);
-            }
-
             if (this.Name != null)
             {
-                query = this.FilterByName(context, query);
-            }
+                //                query = this.FilterByName(context, query);
+                IEnumerable<ClaimResponse> query = context.ClaimEmployees
+                                    .Join(
+                                        context.Policies,
+                                        claim => claim.PolicyId,
+                                        policy => policy.Id,
+                                        (claim, policy) => new { claim, policy }
+                                    )
+                                    .Where(item => item.policy.CompanyId == company_id)
+                                    .Join(
+                                        context.Employees,
+                                        claim => claim.claim.EmployeeId,
+                                        emp => emp.Id,
+                                        (group, emp) => new { group, emp }
+                                    )
+                                    .Where(item => item.emp.Username.Contains(this.Name) || item.emp.Firstname.Contains(this.Name) || item.emp.Lastname.Contains(this.Name))
+                                    .OrderByDescending(d => d.group.claim.CreatedAt)
+                                    .Select(item => new ClaimResponse()
+                                    {
+                                        PolicyRes = item.group.policy,
+                                        ClaimRes = item.group.claim,
+                                    });
 
-            if (this.Status > 0)
-            {
-                query = this.FilterByStatus(query);
+                if (this.Status > 0)
+                {
+                    query = this.FilterByStatus(query);
+                }
+                return query;
             }
-            return query;
-            //.Skip((this.PageNumber - 1) * this.PageSize)
-            //.Take(this.PageSize)
-            //.ToList();
+            else
+            {
+                IEnumerable<ClaimResponse> query = context.ClaimEmployees
+                        .Join(
+                            context.Policies,
+                            claim => claim.PolicyId,
+                            policy => policy.Id,
+                            (claim, policy) => new { claim, policy }
+                        )
+                        .Where(item => item.policy.CompanyId == company_id)
+                        .OrderByDescending(d => d.claim.CreatedAt)
+                        .Select(item => new ClaimResponse()
+                        {
+                            PolicyRes = item.policy,
+                            ClaimRes = item.claim,
+                        });
+                if (this.Status > 0)
+                {
+                    query = this.FilterByStatus(query);
+                }
+                return query;
+            }
         }
 
         public IEnumerable<ClaimResponse> GetClaimFilter(ApiNetContext context)
@@ -95,7 +113,7 @@ namespace BaseProject.MyModels
         {
             IEnumerable<ClaimResponse> res = context.Join(
                                         api.Employees,
-                                        claim => claim.ClaimRes.Id,
+                                        claim => claim.ClaimRes.EmployeeId,
                                         emp => emp.Id,
                                         (claim, emp) => new { claim, emp }
                                     )
