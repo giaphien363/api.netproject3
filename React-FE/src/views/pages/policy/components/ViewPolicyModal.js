@@ -149,7 +149,7 @@ export default function ViewPolicyModal({
               </>
             )
           ) : (
-            <CButton color="primary" onClick={onCreateClaim}>
+            <CButton color="primary" onClick={() => onCreateClaim(policy)}>
               {/* contractPolicies === null ---> in contract page */}
               Create a claim
             </CButton>
