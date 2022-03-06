@@ -51,26 +51,65 @@ namespace BaseProject.Controllers
 
         // GET: api/Contracts/5
         [HttpGet("{id}")]
-        [Authorize]
-        public async Task<ActionResult<Contract>> GetContract(int id)
+        //[Authorize]
+        public async Task<ActionResult<DetailContractResponse>> GetContract(int id)
         {
+            //var contract = await _context.Contracts
+            //        .Where(item => item.IsDeleted == 0)
+            //        .Where(item => item.EmployeeId == id)
+            //        .Include(item => item.ContractPolicies)
+            //            .ThenInclude(cp => cp.Policy)
+            //                .ThenInclude(p => p.Company)
+            //        .Include(item => item.ContractPolicies)
+            //            .ThenInclude(cp => cp.Policy)
+            //                .ThenInclude(p => p.Type)
+            //        .FirstOrDefaultAsync();
+
+
             var contract = await _context.Contracts
                     .Where(item => item.IsDeleted == 0)
                     .Where(item => item.EmployeeId == id)
-                    .Include(item => item.ContractPolicies)
-                        .ThenInclude(cp => cp.Policy)
-                            .ThenInclude(p => p.Company)
-                    .Include(item => item.ContractPolicies)
-                        .ThenInclude(cp => cp.Policy)
-                            .ThenInclude(p => p.Type)
                     .FirstOrDefaultAsync();
-
             if (contract == null)
             {
                 return NotFound();
             }
 
-            return contract;
+            var listContractPolicies = await _context.ContractPolicies
+                    .Where(item => item.ContractId == id)
+                    .Join(
+                        _context.Policies,
+                        ctP => ctP.PolicyId,
+                        pl => pl.Id,
+                        (con, pl) => new { policies = pl }
+                    )
+                    .Join(
+                        _context.InsuranceCompanies,
+                        group1 => group1.policies.CompanyId,
+                        com => com.Id,
+                        (g1, com) => new { policy = g1.policies, company = com }
+                    )
+                    .Join(
+                        _context.TypePolicies,
+                        group2 => group2.policy.TypeId,
+                        type => type.Id,
+                        (g2, type) => new { policy = g2.policy, company = g2.company, type = type }
+                    )
+
+                    .Select(item => new PolicyCompanyTypeResponse()
+                    {
+                        PolicyRes = item.policy,
+                        CompanyRes = item.company,
+                        TypeRes = item.type
+                    })
+                    .ToListAsync();
+
+            DetailContractResponse dataResponse = new DetailContractResponse()
+            {
+                ContractRes = contract,
+                GroupRes = listContractPolicies
+            };
+            return Ok(dataResponse);
         }
 
         //// PUT: api/Contracts/5

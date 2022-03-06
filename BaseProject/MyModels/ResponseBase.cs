@@ -27,13 +27,24 @@ namespace BaseProject.MyModels
     {
         public ClaimEmployee ClaimRes { get; set; }
         public Policy PolicyRes { get; set; }
-        public  ICollection<ClaimAction> ActionsRes{ get; set; }
+        public ICollection<ClaimAction> ActionsRes { get; set; }
     }
-    
+
     public class OrderResponse
     {
         public Employee EmployeeRes { get; set; }
         public Policy PolicyRes { get; set; }
         public PolicyOrder OrderRes { get; set; }
+    }
+    public class DetailContractResponse
+    {
+        public Contract ContractRes { get; set; }
+        public ICollection<PolicyCompanyTypeResponse> GroupRes { get; set; }
+    }
+    public class PolicyCompanyTypeResponse
+    {
+        public Policy PolicyRes { get; set; }
+        public InsuranceCompany CompanyRes { get; set; }
+        public TypePolicy TypeRes { get; set; }
     }
 }
