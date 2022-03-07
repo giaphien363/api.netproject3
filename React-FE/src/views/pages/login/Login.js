@@ -84,8 +84,10 @@ const Login = ({ type }) => {
                     <CForm>
                       <h1>Login</h1>
                       <p className="text-medium-emphasis">
-                        Sign in as an{' '}
-                        <span className="text-primary">{type ? type : 'employee'}</span>
+                        Signing in as an{' '}
+                        <span className="text-primary">
+                          {type ? (type === 'insurance' ? 'insurance admin' : 'admin') : 'employee'}
+                        </span>
                       </p>
                       {error && <p style={{ color: 'red' }}>{error}</p>}
                       <CInputGroup className="mb-3">
